@@ -10,8 +10,10 @@
             @foreach(var node in Model)
             {
                 <li class="anime-card">
-                    <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" height="100" width="100">
-                    <p class="anime-title">@node.Anime.Title</p>
+                    <a anime-link>
+                        <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" height="300" width="225">
+                        <p class="anime-title">@node.Anime.Title</p>
+                    </a>
                 </li>
             }
         </ul>

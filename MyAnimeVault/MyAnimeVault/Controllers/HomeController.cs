@@ -12,19 +12,17 @@ namespace MyAnimeVault.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAnimeApiService AnimeApiService;
 
-        public List<AnimeListNode> AnimeList { get; set; }
+        public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
         public HomeController(ILogger<HomeController> logger, IAnimeApiService animeApiService)
         {
             _logger = logger;
             AnimeApiService = animeApiService;
-
-            AnimeList = new List<AnimeListNode>();
-            UpdateAnimeList();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            AnimeList = await AnimeApiService.GetAllAnime();
             return View(AnimeList);
         }
 
@@ -39,10 +37,10 @@ namespace MyAnimeVault.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private async void UpdateAnimeList()
-        {
+        //private async void UpdateAnimeList()
+        //{
 
-            AnimeList = await AnimeApiService.GetAllAnime();
-        }
+        //    AnimeList = await AnimeApiService.GetAllAnime();
+        //}
     }
 }
