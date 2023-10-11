@@ -21,12 +21,12 @@ namespace MyAnimeVault.MyAnimeListApi.Services
             HttpClientFactory = httpClientFactory;
         }
 
-        public async Task<List<Anime>> GetAllAnime()
+        public async Task<List<AnimeListNode>> GetAllAnime()
         {
             HttpClient client = HttpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Add("X-MAL-CLIENT-ID", "ce20b660a7716a612c5523c38e3d7209");
 
-            List<Anime> AnimeList = new List<Anime>();
+            List<AnimeListNode> AnimeList = new List<AnimeListNode>();
 
             HttpResponseMessage response = await client.GetAsync("https://api.myanimelist.net/v2/anime?q=one&limit=4&offset=0&fields=id,title,main_picture,start_date,end_date,synopsis,mean,rank,popularity,nsfw,genres,created_at,updated_at,media_type,status,num_episodes,source,broadcast,average_episode_duration,rating,studios");
             if (response.IsSuccessStatusCode)

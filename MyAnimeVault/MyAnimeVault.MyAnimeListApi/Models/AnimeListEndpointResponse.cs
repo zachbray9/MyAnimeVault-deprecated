@@ -10,6 +10,6 @@ namespace MyAnimeVault.MyAnimeListApi.Models
 {
     public class AnimeListEndpointResponse
     {
-        public List<Anime> Data { get; set; } = new List<Anime>();
+        public List<AnimeListNode> Data { get; set; } = new List<AnimeListNode>();
     }
 }

@@ -25,6 +25,10 @@ body {
     box-sizing: border-box;
 }
 
+p {
+    font-size: 16px;
+}
+
 ul ol {
     list-style: none;
 }
@@ -52,4 +56,16 @@ li {
 .navbar-list {
     display: flex;
     column-gap: 20px;
+}
+
+/*Homepage anime list*/
+
+.anime-list-container {
+    margin: 100px 40px 0px 40px;
+}
+
+.anime-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
 }

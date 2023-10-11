@@ -1,8 +1,19 @@
-﻿@{
+﻿@using MyAnimeVault.Domain.Models
+@model List<AnimeListNode>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="anime-list-container">
+        <ul class="anime-list">
+            @foreach(var node in Model)
+            {
+                <li class="anime-card">
+                    <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" height="100" width="100">
+                    <p class="anime-title">@node.Anime.Title</p>
+                </li>
+            }
+        </ul>
+    </div>
 </div>

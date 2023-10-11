@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyAnimeVault.Domain.Models
 {
-    public class Poster
+    public class AnimeListNode
     {
-        public string? Large { get; set; }
-        public string Medium { get; set; } = null!;
+        [JsonProperty("node")]
+        public Anime Anime { get; set; } = null!;
     }
 }
