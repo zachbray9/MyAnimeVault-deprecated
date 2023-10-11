@@ -1,4 +1,4 @@
-html {
+/*html {
   font-size: 14px;
 }
 
@@ -15,4 +15,41 @@ html {
 
 body {
   margin-bottom: 60px;
+}*/
+
+/*CSS Reset*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+ul ol {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+/*Navbar*/
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+
+.navbar-list {
+    display: flex;
+    column-gap: 20px;
 }

@@ -1,0 +1,49 @@
+/* _content/MyAnimeVault/Views/Shared/_Layout.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-g1bqh1vx00] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-g1bqh1vx00] {
+  color: #0077cc;
+}
+
+.btn-primary[b-g1bqh1vx00] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-g1bqh1vx00], .nav-pills .show > .nav-link[b-g1bqh1vx00] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-g1bqh1vx00] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-g1bqh1vx00] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-g1bqh1vx00] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-g1bqh1vx00] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-g1bqh1vx00] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

@@ -1,7 +1,15 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using MyAnimeVault.Domain.Services;
+using MyAnimeVault.MyAnimeListApi.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
+
+builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 
 var app = builder.Build();
 

@@ -5,6 +5,12 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault", "MyAnimeVault\MyAnimeVault.csproj", "{53CA1DD6-4DA2-4DD2-B2D9-D6C7BC5892E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault.EntityFramework", "MyAnimeVault.EntityFramework\MyAnimeVault.EntityFramework.csproj", "{F558C8AC-571A-4E9C-AFD0-82F80A0DE2DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault.MyAnimeListApi", "MyAnimeVault.MyAnimeListApi\MyAnimeVault.MyAnimeListApi.csproj", "{08DFF942-95F6-49CC-B14B-F7F5EA770ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault.Domain", "MyAnimeVault.Domain\MyAnimeVault.Domain.csproj", "{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{53CA1DD6-4DA2-4DD2-B2D9-D6C7BC5892E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53CA1DD6-4DA2-4DD2-B2D9-D6C7BC5892E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53CA1DD6-4DA2-4DD2-B2D9-D6C7BC5892E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F558C8AC-571A-4E9C-AFD0-82F80A0DE2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F558C8AC-571A-4E9C-AFD0-82F80A0DE2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F558C8AC-571A-4E9C-AFD0-82F80A0DE2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F558C8AC-571A-4E9C-AFD0-82F80A0DE2DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08DFF942-95F6-49CC-B14B-F7F5EA770ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DFF942-95F6-49CC-B14B-F7F5EA770ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DFF942-95F6-49CC-B14B-F7F5EA770ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DFF942-95F6-49CC-B14B-F7F5EA770ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

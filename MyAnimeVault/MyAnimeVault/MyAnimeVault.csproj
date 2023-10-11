@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyAnimeVault.Domain\MyAnimeVault.Domain.csproj" />
+    <ProjectReference Include="..\MyAnimeVault.EntityFramework\MyAnimeVault.EntityFramework.csproj" />
+    <ProjectReference Include="..\MyAnimeVault.MyAnimeListApi\MyAnimeVault.MyAnimeListApi.csproj" />
+  </ItemGroup>
+
 </Project>

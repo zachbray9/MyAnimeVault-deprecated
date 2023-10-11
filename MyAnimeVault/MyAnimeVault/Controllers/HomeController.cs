@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Services;
 using MyAnimeVault.Models;
 using System.Diagnostics;
 
@@ -7,10 +9,16 @@ namespace MyAnimeVault.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IAnimeApiService AnimeApiService;
 
-        public HomeController(ILogger<HomeController> logger)
+        private List<Anime> AnimeList = new List<Anime>();
+
+        public HomeController(ILogger<HomeController> logger, IAnimeApiService animeApiService)
         {
             _logger = logger;
+            AnimeApiService = animeApiService;
+
+            UpdateAnimeList(); 
         }
 
         public IActionResult Index()
@@ -27,6 +35,11 @@ namespace MyAnimeVault.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private async void UpdateAnimeList()
+        {
+            AnimeList = await AnimeApiService.GetAllAnime();
         }
     }
 }

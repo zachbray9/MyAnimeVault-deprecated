@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyAnimeVault.EntityFramework.Services.Authentication
 {
-    internal interface IAuthenticationService
+    public interface IAuthenticationService
     {
+        //Task<string> RegisterAsync(string email, string password); 
     }
 }

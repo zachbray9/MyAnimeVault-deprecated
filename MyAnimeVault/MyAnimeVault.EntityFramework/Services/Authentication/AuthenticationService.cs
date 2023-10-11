@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyAnimeVault.EntityFramework.Services.Authentication
 {
-    internal class AuthenticationService
+    internal class AuthenticationService : IAuthenticationService
     {
+
     }
 }
