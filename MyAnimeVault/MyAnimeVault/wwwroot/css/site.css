@@ -1,21 +1,11 @@
-/*html {
-  font-size: 14px;
-}
+/*css variables*/
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+:root {
+    /*1 being darkest*/
+    --darkmode1: #18191a;
+    --darkmode2: #242526;
+    --darkmode3: #3a3b3c;
 }
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}*/
 
 /*CSS Reset*/
 
@@ -23,15 +13,23 @@ body {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
+    color: #fff;
+}
+
+body {
+    background-color: var(--darkmode1);
 }
 
 p {
     font-size: 16px;
+    color: #fff;
+    font-family: Roboto;
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
+    font-family: Roboto;
 }
 
 ul ol {
@@ -49,13 +47,19 @@ li {
     top: 0;
     width: 100%;
     margin-bottom: 25px;
+    background-color: var(--darkmode2);
+    z-index: 1000;
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
+    padding: 20px 40px;
+}
+
+.navbar-brand {
+    font-weight: bold;
 }
 
 .navbar-list {
@@ -66,20 +70,48 @@ li {
 /*Homepage anime list*/
 
 .anime-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 100px 40px 0px 40px;
 }
 
 .anime-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    column-gap: 20px;
-    row-gap: 40px;
+    column-gap: 80px;
+    row-gap: 80px;
 }
 
 .anime-card {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
+    width: min-content;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.anime-card:hover {
+    transform: translateY(-10%);
+}
+
+.anime-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: skewX(45deg) translateX(-300px);
+    transition: all 0.5s;
+}
+
+.anime-card:hover::before {
+    transform: skewX(45deg) translateX(450px);
 }
 
 .anime-link {
@@ -87,10 +119,11 @@ li {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 10px;
 }
 
 .anime-title {
-    overflow-wrap: normal;
+    text-align: center;
 }
 
 /*footer*/
