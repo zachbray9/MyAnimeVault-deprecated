@@ -62,9 +62,57 @@ li {
     font-weight: bold;
 }
 
+.navbar-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+}
+
 .navbar-list {
     display: flex;
     column-gap: 20px;
+}
+
+.navbar-searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    background-color: var(--darkmode3);
+    border-radius: 60px;
+    padding: 10px 20px;
+}
+
+.navbar-searchbar-textbox {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.navbar-searchbar-searchbutton {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.fa-solid {
+    color: gray;
+}
+
+.navbar-account-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.navbar-signup-button {
+    background-color: #6200ee;
+    border-radius: 40px;
+    padding: 7px 15px;
 }
 
 /*Homepage anime list*/

@@ -13,14 +13,24 @@
     <header class="header">
         <nav class="navbar">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyAnimeVault</a>
-            <ul class="navbar-list">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li>
-            </ul>
+            <div class="navbar-menu">
+                <ul class="navbar-list">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+                <form class="navbar-searchbar" action="">
+                    <input class="navbar-searchbar-textbox" type="text" placeholder="Search for an Anime"/>
+                    <button class="navbar-searchbar-searchbutton" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+                <div class="navbar-account-options">
+                    <a class="navbar-signin-button">Sign In</a>
+                    <a class="navbar-signup-button">Sign Up</a>
+                </div>
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -37,6 +47,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/ac5d25142f.js" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
