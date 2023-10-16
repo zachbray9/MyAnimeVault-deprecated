@@ -1,0 +1,23 @@
+﻿@using MyAnimeVault.Domain.Models
+@model Anime
+
+@{
+    ViewData["Title"] = "Anime Details";
+}
+
+<div class="text-center">
+    <div class="anime-details-container">
+        <h2>
+            @if(Model.AlternativeTitles != null && !String.IsNullOrEmpty(Model.AlternativeTitles.en))
+                @Model.AlternativeTitles.en
+            else
+                @Model.Title
+        </h2>
+        <img src="@Model.Picture.Large" alt="@Model.Title" height="400" width="300"/>
+        <div class="anime-synopsis-container">
+            <p>@Model.Synopsis</p>
+        </div>
+    </div>
+</div>
+
+

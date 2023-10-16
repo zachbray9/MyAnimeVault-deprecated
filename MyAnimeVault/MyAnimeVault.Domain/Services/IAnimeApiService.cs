@@ -10,5 +10,6 @@ namespace MyAnimeVault.Domain.Services
     public interface IAnimeApiService
     {
         Task<List<AnimeListNode>> GetAllAnime();
+        Task<Anime> GetAnimeById(int id);
     }
 }

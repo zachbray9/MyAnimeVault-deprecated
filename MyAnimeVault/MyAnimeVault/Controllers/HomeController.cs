@@ -26,9 +26,10 @@ namespace MyAnimeVault.Controllers
             return View(AnimeList);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> AnimeDetails(int id) 
         {
-            return View();
+            Anime anime = await AnimeApiService.GetAnimeById(id);
+            return View(anime);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -37,10 +38,5 @@ namespace MyAnimeVault.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //private async void UpdateAnimeList()
-        //{
-
-        //    AnimeList = await AnimeApiService.GetAllAnime();
-        //}
     }
 }

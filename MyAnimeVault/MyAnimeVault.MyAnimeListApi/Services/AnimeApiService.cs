@@ -38,5 +38,22 @@ namespace MyAnimeVault.MyAnimeListApi.Services
             
             return AnimeList;
         }
+
+        public async Task<Anime> GetAnimeById(int id)
+        {
+            HttpClient client = HttpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("X-MAL-CLIENT-ID", "ce20b660a7716a612c5523c38e3d7209");
+
+            Anime anime = new Anime();
+
+            HttpResponseMessage response = await client.GetAsync($"https://api.myanimelist.net/v2/anime/{id}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,nsfw,genres,created_at,updated_at,media_type,status,num_episodes,source,broadcast,average_episode_duration,rating,studios");
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                anime = JsonConvert.DeserializeObject<Anime>(jsonString);
+            }
+
+            return anime;
+        }
     }
 }
