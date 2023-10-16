@@ -14,6 +14,8 @@ namespace MyAnimeVault.Domain.Models
         public string Title { get; set; } = null!;
         [JsonProperty("main_picture")]
         public Poster? Picture { get; set; }
+        [JsonProperty("alternative_titles")]
+        public AlternativeTitles? AlternativeTitles { get; set; }
         [JsonProperty("start_date")]
         public string? StartDate { get; set; }
         [JsonProperty("end_date")]

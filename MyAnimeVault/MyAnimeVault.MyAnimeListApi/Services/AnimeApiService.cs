@@ -28,7 +28,7 @@ namespace MyAnimeVault.MyAnimeListApi.Services
 
             List<AnimeListNode> AnimeList = new List<AnimeListNode>();
 
-            HttpResponseMessage response = await client.GetAsync("https://api.myanimelist.net/v2/anime/ranking?ranking_type=bypopularity&limit=100&offset=0&fields=id,title,main_picture,start_date,end_date,synopsis,mean,rank,popularity,nsfw,genres,created_at,updated_at,media_type,status,num_episodes,source,broadcast,average_episode_duration,rating,studios");
+            HttpResponseMessage response = await client.GetAsync("https://api.myanimelist.net/v2/anime/ranking?ranking_type=bypopularity&limit=100&offset=0&fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,nsfw,genres,created_at,updated_at,media_type,status,num_episodes,source,broadcast,average_episode_duration,rating,studios");
             if (response.IsSuccessStatusCode)
             {
                 string jsonString = await response.Content.ReadAsStringAsync();

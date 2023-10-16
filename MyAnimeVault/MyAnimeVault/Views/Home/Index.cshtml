@@ -15,7 +15,12 @@
                 <li class="anime-card">
                     <a class="anime-link">
                         <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" height="300" width="225">
-                        <p class="anime-title">@node.Anime.Title</p>
+                        <p class="anime-title">
+                            @if(node.Anime.AlternativeTitles == null)
+                                @node.Anime.Title
+                            else
+                                @node.Anime.AlternativeTitles.en
+                        </p>
                     </a>
                 </li>
             }

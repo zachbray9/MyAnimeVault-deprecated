@@ -191,5 +191,28 @@ li {
 /*footer*/
 
 .footer {
-    margin: 100px 40px 0px 40px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: var(--darkmode2);
+    margin: 100px 0px 0px 0px;
+    padding: 20px 40px;
 }
+
+.social-links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.github-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 500px;
+}
+
+.fa-github {
+    font-size: 24px;
+}
+
