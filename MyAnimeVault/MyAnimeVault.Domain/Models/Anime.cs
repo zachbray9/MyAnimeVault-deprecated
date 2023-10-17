@@ -36,6 +36,8 @@ namespace MyAnimeVault.Domain.Models
         public string Status { get; set; } = null!;
         [JsonProperty("num_episodes")]
         public int NumEpisodes { get; set; }
+        [JsonProperty("start_season")]
+        public StartSeason? StartSeason { get; set; }
         public string? Source { get; set; }
         [JsonProperty("broadcast")]
         public BroadcastDate? BroadcastDate{ get; set; }

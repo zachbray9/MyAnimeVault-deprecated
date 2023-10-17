@@ -7,15 +7,33 @@
 
 <div class="text-center">
     <div class="anime-details-container">
-        <h2>
-            @if(Model.AlternativeTitles != null && !String.IsNullOrEmpty(Model.AlternativeTitles.en))
-                @Model.AlternativeTitles.en
-            else
-                @Model.Title
-        </h2>
-        <div class="image-and-rating-container">
+        <div class="image-and-rankinginfo-container">
             <img src="@Model.Picture.Large" alt="@Model.Title" height="400" width="300"/>
-            <p class="rating"><i class="fa-solid fa-star"></i> @Model.MeanScore</p>
+
+            <div class="rankinginfo-container">
+                <div class="title-and-season">
+                    <h1>
+                        @if(Model.AlternativeTitles != null && !String.IsNullOrEmpty(Model.AlternativeTitles.en))
+                            @Model.AlternativeTitles.en
+                        else
+                            @Model.Title
+                    </h1>
+                    <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
+                </div>
+
+                <div class="ranking-info">
+                    <p class="score"><i class="fa-solid fa-star"></i> @Model.MeanScore</p>
+                    <p class="separator">|</p>
+                    <p class="rank"> Ranked #@Model.Rank</p>
+                    <p class="separator">|</p>
+                    <p class="popularity"> Popularity #@Model.Popularity</p>
+                </div>
+
+                <div class="media-info">
+
+                </div>
+
+            </div>
         </div>
         <div class="anime-synopsis-container">
             <p>@Model.Synopsis</p>

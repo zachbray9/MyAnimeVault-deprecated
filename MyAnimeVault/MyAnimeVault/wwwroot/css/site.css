@@ -7,6 +7,10 @@
     --darkmode3: #3a3b3c;
 }
 
+.separator {
+    opacity: 0.3;
+}
+
 /*CSS Reset*/
 
 * {
@@ -23,6 +27,10 @@ body {
 p {
     font-size: 16px;
     color: #fff;
+    font-family: Roboto;
+}
+
+h1 {
     font-family: Roboto;
 }
 
@@ -199,12 +207,36 @@ li {
     margin: 120px 40px 0px 40px;
 }
 
-.image-and-rating-container {
+.image-and-rankinginfo-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    column-gap: 20px;
+}
+
+.rankinginfo-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: start;
+    row-gap: 20px;
+}
+
+.title-and-season {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+}
+
+.ranking-info {
+    display: flex;
     align-items: center;
-    row-gap: 10px;
+    justify-content: start;
+    column-gap: 10px;
+}
+
+.score {
+    font-size: 20px;
 }
 
 .fa-star {
