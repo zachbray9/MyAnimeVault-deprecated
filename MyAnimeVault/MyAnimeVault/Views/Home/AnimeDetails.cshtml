@@ -13,7 +13,10 @@
             else
                 @Model.Title
         </h2>
-        <img src="@Model.Picture.Large" alt="@Model.Title" height="400" width="300"/>
+        <div class="image-and-rating-container">
+            <img src="@Model.Picture.Large" alt="@Model.Title" height="400" width="300"/>
+            <p class="rating"><i class="fa-solid fa-star"></i> @Model.MeanScore</p>
+        </div>
         <div class="anime-synopsis-container">
             <p>@Model.Synopsis</p>
         </div>
