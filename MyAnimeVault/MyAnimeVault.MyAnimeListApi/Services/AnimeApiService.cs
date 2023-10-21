@@ -63,7 +63,7 @@ namespace MyAnimeVault.MyAnimeListApi.Services
 
             List<AnimeListNode> AnimeList = new List<AnimeListNode>();
 
-            HttpResponseMessage response = await client.GetAsync($"https://api.myanimelist.net/v2/anime?q={query}&limit=25&fields=id,title");
+            HttpResponseMessage response = await client.GetAsync($"https://api.myanimelist.net/v2/anime?q={query}&limit=25&fields=id,title,alternative_titles");
             if (response.IsSuccessStatusCode)
             {
                 string jsonString = await response.Content.ReadAsStringAsync();

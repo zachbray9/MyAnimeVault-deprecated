@@ -31,6 +31,10 @@ p {
     color: #fff;
 }
 
+pre {
+    overflow-x: auto;
+}
+
 a {
     text-decoration: none;
     cursor: pointer;
@@ -256,6 +260,14 @@ li {
     align-items: start;
     row-gap: 10px;
     width: 100%;
+}
+
+.synopsis-lines-container {
+    display: flex;
+    flex-direction:column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 5px;
 }
 
 .opening-and-ending-info-container {

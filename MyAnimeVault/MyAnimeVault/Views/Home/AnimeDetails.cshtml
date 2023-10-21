@@ -55,16 +55,18 @@
                     <p class="popularity"> Popularity #@Model.Popularity</p>
                 </div>
 
-                <div class="media-info">
-
-                </div>
-
             </div>
         </div>
 
         <div class="anime-synopsis-container">
             <h3>Synopsis</h3>
-            <p>@Model.Synopsis</p>
+            <div class="synopsis-lines-container">
+                @foreach(var line in Model.Synopsis.Split('\n'))
+                {
+                    <p>@line</p>
+                
+                }
+            </div>
         </div>
 
         <div class="opening-and-ending-info-container">

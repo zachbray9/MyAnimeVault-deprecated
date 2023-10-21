@@ -21,7 +21,14 @@
                     <li class="search-result">
                         <a class="search-result-link" asp-area="" asp-controller="Home" asp-action="AnimeDetails" asp-route-id="@node.Anime.Id">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <p>@node.Anime.Title</p>
+                            @if(node.Anime.AlternativeTitles != null && !String.IsNullOrEmpty(node.Anime.AlternativeTitles.en))
+                            {
+                                <p>@node.Anime.AlternativeTitles.en</p>
+                            }
+                            else
+                            {
+                                <p>@node.Anime.Title</p>
+                            }
                         </a>
                     </li>
                 }   
