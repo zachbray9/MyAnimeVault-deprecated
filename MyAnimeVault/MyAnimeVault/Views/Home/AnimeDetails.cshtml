@@ -18,7 +18,16 @@
                         else
                             @Model.Title
                     </h1>
-                    <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
+                    <div class="season-and-mediatype-container">
+                        <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
+                        <p class="separator">|</p>
+                        <p class="mediatype">
+                            @if(Model.MediaType.Length < 4)
+                                @Model.MediaType.ToUpper()
+                            else
+                                @(char.ToUpper(Model.MediaType[0]) + Model.MediaType.Substring(1))
+                        </p>
+                    </div>
                 </div>
 
                 <div class="ranking-info">
@@ -44,11 +53,21 @@
         <div class="opening-and-ending-info-container">
             <div class="openings-list-container song-list-container">
                 <h3>Opening Themes</h3>
+       
                 <ul class="song-list">
-                    @foreach(OpeningSong song in Model.OpeningSongs)
+                    @if(Model.OpeningSongs != null)
+                    {
+                        @foreach(OpeningSong song in Model.OpeningSongs)
+                        {
+                            <li>
+                                <p>@song.Text</p>
+                            </li>
+                        }
+                    }
+                    else
                     {
                         <li>
-                            <p>@song.Text</p>
+                            <p>No openings</p>
                         </li>
                     }
                 </ul>
@@ -57,10 +76,19 @@
             <div class="endings-list-container song-list-container">
                 <h3>Ending Themes</h3>
                 <ul class="song-list">
-                    @foreach(EndingSong song in Model.EndingSongs)
+                    @if(Model.EndingSongs != null)
+                    {
+                        @foreach(EndingSong song in Model.EndingSongs)
+                        {
+                            <li>
+                                <p>@song.Text</p>
+                            </li>
+                        }
+                    }
+                    else
                     {
                         <li>
-                            <p>@song.Text</p>
+                            <p>No endings</p>
                         </li>
                     }
                 </ul>

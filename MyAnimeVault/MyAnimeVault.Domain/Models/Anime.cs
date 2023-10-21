@@ -46,8 +46,8 @@ namespace MyAnimeVault.Domain.Models
         public string? Rating { get; set; }
         public Studio[] Studios { get; set; } = null!;
         [JsonProperty("opening_themes")]
-        public OpeningSong[] OpeningSongs { get; set; } = null!;
+        public OpeningSong[]? OpeningSongs { get; set; }
         [JsonProperty("ending_themes")]
-        public EndingSong[] EndingSongs { get; set; } = null!;
+        public EndingSong[]? EndingSongs { get; set; } = null!;
     }
 }

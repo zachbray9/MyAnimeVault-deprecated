@@ -134,7 +134,7 @@ li {
     justify-content: start;
     align-items: center;
     margin: 0px 40px;
-    width: 84%;
+    width: 100%;
 }
 
 .anime-list {
@@ -224,6 +224,13 @@ li {
     flex-direction: column;
     justify-content: start;
     align-items: start;
+}
+
+.season-and-mediatype-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 10px;
 }
 
 .ranking-info {
