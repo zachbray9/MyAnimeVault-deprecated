@@ -18,6 +18,7 @@
     margin: 0px;
     box-sizing: border-box;
     color: #fff;
+    font-family: Roboto;
 }
 
 body {
@@ -27,21 +28,11 @@ body {
 p {
     font-size: 16px;
     color: #fff;
-    font-family: Roboto;
-}
-
-h1 {
-    font-family: Roboto;
-}
-
-h2 {
-    font-family: Roboto;
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
-    font-family: Roboto;
 }
 
 ul ol {
@@ -197,14 +188,21 @@ li {
 }
 
 /*Anime Details Page*/
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .anime-details-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 20px;
+    row-gap: 80px;
     margin: 120px 40px 0px 40px;
+    max-width: 1000px;
 }
 
 .image-and-rankinginfo-container {
@@ -241,6 +239,39 @@ li {
 
 .fa-star {
     color: yellow;
+}
+
+.anime-synopsis-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    row-gap: 10px;
+}
+
+.opening-and-ending-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    column-gap: 40px;
+    width: 100%;
+}
+
+.song-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 10px;
 }
 
 /*footer*/

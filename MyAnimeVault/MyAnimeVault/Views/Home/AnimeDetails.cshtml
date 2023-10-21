@@ -35,8 +35,36 @@
 
             </div>
         </div>
+
         <div class="anime-synopsis-container">
+            <h3>Synopsis</h3>
             <p>@Model.Synopsis</p>
+        </div>
+
+        <div class="opening-and-ending-info-container">
+            <div class="openings-list-container song-list-container">
+                <h3>Opening Themes</h3>
+                <ul class="song-list">
+                    @foreach(OpeningSong song in Model.OpeningSongs)
+                    {
+                        <li>
+                            <p>@song.Text</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="endings-list-container song-list-container">
+                <h3>Ending Themes</h3>
+                <ul class="song-list">
+                    @foreach(EndingSong song in Model.EndingSongs)
+                    {
+                        <li>
+                            <p>@song.Text</p>
+                        </li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>
