@@ -55,5 +55,23 @@ namespace MyAnimeVault.MyAnimeListApi.Services
 
             return anime;
         }
+
+        async Task<List<AnimeListNode>> IAnimeApiService.GetListOfAnimeByQuery(string query)
+        {
+            HttpClient client = HttpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("X-MAL-CLIENT-ID", "ce20b660a7716a612c5523c38e3d7209");
+
+            List<AnimeListNode> AnimeList = new List<AnimeListNode>();
+
+            HttpResponseMessage response = await client.GetAsync($"https://api.myanimelist.net/v2/anime?q={query}&limit=25&fields=id,title");
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                AnimeListEndpointResponse endpointResponse = JsonConvert.DeserializeObject<AnimeListEndpointResponse>(jsonString);
+                AnimeList = endpointResponse.Data;
+            }
+
+            return AnimeList;
+        }
     }
 }

@@ -32,6 +32,12 @@ namespace MyAnimeVault.Controllers
             return View(anime);
         }
 
+        public async Task<IActionResult> SearchResults(string query)
+        {
+            List<AnimeListNode> SearchResults = await AnimeApiService.GetListOfAnimeByQuery(query);
+            return View(SearchResults);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

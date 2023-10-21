@@ -3,6 +3,7 @@
 :root {
     /*1 being darkest*/
     --darkmode1: #18191a;
+    --darkmode1hover: #242627;
     --darkmode2: #242526;
     --darkmode3: #3a3b3c;
 }
@@ -251,9 +252,10 @@ li {
 .anime-synopsis-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: start;
     row-gap: 10px;
+    width: 100%;
 }
 
 .opening-and-ending-info-container {
@@ -279,6 +281,47 @@ li {
     justify-content: start;
     align-items: start;
     row-gap: 10px;
+}
+
+/*Search Results Page*/
+
+.search-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 100px 40px 0px 40px;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.search-result {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.search-result-link {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    width: 100%;
+    padding: 10px 20px;
+    transition: all 0.1s;
+}
+
+.search-result-link:hover {
+    background-color: var(--darkmode1hover);
 }
 
 /*footer*/

@@ -11,5 +11,6 @@ namespace MyAnimeVault.Domain.Services
     {
         Task<List<AnimeListNode>> GetAllAnime();
         Task<Anime> GetAnimeById(int id);
+        Task<List<AnimeListNode>> GetListOfAnimeByQuery(string query);
     }
 }

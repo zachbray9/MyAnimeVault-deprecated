@@ -19,8 +19,11 @@
                             @Model.Title
                     </h1>
                     <div class="season-and-mediatype-container">
-                        <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
-                        <p class="separator">|</p>
+                        @if(Model.StartSeason != null)
+                        {
+                            <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
+                            <p class="separator">|</p>
+                        }
                         <p class="mediatype">
                             @if(Model.MediaType.Length < 4)
                                 @Model.MediaType.ToUpper()
@@ -31,9 +34,23 @@
                 </div>
 
                 <div class="ranking-info">
-                    <p class="score"><i class="fa-solid fa-star"></i> @Model.MeanScore</p>
+                    @if(Model.MeanScore != null)
+                    {
+                        <p class="score"><i class="fa-solid fa-star"></i> @Model.MeanScore </p>
+                    }
+                    else
+                    {
+                        <p class="score"><i class="fa-solid fa-star"></i> No score </p>
+                    }
                     <p class="separator">|</p>
-                    <p class="rank"> Ranked #@Model.Rank</p>
+                    @if(Model.Rank != null)
+                    {
+                        <p class="rank"> Ranked #@Model.Rank</p>
+                    }
+                    else
+                    {
+                        <p class="rank"> Unranked</p>
+                    }
                     <p class="separator">|</p>
                     <p class="popularity"> Popularity #@Model.Popularity</p>
                 </div>
