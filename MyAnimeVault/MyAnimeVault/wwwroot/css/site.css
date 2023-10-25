@@ -336,6 +336,67 @@ li {
     background-color: var(--darkmode1hover);
 }
 
+/*Create Account Page*/
+
+.register-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    margin: 200px 0px 80px 0px;
+    max-width: 500px;
+    width: 100%;
+    background-color: var(--darkmode2);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.register-form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    width: 100%;
+}
+
+.register-input {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0px 20px;
+    width: 100%;
+    border-radius: 500px;
+    background-color: var(--darkmode3);
+}
+
+.register-input-textbox {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+}
+
+.register-button {
+    background-color: blue;
+    border-radius: 500px;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
 /*footer*/
 
 .footer {

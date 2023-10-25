@@ -4,10 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f3fd6de1-8970-415b-9e50-d22472f36f93</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>

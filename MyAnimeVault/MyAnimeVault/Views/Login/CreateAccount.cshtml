@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="text-center">
+    <div class="register-form-container">
+        <div class="register-form-header">
+            <h1>Create Account</h1>
+            <p>Already have an account? <a style="text-decoration: underline" asp-area="" asp-controller="Login" asp-action="Index">Sign in</a></p>
+        </div>
+        <form class="register-form">
+            <div class="register-input">
+                <i class="fa-solid fa-envelope"></i>
+                <input class="register-input-textbox" type="email" placeholder="Email"/>
+            </div>
+
+            <div class="register-input">
+                <i class="fa-solid fa-user"></i>
+                <input class="register-input-textbox" type="text" placeholder="Display Name" />
+            </div>
+
+            <div class="register-input">
+                <i class="fa-solid fa-lock"></i>
+                <input class="register-input-textbox" type="password" placeholder="Password" />
+            </div>
+
+            <div class="register-input">
+                <i class="fa-solid fa-lock"></i>
+                <input class="register-input-textbox" type="password" placeholder="Confirm Password" />
+            </div>
+
+            <button class="register-button" type="submit">Create Account</button>
+        </form>
+    </div>
+</div>
