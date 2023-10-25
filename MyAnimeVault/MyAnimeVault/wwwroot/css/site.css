@@ -6,6 +6,7 @@
     --darkmode1hover: #242627;
     --darkmode2: #242526;
     --darkmode3: #3a3b3c;
+    --accentblue: #3772ff;
 }
 
 .separator {
@@ -118,7 +119,7 @@ li {
 }
 
 .navbar-signup-button {
-    background-color: #6200ee;
+    background-color: var(--accentblue);
     border-radius: 40px;
     padding: 7px 15px;
 }
@@ -389,7 +390,7 @@ li {
 }
 
 .register-button {
-    background-color: blue;
+    background-color: var(--accentblue);
     border-radius: 500px;
     padding: 10px 20px;
     cursor: pointer;
