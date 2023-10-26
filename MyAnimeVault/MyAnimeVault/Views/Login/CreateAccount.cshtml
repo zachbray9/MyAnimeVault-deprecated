@@ -13,22 +13,25 @@
         <form class="register-form" method="post" asp-action="CreateAccount">
             <div class="register-input">
                 <i class="fa-solid fa-envelope"></i>
-                <input class="register-input-textbox" type="email" name="Email" placeholder="Email"/>
+                <input class="register-input-textbox" type="email" asp-for="Email" placeholder="Email"/>
             </div>
 
             <div class="register-input">
                 <i class="fa-solid fa-user"></i>
-                <input class="register-input-textbox" type="text" name="DisplayName" placeholder="Display Name" />
+                <input class="register-input-textbox" type="text" asp-for="DisplayName" placeholder="Display Name" />
             </div>
 
             <div class="register-input">
                 <i class="fa-solid fa-lock"></i>
-                <input class="register-input-textbox" type="password" name="Password" placeholder="Password" />
+                <input class="register-input-textbox" type="password" asp-for="Password" placeholder="Password" />
             </div>
 
             <div class="register-input">
                 <i class="fa-solid fa-lock"></i>
-                <input class="register-input-textbox" type="password" name="ConfirmPassword" placeholder="Confirm Password" />
+                <input class="register-input-textbox" type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+            </div>
+
+            <div class="error-message" asp-validation-summary="All">
             </div>
 
             <button class="register-button" type="submit">Create Account</button>

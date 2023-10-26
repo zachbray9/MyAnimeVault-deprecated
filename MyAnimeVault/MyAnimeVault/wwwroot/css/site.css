@@ -389,6 +389,10 @@ li {
     padding: 10px 0px;
 }
 
+div.validation-summary-errors ul li {
+    color: #ff0000;
+}
+
 .register-button {
     background-color: var(--accentblue);
     border-radius: 500px;

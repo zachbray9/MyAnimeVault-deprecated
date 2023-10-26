@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
+using System.Diagnostics;
 
 namespace MyAnimeVault.Controllers
 {
@@ -39,10 +40,20 @@ namespace MyAnimeVault.Controllers
                     UserCredential userCredential = await Authenticator.RegisterAsync(viewModel.Email, viewModel.DisplayName, viewModel.Password);
                     return RedirectToAction("Index", "Home");
                 }
-                catch(Exception ex)
+                catch(FirebaseAuthException ex)
                 {
-                    //create error statements based on exception that returned
-                    ModelState.AddModelError(string.Empty, ex.Message);
+                    switch(ex.Reason)
+                    {
+                        case AuthErrorReason.EmailExists:
+                            ModelState.AddModelError(string.Empty, "The email you are trying to use already exists.");
+                            break;
+                        case AuthErrorReason.WeakPassword:
+                            ModelState.AddModelError(string.Empty, "Password must be more than 6 characters.");
+                            break;
+                        default:
+                            ModelState.AddModelError(string.Empty, "An error occurred during account creation. Please try again.");
+                            break;
+                    }
                 }
             }
 
