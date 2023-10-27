@@ -402,6 +402,67 @@ div.validation-summary-errors ul li {
     border: none;
 }
 
+/*Login Page*/
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    margin: 200px 0px 180px 0px;
+    max-width: 500px;
+    width: 100%;
+    background-color: var(--darkmode2);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.login-form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    width: 100%;
+}
+
+.login-input {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0px 20px;
+    width: 100%;
+    border-radius: 500px;
+    background-color: var(--darkmode3);
+}
+
+.login-input-textbox {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+}
+
+.login-button {
+    background-color: var(--accentblue);
+    border-radius: 500px;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
 /*footer*/
 
 .footer {

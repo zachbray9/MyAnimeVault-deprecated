@@ -11,9 +11,9 @@ namespace MyAnimeVault.Services.Authentication
             FirebaseAuthClient = firebaseAuthClient;
         }
 
-        public async Task<UserCredential> RegisterAsync(string email, string displayName, string password)
+        public async Task<UserCredential> RegisterAsync(string email, string password, string displayName)
         {
-            UserCredential userCredential = await FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(email, displayName, password);
+            UserCredential userCredential = await FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(email, password, displayName);
             return userCredential;
         }
 
