@@ -3,8 +3,15 @@ using MyAnimeVault.MyAnimeListApi.Services;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using MyAnimeVault.Services.Authentication;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//SecretClient keyVaultClient = new SecretClient(
+//    new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")),
+//    new DefaultAzureCredential()
+//    );
 
 //gets the Firebase Api Key and project id from user secrets file (will change this to azure key vault later)
 string Firebase_Api_Key = builder.Configuration["Firebase_Api_Key"];
@@ -25,6 +32,15 @@ FirebaseAuthClient FirebaseClient = new FirebaseAuthClient(FirebaseConfig);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 
@@ -50,6 +66,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//added this for HttpContextAccessor.HttpContext.Session to store currentuser info
+app.UseSession();
 
 app.UseAuthorization();
 
