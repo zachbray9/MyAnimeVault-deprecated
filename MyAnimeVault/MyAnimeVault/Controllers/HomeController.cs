@@ -43,6 +43,18 @@ namespace MyAnimeVault.Controllers
             return View(SearchResults);
         }
 
+        public IActionResult Vault() 
+        {
+            StoreUserDataInSession();
+
+            if(HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+                return View();
+
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
