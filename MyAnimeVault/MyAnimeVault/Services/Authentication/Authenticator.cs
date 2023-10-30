@@ -1,4 +1,6 @@
 ﻿using Firebase.Auth;
+using FirebaseAdmin.Auth;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace MyAnimeVault.Services.Authentication
@@ -28,6 +30,18 @@ namespace MyAnimeVault.Services.Authentication
             return userCredential;
         }
 
+        public async Task<UserCredential> LoginWithCredentialAsync(AuthCredential authCredential)
+        {
+            UserCredential userCredential = await FirebaseAuthClient.SignInWithCredentialAsync(authCredential);
+            AddUserDetailsToSession(userCredential);
+            return userCredential;
+        }
+
+        public async Task<FirebaseToken> VerifyIdToken(string IdToken)
+        {
+            
+        }
+
         public Task Logout()
         {
             throw new NotImplementedException();
@@ -36,10 +50,17 @@ namespace MyAnimeVault.Services.Authentication
         //helper methods
         private void AddUserDetailsToSession(UserCredential userCredential)
         {
-            HttpContextAccessor.HttpContext.Session.SetString("FirebaseToken", userCredential.User.Credential.IdToken);
             HttpContextAccessor.HttpContext.Session.SetString("UserId", userCredential.User.Uid);
             HttpContextAccessor.HttpContext.Session.SetString("Email", userCredential.User.Info.Email);
             HttpContextAccessor.HttpContext.Session.SetString("DisplayName", userCredential.User.Info.DisplayName);
+            HttpContextAccessor.HttpContext.Session.SetString("FirebaseToken", userCredential.User.Credential.IdToken);
+
+            CookieOptions cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.UtcNow.AddSeconds(userCredential.User.Credential.ExpiresIn)
+            };
+
+            HttpContextAccessor.HttpContext.Response.Cookies.Append("FirebaseToken", userCredential.User.Credential.IdToken, cookieOptions);
         }
 
     }

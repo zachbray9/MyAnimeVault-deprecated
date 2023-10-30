@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Firebase.Auth;
+using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
 using MyAnimeVault.Models;
+using MyAnimeVault.Services.Authentication;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 
@@ -11,14 +14,16 @@ namespace MyAnimeVault.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
+        private readonly IAuthenticator Authenticator;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
+            Authenticator = authenticator;
             AnimeApiService = animeApiService;
         }
 
@@ -62,12 +67,35 @@ namespace MyAnimeVault.Controllers
         }
 
         //helper methods
-        private void StoreUserDataInSession()
+        private async void StoreUserDataInSession()
         {
-            ViewBag.FirebaseToken = HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken");
-            ViewBag.UserId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
-            ViewBag.Email = HttpContextAccessor.HttpContext.Session.GetString("Email");
-            ViewBag.DisplayName = HttpContextAccessor.HttpContext.Session.GetString("DisplayName");
+            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken") != null ? true : false;
+            bool AuthCookieExists = HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"] != null ? true : false;
+        
+            if(UserAlreadyAuthenticated)
+            {
+                ViewBag.FirebaseToken = HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken");
+                ViewBag.UserId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
+                ViewBag.Email = HttpContextAccessor.HttpContext.Session.GetString("Email");
+                ViewBag.DisplayName = HttpContextAccessor.HttpContext.Session.GetString("DisplayName");
+            }
+            else if (AuthCookieExists)
+            {
+
+                try
+                {
+                    AuthCredential authCredential = JsonConvert.DeserializeObject<AuthCredential>(HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"]);
+
+                    UserCredential userCredential = await Authenticator.LoginWithCredentialAsync(authCredential); ViewBag.FirebaseToken = userCredential.User.Credential.IdToken;
+                    ViewBag.UserId = userCredential.User.Uid;
+                    ViewBag.Email = userCredential.User.Info.Email;
+                    ViewBag.DisplayName = userCredential.User.Info.DisplayName;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
         }
 
     }
