@@ -1,13 +1,10 @@
-﻿using Firebase.Auth;
-using FirebaseAdmin.Auth;
+﻿using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
-using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MyAnimeVault.Controllers
 {
@@ -53,7 +50,7 @@ namespace MyAnimeVault.Controllers
         {
             StoreUserDataInSession();
 
-            if(HttpContextAccessor.HttpContext.Session.GetString("UserId") == null)
+            if(HttpContextAccessor.HttpContext?.Session.GetString("UserId") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
@@ -68,35 +65,49 @@ namespace MyAnimeVault.Controllers
         }
 
         //helper methods
-        private async void StoreUserDataInSession()
+        private async void StoreUserDataInSession() //checks if the user is already logged in or has a session cookie. If not, user must login
         {
-            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext.Session.GetString("UserId") != null ? true : false;
-            bool AuthCookieExists = HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"] != null ? true : false;
+            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext?.Session.GetString("UserId") != null ? true : false;
+            string? sessionCookie = HttpContextAccessor.HttpContext?.Request.Cookies["Session"];
         
-            if(UserAlreadyAuthenticated)
+            if(UserAlreadyAuthenticated) //checks if the user has already logged in during this session (The session variables are populated)
             {
-                ViewBag.UserId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
-                ViewBag.Email = HttpContextAccessor.HttpContext.Session.GetString("Email");
-                ViewBag.DisplayName = HttpContextAccessor.HttpContext.Session.GetString("DisplayName");
+                ViewBag.UserId = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+                ViewBag.Email = HttpContextAccessor.HttpContext?.Session.GetString("Email");
+                ViewBag.DisplayName = HttpContextAccessor.HttpContext?.Session.GetString("DisplayName");
             }
-            else if (AuthCookieExists)
+            else if (!string.IsNullOrEmpty(sessionCookie)) //checks if there is a session cookie
             {
 
                 try
                 {
-                    string idToken = HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"];
-
-                    FirebaseToken userCredential = await Authenticator.VerifyIdTokenAsync(idToken);
-                    if(userCredential.Uid != null)
+                    FirebaseToken decodedToken = await Authenticator.VerifyCookieAsync(sessionCookie); //checks if the session cookie is still valid
+                    if(decodedToken.Uid != null)
                     {
-                        UserRecord userRecord = await Authenticator.GetUserByUidAsync(userCredential.Uid);
+                        UserRecord userRecord = await Authenticator.GetUserByUidAsync(decodedToken.Uid);
                         ViewBag.UserId = userRecord.Uid;
                         ViewBag.Email = userRecord.Email;
                         ViewBag.DisplayName = userRecord.DisplayName;
 
                     }
                 }
-                catch (Exception ex)
+                catch (FirebaseAuthException ex)
+                {
+                    switch(ex.AuthErrorCode)
+                    {
+                        case AuthErrorCode.ExpiredSessionCookie:
+                            HttpContextAccessor.HttpContext?.Response.Cookies.Delete("Session");
+                            Debug.WriteLine("The specified session cookie is expired.");
+                            break;
+                        case AuthErrorCode.InvalidSessionCookie:
+                            HttpContextAccessor.HttpContext?.Response.Cookies.Delete("Session");
+                            break;
+                        default:
+                            Debug.WriteLine(ex.Message);
+                            break;
+                    }
+                }
+                catch(Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
                 }

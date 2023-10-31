@@ -9,6 +9,8 @@ namespace MyAnimeVault.Services.Authentication
         Task<UserCredential> LoginAsync(string email, string password);
         Task<FirebaseToken> VerifyIdTokenAsync(string idToken);
         Task<UserRecord> GetUserByUidAsync(string uid);
+        Task CreateCookieAsync(string idToken);
+        Task<FirebaseToken> VerifyCookieAsync(string sessionCookie);
         Task Logout();
     }
 }

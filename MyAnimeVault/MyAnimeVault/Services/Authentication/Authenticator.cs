@@ -27,7 +27,7 @@ namespace MyAnimeVault.Services.Authentication
         {
             Firebase.Auth.UserCredential userCredential = await FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(email, password, displayName);
             AddUserDetailsToSession(userCredential.User.Uid, userCredential.User.Info.Email, userCredential.User.Info.DisplayName);
-            CreateCookie(userCredential);
+            await CreateCookieAsync(userCredential.User.Credential.IdToken);
             return userCredential;
         }
 
@@ -35,7 +35,7 @@ namespace MyAnimeVault.Services.Authentication
         {
             Firebase.Auth.UserCredential userCredential = await FirebaseAuthClient.SignInWithEmailAndPasswordAsync(email, password);
             AddUserDetailsToSession(userCredential.User.Uid, userCredential.User.Info.Email, userCredential.User.Info.DisplayName);
-            CreateCookie(userCredential);
+            await CreateCookieAsync(userCredential.User.Credential.IdToken);
             return userCredential;
         }
 
@@ -52,6 +52,31 @@ namespace MyAnimeVault.Services.Authentication
             return userRecord;
         }
 
+        public async Task CreateCookieAsync(string idToken)
+        {
+            SessionCookieOptions sessionCookieOptions = new SessionCookieOptions
+            {
+                ExpiresIn = TimeSpan.FromDays(14)
+            };
+
+            string sessionCookie = await FirebaseAuth.CreateSessionCookieAsync(idToken, sessionCookieOptions);
+
+            CookieOptions cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.UtcNow.Add(sessionCookieOptions.ExpiresIn),
+                HttpOnly = true,
+                Secure = true
+            };
+
+            HttpContextAccessor.HttpContext.Response.Cookies.Append("Session", sessionCookie, cookieOptions);
+        }
+
+        public async Task<FirebaseToken> VerifyCookieAsync(string sessionCookie)
+        {
+            FirebaseToken firebaseToken = await FirebaseAuth.VerifySessionCookieAsync(sessionCookie);
+            return firebaseToken;
+        }
+
         public Task Logout()
         {
             throw new NotImplementedException();
@@ -63,17 +88,6 @@ namespace MyAnimeVault.Services.Authentication
             HttpContextAccessor.HttpContext.Session.SetString("UserId", uid);
             HttpContextAccessor.HttpContext.Session.SetString("Email", email);
             HttpContextAccessor.HttpContext.Session.SetString("DisplayName", displayName);
-        }
-
-        private void CreateCookie(Firebase.Auth.UserCredential userCredential)
-        {
-            CookieOptions cookieOptions = new CookieOptions
-            {
-                Expires = DateTime.UtcNow.AddSeconds(userCredential.User.Credential.ExpiresIn)
-            };
-
-            HttpContextAccessor.HttpContext.Response.Cookies.Append("FirebaseToken", userCredential.User.Credential.IdToken, cookieOptions);
-            HttpContextAccessor.HttpContext.Response.Cookies.Append("RefreshToken", userCredential.User.Credential.RefreshToken, cookieOptions);
         }
 
     }
