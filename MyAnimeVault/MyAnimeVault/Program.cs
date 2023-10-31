@@ -5,6 +5,9 @@ using Firebase.Auth.Providers;
 using MyAnimeVault.Services.Authentication;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using FirebaseAdmin.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,12 @@ var builder = WebApplication.CreateBuilder(args);
 //gets the Firebase Api Key and project id from user secrets file (will change this to azure key vault later)
 string Firebase_Api_Key = builder.Configuration["Firebase_Api_Key"];
 string Firebase_Project_Id = builder.Configuration["Firebase_Project_Id"];
+string Firebase_Private_Key = builder.Configuration["Firebase_Private_Key"];
+
+FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions
+{
+    Credential = GoogleCredential.FromJson(Firebase_Private_Key),
+});
 
 FirebaseAuthConfig FirebaseConfig = new FirebaseAuthConfig
 {
@@ -23,7 +32,8 @@ FirebaseAuthConfig FirebaseConfig = new FirebaseAuthConfig
     AuthDomain = $"{Firebase_Project_Id}.firebaseapp.com",
     Providers = new FirebaseAuthProvider[]
     {
-        new EmailProvider()
+        new EmailProvider(),
+        new GoogleProvider()
     }
 }; 
 
@@ -43,6 +53,11 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
+
+builder.Services.AddSingleton<FirebaseAuth>(provider =>
+{
+    return FirebaseAuth.GetAuth(FirebaseApp.DefaultInstance);
+});
 
 builder.Services.AddSingleton<FirebaseAuthConfig>(FirebaseConfig); //adding the config and client so I can inject the client into my authentication service
 builder.Services.AddTransient<FirebaseAuthClient>(provider =>

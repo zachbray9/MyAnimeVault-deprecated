@@ -1,4 +1,5 @@
 ﻿using Firebase.Auth;
+using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
@@ -52,7 +53,7 @@ namespace MyAnimeVault.Controllers
         {
             StoreUserDataInSession();
 
-            if(HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken") == null)
+            if(HttpContextAccessor.HttpContext.Session.GetString("UserId") == null)
             {
                 return RedirectToAction("Index", "Login");
             }
@@ -69,12 +70,11 @@ namespace MyAnimeVault.Controllers
         //helper methods
         private async void StoreUserDataInSession()
         {
-            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken") != null ? true : false;
+            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext.Session.GetString("UserId") != null ? true : false;
             bool AuthCookieExists = HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"] != null ? true : false;
         
             if(UserAlreadyAuthenticated)
             {
-                ViewBag.FirebaseToken = HttpContextAccessor.HttpContext.Session.GetString("FirebaseToken");
                 ViewBag.UserId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
                 ViewBag.Email = HttpContextAccessor.HttpContext.Session.GetString("Email");
                 ViewBag.DisplayName = HttpContextAccessor.HttpContext.Session.GetString("DisplayName");
@@ -84,12 +84,17 @@ namespace MyAnimeVault.Controllers
 
                 try
                 {
-                    AuthCredential authCredential = JsonConvert.DeserializeObject<AuthCredential>(HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"]);
+                    string idToken = HttpContextAccessor.HttpContext.Request.Cookies["FirebaseToken"];
 
-                    UserCredential userCredential = await Authenticator.LoginWithCredentialAsync(authCredential); ViewBag.FirebaseToken = userCredential.User.Credential.IdToken;
-                    ViewBag.UserId = userCredential.User.Uid;
-                    ViewBag.Email = userCredential.User.Info.Email;
-                    ViewBag.DisplayName = userCredential.User.Info.DisplayName;
+                    FirebaseToken userCredential = await Authenticator.VerifyIdTokenAsync(idToken);
+                    if(userCredential.Uid != null)
+                    {
+                        UserRecord userRecord = await Authenticator.GetUserByUidAsync(userCredential.Uid);
+                        ViewBag.UserId = userRecord.Uid;
+                        ViewBag.Email = userRecord.Email;
+                        ViewBag.DisplayName = userRecord.DisplayName;
+
+                    }
                 }
                 catch (Exception ex)
                 {

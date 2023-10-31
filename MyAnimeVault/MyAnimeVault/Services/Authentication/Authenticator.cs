@@ -1,6 +1,11 @@
 ﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Auth.Requests;
 using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
 namespace MyAnimeVault.Services.Authentication
@@ -9,37 +14,42 @@ namespace MyAnimeVault.Services.Authentication
     {
         private readonly FirebaseAuthClient FirebaseAuthClient;
         private readonly IHttpContextAccessor HttpContextAccessor;
+        private readonly FirebaseAuth FirebaseAuth;
 
-        public Authenticator(FirebaseAuthClient firebaseAuthClient, IHttpContextAccessor httpContextAccessor)
+        public Authenticator(FirebaseAuthClient firebaseAuthClient, IHttpContextAccessor httpContextAccessor, FirebaseAuth firebaseAuth)
         {
             FirebaseAuthClient = firebaseAuthClient;
             HttpContextAccessor = httpContextAccessor;
+            FirebaseAuth = firebaseAuth;
         }
 
-        public async Task<UserCredential> RegisterAsync(string email, string password, string displayName)
+        public async Task<Firebase.Auth.UserCredential> RegisterAsync(string email, string password, string displayName)
         {
-            UserCredential userCredential = await FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(email, password, displayName);
-            AddUserDetailsToSession(userCredential);
+            Firebase.Auth.UserCredential userCredential = await FirebaseAuthClient.CreateUserWithEmailAndPasswordAsync(email, password, displayName);
+            AddUserDetailsToSession(userCredential.User.Uid, userCredential.User.Info.Email, userCredential.User.Info.DisplayName);
+            CreateCookie(userCredential);
             return userCredential;
         }
 
-        public async Task<UserCredential> LoginAsync(string email, string password)
+        public async Task<Firebase.Auth.UserCredential> LoginAsync(string email, string password)
         {
-            UserCredential userCredential = await FirebaseAuthClient.SignInWithEmailAndPasswordAsync(email, password);
-            AddUserDetailsToSession(userCredential);
+            Firebase.Auth.UserCredential userCredential = await FirebaseAuthClient.SignInWithEmailAndPasswordAsync(email, password);
+            AddUserDetailsToSession(userCredential.User.Uid, userCredential.User.Info.Email, userCredential.User.Info.DisplayName);
+            CreateCookie(userCredential);
             return userCredential;
         }
 
-        public async Task<UserCredential> LoginWithCredentialAsync(AuthCredential authCredential)
+        public async Task<FirebaseToken> VerifyIdTokenAsync(string idToken)
         {
-            UserCredential userCredential = await FirebaseAuthClient.SignInWithCredentialAsync(authCredential);
-            AddUserDetailsToSession(userCredential);
-            return userCredential;
+            FirebaseToken firebaseToken = await FirebaseAuth.VerifyIdTokenAsync(idToken);
+            return firebaseToken;
         }
 
-        public async Task<FirebaseToken> VerifyIdToken(string IdToken)
+        public async Task<UserRecord> GetUserByUidAsync(string uid)
         {
-            
+            UserRecord userRecord = await FirebaseAuth.GetUserAsync(uid);
+            AddUserDetailsToSession(userRecord.Uid, userRecord.Email, userRecord.DisplayName);
+            return userRecord;
         }
 
         public Task Logout()
@@ -48,19 +58,22 @@ namespace MyAnimeVault.Services.Authentication
         }
     
         //helper methods
-        private void AddUserDetailsToSession(UserCredential userCredential)
+        private void AddUserDetailsToSession(string uid, string email, string displayName)
         {
-            HttpContextAccessor.HttpContext.Session.SetString("UserId", userCredential.User.Uid);
-            HttpContextAccessor.HttpContext.Session.SetString("Email", userCredential.User.Info.Email);
-            HttpContextAccessor.HttpContext.Session.SetString("DisplayName", userCredential.User.Info.DisplayName);
-            HttpContextAccessor.HttpContext.Session.SetString("FirebaseToken", userCredential.User.Credential.IdToken);
+            HttpContextAccessor.HttpContext.Session.SetString("UserId", uid);
+            HttpContextAccessor.HttpContext.Session.SetString("Email", email);
+            HttpContextAccessor.HttpContext.Session.SetString("DisplayName", displayName);
+        }
 
+        private void CreateCookie(Firebase.Auth.UserCredential userCredential)
+        {
             CookieOptions cookieOptions = new CookieOptions
             {
                 Expires = DateTime.UtcNow.AddSeconds(userCredential.User.Credential.ExpiresIn)
             };
 
             HttpContextAccessor.HttpContext.Response.Cookies.Append("FirebaseToken", userCredential.User.Credential.IdToken, cookieOptions);
+            HttpContextAccessor.HttpContext.Response.Cookies.Append("RefreshToken", userCredential.User.Credential.RefreshToken, cookieOptions);
         }
 
     }
