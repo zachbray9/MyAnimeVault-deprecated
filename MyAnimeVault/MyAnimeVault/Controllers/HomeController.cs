@@ -27,28 +27,28 @@ namespace MyAnimeVault.Controllers
 
         public async Task<IActionResult> Index()
         {
-            StoreUserDataInSession();
+            await StoreUserDataInSession();
             AnimeList = await AnimeApiService.GetAllAnime();
             return View(AnimeList);
         }
 
         public async Task<IActionResult> AnimeDetails(int id) 
         {
-            StoreUserDataInSession();
+            await StoreUserDataInSession();
             Anime anime = await AnimeApiService.GetAnimeById(id);
             return View(anime);
         }
 
         public async Task<IActionResult> SearchResults(string query)
         {
-            StoreUserDataInSession();
+            await StoreUserDataInSession();
             List<AnimeListNode> SearchResults = await AnimeApiService.GetListOfAnimeByQuery(query);
             return View(SearchResults);
         }
 
-        public IActionResult Vault() 
+        public async Task<IActionResult> Vault() 
         {
-            StoreUserDataInSession();
+            await StoreUserDataInSession();
 
             if(HttpContextAccessor.HttpContext?.Session.GetString("UserId") == null)
             {
@@ -65,7 +65,7 @@ namespace MyAnimeVault.Controllers
         }
 
         //helper methods
-        private async void StoreUserDataInSession() //checks if the user is already logged in or has a session cookie. If not, user must login
+        private async Task StoreUserDataInSession() //checks if the user is already logged in or has a session cookie. If not, user must login
         {
             bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext?.Session.GetString("UserId") != null ? true : false;
             string? sessionCookie = HttpContextAccessor.HttpContext?.Request.Cookies["Session"];
