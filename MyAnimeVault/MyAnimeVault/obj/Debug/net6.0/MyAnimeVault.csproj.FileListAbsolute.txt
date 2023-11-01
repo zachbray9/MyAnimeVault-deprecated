@@ -63,3 +63,7 @@ C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVa
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Google.Apis.Auth.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Google.Apis.Core.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyAnimeVault.EntityFramework.Services.Authentication
+namespace MyAnimeVault.Domain.Models
 {
-    internal class AuthenticationService : IAuthenticationService
+    public class User
     {
-
+        public int Id { get; set; }
     }
 }

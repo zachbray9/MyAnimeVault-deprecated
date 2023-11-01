@@ -1,12 +1,5 @@
 ﻿using Firebase.Auth;
-using Firebase.Auth.Providers;
-using Firebase.Auth.Requests;
 using FirebaseAdmin.Auth;
-using Google.Apis.Auth.OAuth2;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Diagnostics;
 
 namespace MyAnimeVault.Services.Authentication
 {
@@ -68,7 +61,7 @@ namespace MyAnimeVault.Services.Authentication
                 Secure = true
             };
 
-            HttpContextAccessor.HttpContext.Response.Cookies.Append("Session", sessionCookie, cookieOptions);
+            HttpContextAccessor.HttpContext?.Response.Cookies.Append("Session", sessionCookie, cookieOptions);
         }
 
         public async Task<FirebaseToken> VerifyCookieAsync(string sessionCookie)
@@ -85,9 +78,9 @@ namespace MyAnimeVault.Services.Authentication
         //helper methods
         private void AddUserDetailsToSession(string uid, string email, string displayName)
         {
-            HttpContextAccessor.HttpContext.Session.SetString("UserId", uid);
-            HttpContextAccessor.HttpContext.Session.SetString("Email", email);
-            HttpContextAccessor.HttpContext.Session.SetString("DisplayName", displayName);
+            HttpContextAccessor.HttpContext?.Session.SetString("UserId", uid);
+            HttpContextAccessor.HttpContext?.Session.SetString("Email", email);
+            HttpContextAccessor.HttpContext?.Session.SetString("DisplayName", displayName);
         }
 
     }

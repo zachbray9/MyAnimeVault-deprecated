@@ -8,6 +8,7 @@ using Azure.Security.KeyVault.Secrets;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using FirebaseAdmin.Auth;
+using MyAnimeVault.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,8 +33,7 @@ FirebaseAuthConfig FirebaseConfig = new FirebaseAuthConfig
     AuthDomain = $"{Firebase_Project_Id}.firebaseapp.com",
     Providers = new FirebaseAuthProvider[]
     {
-        new EmailProvider(),
-        new GoogleProvider()
+        new EmailProvider()
     }
 }; 
 
@@ -52,7 +52,10 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
+builder.Services.AddDbContext<MyAnimeVaultDbContext>(options =>
+{
+    options.EnableSensitiveDataLogging(true);
+});
 
 builder.Services.AddSingleton<FirebaseAuth>(provider =>
 {
@@ -65,6 +68,8 @@ builder.Services.AddTransient<FirebaseAuthClient>(provider =>
     FirebaseAuthConfig firebaseAuthConfig = provider.GetRequiredService<FirebaseAuthConfig>();
     return new FirebaseAuthClient(firebaseAuthConfig);
 });
+
+builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 builder.Services.AddTransient<IAuthenticator, Authenticator>();
 
 var app = builder.Build();

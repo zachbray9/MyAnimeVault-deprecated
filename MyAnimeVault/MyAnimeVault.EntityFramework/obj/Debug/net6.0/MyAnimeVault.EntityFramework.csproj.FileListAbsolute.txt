@@ -9,3 +9,9 @@ C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVa
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\refint\MyAnimeVault.EntityFramework.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\MyAnimeVault.EntityFramework.pdb
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\ref\MyAnimeVault.EntityFramework.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\bin\Debug\net6.0\MyAnimeVault.EntityFramework.runtimeconfig.json
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\bin\Debug\net6.0\MyAnimeVault.Domain.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\bin\Debug\net6.0\MyAnimeVault.Domain.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\MyAnimeVault.EntityFramework.csproj.AssemblyReference.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\MyAnimeVault.EntityFramework.csproj.CopyComplete
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.EntityFramework\obj\Debug\net6.0\MyAnimeVault.EntityFramework.genruntimeconfig.cache

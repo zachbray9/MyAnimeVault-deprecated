@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
-using System.Diagnostics;
 
 namespace MyAnimeVault.Controllers
 {
@@ -55,7 +54,7 @@ namespace MyAnimeVault.Controllers
                             ModelState.AddModelError(string.Empty, "The user account does not exist. Please check the entered information or create a new account if you are a new user.");
                             break;
                         default:
-                            ModelState.AddModelError(string.Empty, "An error occurred during the login attempt. Please try again.");
+                            ModelState.AddModelError(string.Empty, "An error occurred during the login attempt. Please check the entered information oro create a new account if you are a new user.");
                             break;
                     }
                 }

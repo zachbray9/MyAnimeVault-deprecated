@@ -96,7 +96,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj": {
+                "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -108,6 +112,18 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.13, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "slCoj/QXIvG9hsCQArvMvHO83oArvFrNn+R+q/xoz8uP26BcSL/wQ7bd82IqFgz4IOtrQD/IYTJ5Qf7jqClAKg==",
+  "dgSpecHash": "dKWDDIg3i2DRXV91y8W1CM8q2EJomTJJbFOEgu/1rCtL4VJ/2D8PF0+UxgWj89XIFriNL+Y2nC+NcMZtpGz2Jg==",
   "success": true,
   "projectFilePath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,11 @@
     "C:\\Users\\zachb\\.nuget\\packages\\google.apis.auth\\1.49.0\\google.apis.auth.1.49.0.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\google.apis.core\\1.49.0\\google.apis.core.1.49.0.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.http\\7.0.0\\microsoft.extensions.http.7.0.0.nupkg.sha512",
