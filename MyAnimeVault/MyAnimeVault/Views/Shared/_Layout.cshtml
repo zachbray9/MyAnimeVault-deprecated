@@ -29,7 +29,15 @@
                 <div class="navbar-account-options">
                     @if(ViewBag.UserId != null)
                     {
-                        <p>@ViewBag.DisplayName</p>
+                        <div class="navbar-dropdown-menu-container" data-dropdown>
+                            <button class="navbar-dropdown-menu-button" type="button" data-dropdown-button>@ViewBag.DisplayName <i class="fa-solid fa-caret-down"></i></button>
+                            <div class="navbar-dropdown-menu" aria-labelledby="navbar-dropdown-menu-button">
+                                <div class="navbar-dropdown-menu-list">
+                                    <a class="navbar-dropdown-menu-listitem">Account Settings</a>
+                                    <a class="navbar-dropdown-menu-listitem">Logout</a>
+                                </div>
+                            </div>
+                        </div>
                     }
                     else
                     {
