@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
 
@@ -8,11 +9,13 @@ namespace MyAnimeVault.Controllers
     public class LoginController : Controller
     {
         private readonly ILogger<LoginController > _logger;
+        private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
 
-        public LoginController(ILogger<LoginController> logger, IAuthenticator authenticator)
+        public LoginController(ILogger<LoginController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator)
         {
             _logger = logger;
+            HttpContextAccessor = httpContextAccessor;
             Authenticator = authenticator;
         }
 
@@ -105,6 +108,13 @@ namespace MyAnimeVault.Controllers
 
             //If there is an error on the form then return to the create account page with error message
             return View(viewModel);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContextAccessor.HttpContext?.Session.Clear();
+            HttpContextAccessor.HttpContext?.Response.Cookies.Delete("Session");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
