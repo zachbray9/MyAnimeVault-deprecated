@@ -1,5 +1,6 @@
 ﻿using Firebase.Auth;
 using FirebaseAdmin.Auth;
+using System.Diagnostics;
 
 namespace MyAnimeVault.Services.Authentication
 {
@@ -70,9 +71,19 @@ namespace MyAnimeVault.Services.Authentication
             return firebaseToken;
         }
 
-        public Task Logout()
+        public async Task Logout()
         {
-            throw new NotImplementedException();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+            try
+            {
+                await FirebaseAuth.RevokeRefreshTokensAsync(uid);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            HttpContextAccessor.HttpContext?.Session.Clear();
+            HttpContextAccessor.HttpContext?.Response.Cookies.Delete("Session");
         }
     
         //helper methods

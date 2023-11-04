@@ -57,7 +57,7 @@ namespace MyAnimeVault.Controllers
                             ModelState.AddModelError(string.Empty, "The user account does not exist. Please check the entered information or create a new account if you are a new user.");
                             break;
                         default:
-                            ModelState.AddModelError(string.Empty, "An error occurred during the login attempt. Please check the entered information oro create a new account if you are a new user.");
+                            ModelState.AddModelError(string.Empty, "An error occurred during the login attempt. Please check the entered information or create a new account if you are a new user.");
                             break;
                     }
                 }
@@ -110,10 +110,9 @@ namespace MyAnimeVault.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContextAccessor.HttpContext?.Session.Clear();
-            HttpContextAccessor.HttpContext?.Response.Cookies.Delete("Session");
+            await Authenticator.Logout();
             return RedirectToAction("Index", "Home");
         }
     }
