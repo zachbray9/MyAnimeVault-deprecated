@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAnimeVault.Domain.Models
+﻿namespace MyAnimeVault.Domain.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        public int Id { get; set; } // Firebase Uid
+        public ICollection<UserAnime> Animes { get; set; } = new List<UserAnime>(); 
     }
 }

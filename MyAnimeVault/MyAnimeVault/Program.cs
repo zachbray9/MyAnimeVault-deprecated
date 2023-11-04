@@ -9,6 +9,7 @@ using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using FirebaseAdmin.Auth;
 using MyAnimeVault.EntityFramework;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 string Firebase_Api_Key = builder.Configuration["Firebase_Api_Key"];
 string Firebase_Project_Id = builder.Configuration["Firebase_Project_Id"];
 string Firebase_Private_Key = builder.Configuration["Firebase_Private_Key"];
+string ConnectionString = builder.Configuration["ConnectionString"];
 
 FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions
 {
@@ -54,6 +56,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<MyAnimeVaultDbContext>(options =>
 {
+    options.UseSqlServer(ConnectionString);
     options.EnableSensitiveDataLogging(true);
 });
 

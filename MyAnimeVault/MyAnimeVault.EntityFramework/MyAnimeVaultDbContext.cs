@@ -12,13 +12,15 @@ namespace MyAnimeVault.EntityFramework
     public class MyAnimeVaultDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Anime> Animes { get; set; }
+        public DbSet<UserAnime> Animes { get; set; }
+        public DbSet<Poster> Posters { get; set; }
+        public DbSet<StartSeason> StartSeasons { get; set; }
 
         public MyAnimeVaultDbContext(DbContextOptions options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            
         }
     }
 }

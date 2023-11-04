@@ -74,7 +74,7 @@
                 <h3>Opening Themes</h3>
        
                 <ul class="song-list">
-                    @if(Model.OpeningSongs != null)
+                    @if(Model.OpeningSongs.Any())
                     {
                         @foreach(OpeningSong song in Model.OpeningSongs)
                         {
@@ -95,7 +95,7 @@
             <div class="endings-list-container song-list-container">
                 <h3>Ending Themes</h3>
                 <ul class="song-list">
-                    @if(Model.EndingSongs != null)
+                    @if(Model.EndingSongs.Any())
                     {
                         @foreach(EndingSong song in Model.EndingSongs)
                         {

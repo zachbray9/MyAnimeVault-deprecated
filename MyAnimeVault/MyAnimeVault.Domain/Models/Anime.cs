@@ -1,10 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace MyAnimeVault.Domain.Models
 {
@@ -26,7 +20,7 @@ namespace MyAnimeVault.Domain.Models
         public int? Rank { get; set; }
         public int? Popularity { get; set; }
         public string? Nsfw { get; set; }
-        public Genre[] Genres { get; set; } = null!;
+        public ICollection<Genre> Genres { get; set; } = new List<Genre>();
         [JsonProperty("created_at")]
         public DateTime CreatedAt { get; set; }
         [JsonProperty("updated_at")]
@@ -44,10 +38,10 @@ namespace MyAnimeVault.Domain.Models
         [JsonProperty("average_episode_duration")]
         public int? AverageEpisodeDuration { get; set; }
         public string? Rating { get; set; }
-        public Studio[] Studios { get; set; } = null!;
+        public ICollection<Studio> Studios { get; set; } = new List<Studio>();
         [JsonProperty("opening_themes")]
-        public OpeningSong[]? OpeningSongs { get; set; }
+        public ICollection<OpeningSong> OpeningSongs { get; set; } = new List<OpeningSong>();
         [JsonProperty("ending_themes")]
-        public EndingSong[]? EndingSongs { get; set; } = null!;
+        public ICollection<EndingSong> EndingSongs { get; set;} = new List<EndingSong>();
     }
 }
