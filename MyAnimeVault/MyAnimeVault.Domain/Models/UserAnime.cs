@@ -1,12 +1,12 @@
-﻿namespace MyAnimeVault.Domain.Models
+﻿using MyAnimeVault.Domain.Models.Database;
+
+namespace MyAnimeVault.Domain.Models
 {
-    public class UserAnime
+    public class UserAnime : DbObject
     {
-        public int Id { get; set; } //Id from myanimelist api
+        //Id property will be the same from myanimelist api
         public ICollection<User> Users { get; set; } = new List<User>();
         public string Title { get; set; } = null!;
-
-        public int PosterId { get; set; }
         public Poster? Poster { get; set; }
         public int StartSeasonId { get; set; }
         public StartSeason? StartSeason { get; set; }

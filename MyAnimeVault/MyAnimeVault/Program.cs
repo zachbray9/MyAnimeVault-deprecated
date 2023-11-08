@@ -10,6 +10,8 @@ using Google.Apis.Auth.OAuth2;
 using FirebaseAdmin.Auth;
 using MyAnimeVault.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using MyAnimeVault.EntityFramework.Services;
+using MyAnimeVault.Services.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,6 +76,7 @@ builder.Services.AddTransient<FirebaseAuthClient>(provider =>
 
 builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 builder.Services.AddTransient<IAuthenticator, Authenticator>();
+builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataService<>));
 
 var app = builder.Build();
 

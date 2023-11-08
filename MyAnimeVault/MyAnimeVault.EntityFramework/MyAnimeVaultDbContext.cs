@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using MyAnimeVault.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyAnimeVault.EntityFramework
 {
@@ -20,7 +14,25 @@ namespace MyAnimeVault.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            //Users
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Animes)
+                .WithMany(ua => ua.Users);
+
+            //User Animes
+
+            modelBuilder.Entity<UserAnime>()
+                .HasOne(ua => ua.StartSeason)
+                .WithMany(ss => ss.Animes)
+                .HasForeignKey(ua => ua.StartSeasonId)
+                .IsRequired();
+
+            modelBuilder.Entity<UserAnime>()
+                .HasOne(ua => ua.Poster)
+                .WithOne(p => p.Anime)
+                .HasForeignKey<Poster>(p => p.AnimeId)
+                .IsRequired();
         }
     }
 }
