@@ -10,6 +10,9 @@ namespace MyAnimeVault.EntityFramework
         public DbSet<Poster> Posters { get; set; }
         public DbSet<StartSeason> StartSeasons { get; set; }
 
+        //need a constructor with no parameters for unit testing
+        public MyAnimeVaultDbContext(){} 
+
         public MyAnimeVaultDbContext(DbContextOptions options) : base(options) {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

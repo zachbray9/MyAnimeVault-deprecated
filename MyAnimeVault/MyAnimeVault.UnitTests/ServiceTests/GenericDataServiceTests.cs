@@ -9,28 +9,118 @@ namespace MyAnimeVault.UnitTests.ServiceTests
     [TestClass]
     public class GenericDataServiceTests
     {
-        [TestMethod]
-        public async Task GetByIdTest()
+        private MyAnimeVaultDbContext DbContext;
+        private GenericDataService<User> UserService;
+
+        [TestInitialize]
+        public async Task Setup()
         {
-            var mockDbContext = new Mock<MyAnimeVaultDbContext>();
-            var mockDbSet = new Mock<DbSet<User>>();
+            var options = new DbContextOptionsBuilder<MyAnimeVaultDbContext>()
+                .UseInMemoryDatabase(databaseName: "Test_Database")
+                .Options;
 
-            mockDbContext.Setup(context => context.Set<User>()).Returns(mockDbSet.Object);
+            DbContext = new MyAnimeVaultDbContext(options);
+            UserService = new GenericDataService<User>(DbContext);
 
-            var UserService = new GenericDataService<User>(mockDbContext.Object);
-            var testUser = new User
+            await DbContext.Users.AddAsync(
+                new User
+                {
+                    Id = 1,
+                    Email = "default@gmail.com",
+                    DisplayName = "Default"
+                }
+            );
+
+            await DbContext.Users.AddAsync(
+                new User
+                {
+                    Id = 2,
+                    Email = "default2@gmail.com",
+                    DisplayName = "Default2"
+                }
+            );
+
+            await DbContext.Users.AddAsync(
+                new User
+                {
+                    Id = 3,
+                    Email = "default3@gmail.com",
+                    DisplayName = "Default3"
+                }
+            );
+
+            await DbContext.SaveChangesAsync();
+        }
+
+
+
+        [TestMethod]
+        public async Task AddAsync_ShouldAddAndReturnUser()
+        {
+            var user = new User
             {
-                Id = 1,
-                DisplayName = "Test",
-                Email = "test@gmail.com"
+                Id = 115,
+                Email = "test@gmail.com",
+                DisplayName = "Test"
             };
 
-            mockDbSet.Setup(dbSet => dbSet.Find(It.IsAny<object[]>())).Returns(testUser);
-
-            var result = await UserService.GetByIdAsync(1);
+            var result = await UserService.AddAsync(user);
 
             Assert.IsNotNull(result);
+            Assert.AreEqual(115, result.Id);
             Assert.AreEqual("test@gmail.com", result.Email);
+            Assert.AreEqual("Test", result.DisplayName);
+        }
+
+        [TestMethod]
+        public async Task GetByIdAsync_ShouldReturnUser()
+        {
+            var user = await UserService.GetByIdAsync(1);
+
+            Assert.IsNotNull(user);
+            Assert.AreEqual(1, user.Id);
+            Assert.AreEqual("default@gmail.com", user.Email);
+            Assert.AreEqual("Default", user.DisplayName);
+        }
+
+        [TestMethod]
+        public async Task GetAllAsync_ShouldReturnListOfAllUsers()
+        {
+            List<User>? users = await UserService.GetAllAsync();
+
+            Assert.IsNotNull(users);
+        }
+
+        [TestMethod]
+        public async Task DeleteAsync_ShouldReturnTrue()
+        {
+            bool result = await UserService.DeleteAsync(1);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public async Task UpdateAsync_ShouldReturnUpdatedUser()
+        {
+         
+            User? existingUser = await UserService.GetByIdAsync(2);
+            existingUser.Email = "updatedEmail@gmail.com"; 
+            existingUser.DisplayName = "UpdatedDisplayName";
+
+            var result = await UserService.UpdateAsync(existingUser);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Id);
+            Assert.AreEqual("updatedEmail@gmail.com", result.Email);
+            Assert.AreEqual("UpdatedDisplayName", result.DisplayName);
+        }
+
+
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            DbContext.Database.EnsureDeleted();
         }
     }
 }
