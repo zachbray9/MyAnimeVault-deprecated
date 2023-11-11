@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyAnimeVault.EntityFramework;
 
@@ -10,9 +11,11 @@ using MyAnimeVault.EntityFramework;
 namespace MyAnimeVault.EntityFramework.Migrations
 {
     [DbContext(typeof(MyAnimeVaultDbContext))]
-    partial class MyAnimeVaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111024100_AddedUidStringPropertyToUser")]
+    partial class AddedUidStringPropertyToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,9 @@ namespace MyAnimeVault.EntityFramework.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AnimeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Large")
                         .HasColumnType("nvarchar(max)");
 
@@ -37,6 +43,9 @@ namespace MyAnimeVault.EntityFramework.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AnimeId")
+                        .IsUnique();
 
                     b.ToTable("Posters");
                 });
@@ -101,9 +110,6 @@ namespace MyAnimeVault.EntityFramework.Migrations
                     b.Property<int>("NumEpisodesWatched")
                         .HasColumnType("int");
 
-                    b.Property<int>("PosterId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
@@ -121,53 +127,66 @@ namespace MyAnimeVault.EntityFramework.Migrations
                     b.Property<int>("TotalEpisodes")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("WatchStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PosterId");
-
                     b.HasIndex("StartSeasonId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Animes");
                 });
 
-            modelBuilder.Entity("MyAnimeVault.Domain.Models.UserAnime", b =>
+            modelBuilder.Entity("UserUserAnime", b =>
                 {
-                    b.HasOne("MyAnimeVault.Domain.Models.Poster", "Poster")
-                        .WithMany("UserAnimes")
-                        .HasForeignKey("PosterId")
+                    b.Property<int>("AnimesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnimesId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("UserUserAnime");
+                });
+
+            modelBuilder.Entity("MyAnimeVault.Domain.Models.Poster", b =>
+                {
+                    b.HasOne("MyAnimeVault.Domain.Models.UserAnime", "Anime")
+                        .WithOne("Poster")
+                        .HasForeignKey("MyAnimeVault.Domain.Models.Poster", "AnimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Anime");
+                });
+
+            modelBuilder.Entity("MyAnimeVault.Domain.Models.UserAnime", b =>
+                {
                     b.HasOne("MyAnimeVault.Domain.Models.StartSeason", "StartSeason")
                         .WithMany("Animes")
                         .HasForeignKey("StartSeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MyAnimeVault.Domain.Models.User", "User")
-                        .WithMany("Animes")
-                        .HasForeignKey("UserId")
+                    b.Navigation("StartSeason");
+                });
+
+            modelBuilder.Entity("UserUserAnime", b =>
+                {
+                    b.HasOne("MyAnimeVault.Domain.Models.UserAnime", null)
+                        .WithMany()
+                        .HasForeignKey("AnimesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Poster");
-
-                    b.Navigation("StartSeason");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MyAnimeVault.Domain.Models.Poster", b =>
-                {
-                    b.Navigation("UserAnimes");
+                    b.HasOne("MyAnimeVault.Domain.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyAnimeVault.Domain.Models.StartSeason", b =>
@@ -175,9 +194,9 @@ namespace MyAnimeVault.EntityFramework.Migrations
                     b.Navigation("Animes");
                 });
 
-            modelBuilder.Entity("MyAnimeVault.Domain.Models.User", b =>
+            modelBuilder.Entity("MyAnimeVault.Domain.Models.UserAnime", b =>
                 {
-                    b.Navigation("Animes");
+                    b.Navigation("Poster");
                 });
 #pragma warning restore 612, 618
         }

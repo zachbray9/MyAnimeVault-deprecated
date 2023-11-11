@@ -1,6 +1,7 @@
 ﻿using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
 
@@ -11,12 +12,14 @@ namespace MyAnimeVault.Controllers
         private readonly ILogger<LoginController > _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
+        private readonly IUserDataService UserDataService;
 
-        public LoginController(ILogger<LoginController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator)
+        public LoginController(ILogger<LoginController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
             Authenticator = authenticator;
+            UserDataService = userDataService;
         }
 
         public IActionResult Index()
@@ -87,6 +90,14 @@ namespace MyAnimeVault.Controllers
                 {
                     //store current user and redirect to home page
                     UserCredential userCredential = await Authenticator.RegisterAsync(viewModel.Email, viewModel.Password, viewModel.DisplayName);
+                    MyAnimeVault.Domain.Models.User newUser = new MyAnimeVault.Domain.Models.User
+                    {
+                        Uid = userCredential.User.Uid,
+                        Email = userCredential.User.Info.Email,
+                        DisplayName = userCredential.User.Info.DisplayName
+                    };
+                    await UserDataService.AddAsync(newUser);
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch(FirebaseAuthException ex)
@@ -103,6 +114,10 @@ namespace MyAnimeVault.Controllers
                             ModelState.AddModelError(string.Empty, "An error occurred during account creation. Please try again.");
                             break;
                     }
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
                 }
             }
 

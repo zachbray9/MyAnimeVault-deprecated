@@ -77,6 +77,7 @@ builder.Services.AddTransient<FirebaseAuthClient>(provider =>
 builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 builder.Services.AddTransient<IAuthenticator, Authenticator>();
 builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataService<>));
+builder.Services.AddScoped(typeof(IUserDataService), typeof(UserDataService));
 
 var app = builder.Build();
 

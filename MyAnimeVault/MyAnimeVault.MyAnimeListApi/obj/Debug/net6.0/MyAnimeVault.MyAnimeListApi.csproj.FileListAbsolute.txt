@@ -1,4 +1,3 @@
-C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Debug\net6.0\MyAnimeVault.MyAnimeListApi.deps.json
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Debug\net6.0\MyAnimeVault.MyAnimeListApi.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Debug\net6.0\MyAnimeVault.MyAnimeListApi.pdb
@@ -10,6 +9,7 @@ C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVa
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.AssemblyInfo.cs
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.csproj.CoreCompileInputs.cache
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.csproj.CopyComplete
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\refint\MyAnimeVault.MyAnimeListApi.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\MyAnimeVault.MyAnimeListApi.pdb
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Debug\net6.0\ref\MyAnimeVault.MyAnimeListApi.dll

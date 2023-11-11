@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyAnimeVault.EntityFramework;
 
@@ -10,9 +11,11 @@ using MyAnimeVault.EntityFramework;
 namespace MyAnimeVault.EntityFramework.Migrations
 {
     [DbContext(typeof(MyAnimeVaultDbContext))]
-    partial class MyAnimeVaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111034004_UpdatedUserAnimeRelationships")]
+    partial class UpdatedUserAnimeRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

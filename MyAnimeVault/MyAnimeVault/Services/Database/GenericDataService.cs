@@ -68,7 +68,7 @@ namespace MyAnimeVault.Services.Database
             var navigationProperties = entityType.GetNavigations();
             IQueryable<T> query = DbContext.Set<T>();
 
-            foreach(var navigationProperty in navigationProperties)
+            foreach (var navigationProperty in navigationProperties)
             {
                 query = query.Include(navigationProperty.Name);
             }

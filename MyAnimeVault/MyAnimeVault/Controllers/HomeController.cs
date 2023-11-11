@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
+using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
 using System.Diagnostics;
@@ -13,15 +14,17 @@ namespace MyAnimeVault.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
+        private readonly IGenericDataService<User> UserDataService;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IGenericDataService<User> userDataService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
             Authenticator = authenticator;
+            UserDataService = userDataService;
             AnimeApiService = animeApiService;
         }
 

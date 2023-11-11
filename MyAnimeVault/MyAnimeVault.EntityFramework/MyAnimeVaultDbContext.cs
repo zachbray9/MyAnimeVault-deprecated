@@ -21,7 +21,9 @@ namespace MyAnimeVault.EntityFramework
 
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Animes)
-                .WithMany(ua => ua.Users);
+                .WithOne(ua => ua.User)
+                .HasForeignKey(u => u.UserId)
+                .IsRequired();
 
             //User Animes
 
@@ -33,8 +35,8 @@ namespace MyAnimeVault.EntityFramework
 
             modelBuilder.Entity<UserAnime>()
                 .HasOne(ua => ua.Poster)
-                .WithOne(p => p.Anime)
-                .HasForeignKey<Poster>(p => p.AnimeId)
+                .WithMany(p => p.UserAnimes)
+                .HasForeignKey(ua => ua.PosterId)
                 .IsRequired();
         }
     }

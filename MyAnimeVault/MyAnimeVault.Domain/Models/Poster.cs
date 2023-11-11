@@ -6,7 +6,6 @@ namespace MyAnimeVault.Domain.Models
     {
         public string? Large { get; set; }
         public string Medium { get; set; } = null!;
-        public int AnimeId { get; set; }
-        public UserAnime Anime { get; set; } = null!;
+        public ICollection<UserAnime> UserAnimes { get; set; } = new List<UserAnime>();
     }
 }
