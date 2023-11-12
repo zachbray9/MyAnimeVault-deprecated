@@ -13,6 +13,10 @@
     opacity: 0.3;
 }
 
+.text-center {
+    min-height: 800px;
+}
+
 /*CSS Reset*/
 
 * {
@@ -387,6 +391,24 @@ li {
 
 .search-result-link:hover {
     background-color: var(--darkmode1hover);
+}
+
+/*Vault Page*/
+
+.user-anime-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.progress-bar.completed {                          /*class created from javascript*/
+    background-color: blue;
+}
+
+.progress-bar.progress-bar-fill {                  /*class created from javascript*/
+    background-color: green;
 }
 
 /*Create Account Page*/

@@ -1,8 +1,44 @@
-﻿
+﻿@using MyAnimeVault.Domain.Models
+@model ICollection<UserAnime>
+
 @{
     ViewData["Title"] = "MyVault";
 }
 
 <div class="text-center">
+    <ul class="user-anime-list">
+        @if(Model == null || Model.Count == 0)
+        {
+            <li>
+                <p>Your list is empty. Go watch some anime!</p>
+            </li>
+        }
+        else
+        {
+            @foreach(UserAnime anime in Model)
+            {
+                <li class="user-anime-listitem">
+                    <a class="user-anime-link">
+                        <img src="@anime.Poster?.Medium" alt="@anime.Title">
+                        <div class="user-anime-details-container">
+                            <div class="user-anime-details-titleandmediatype-container">
+                                <h5 class="user-anime-title">@anime.Title</h5>
+                                <p class="user-anime-mediatype">@anime.MediaType, @anime.StartSeason</p>
+                            </div>
+                            <div class="user-anime-details-episodeinfo">
+                                <div class="progress-bar" data-watched="@anime.NumEpisodesWatched" data-total="@anime.TotalEpisodes"></div>
+                                <div class="user-anime-details-ratingandepisodeswatched-container">
+                                    <p><i class="fa-solid fa-star"></i> @anime.Rating</p>
+                                    <p>@anime.NumEpisodesWatched / @anime.TotalEpisodes ep</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="user-anime-buttons">
 
+                    </div>
+                </li>
+            }
+        }
+    </ul>
 </div>

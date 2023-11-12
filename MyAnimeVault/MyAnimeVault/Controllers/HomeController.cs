@@ -14,12 +14,12 @@ namespace MyAnimeVault.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
-        private readonly IGenericDataService<User> UserDataService;
+        private readonly IUserDataService UserDataService;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IGenericDataService<User> userDataService, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
@@ -52,12 +52,15 @@ namespace MyAnimeVault.Controllers
         public async Task<IActionResult> Vault() 
         {
             await StoreUserDataInSession();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
 
-            if(HttpContextAccessor.HttpContext?.Session.GetString("UserId") == null)
+            if(uid == null)
             {
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Login"); //if user is not logged in, redirect to login page
             }
-                return View();
+
+            User? currentUser = await UserDataService.GetByUidAsync(uid); //if user is logged in, retrieve user from database and pass their anime list into the vault view
+            return View(currentUser?.Animes);
 
         }
 
