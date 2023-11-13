@@ -1,5 +1,5 @@
 ﻿@using MyAnimeVault.Domain.Models
-@model Anime
+@model AnimeDetailsViewModel
 
 @{
     ViewData["Title"] = "Anime Details";
@@ -8,51 +8,56 @@
 <div class="text-center">
     <div class="anime-details-container">
         <div class="image-and-rankinginfo-container">
-            <img src="@Model.Picture.Large" alt="@Model.Title" height="400" width="300"/>
+            <img src="@Model.Anime.Picture?.Large" alt="@Model.Anime.Title" height="400" width="300"/>
 
             <div class="rankinginfo-container">
                 <div class="title-and-season">
                     <h1>
-                        @if(Model.AlternativeTitles != null && !String.IsNullOrEmpty(Model.AlternativeTitles.en))
-                            @Model.AlternativeTitles.en
+                        @if(Model.Anime.AlternativeTitles != null && !String.IsNullOrEmpty(Model.Anime.AlternativeTitles?.en))
+                            @Model.Anime.AlternativeTitles.en
                         else
-                            @Model.Title
+                            @Model.Anime.Title
                     </h1>
                     <div class="season-and-mediatype-container">
-                        @if(Model.StartSeason != null)
+                        @if(Model.Anime.StartSeason != null)
                         {
-                            <p class="season">@(char.ToUpper(Model.StartSeason.Season[0]) + Model.StartSeason.Season.Substring(1)) @Model.StartSeason.Year</p>
+                            <p class="season">@(char.ToUpper(Model.Anime.StartSeason.Season[0]) + Model.Anime.StartSeason.Season.Substring(1)) @Model.Anime.StartSeason.Year</p>
                             <p class="separator">|</p>
                         }
                         <p class="mediatype">
-                            @if(Model.MediaType.Length < 4)
-                                @Model.MediaType.ToUpper()
+                            @if(Model.Anime.MediaType.Length < 4)
+                                @Model.Anime.MediaType.ToUpper()
                             else
-                                @(char.ToUpper(Model.MediaType[0]) + Model.MediaType.Substring(1))
+                                @(char.ToUpper(Model.Anime.MediaType[0]) + Model.Anime.MediaType.Substring(1))
                         </p>
+                        @if(Model.Anime.Studios.Count > 0)
+                        {
+                            <p class="separator">|</p>
+                            <p>@Model.Anime.Studios.First().Name</p>
+                        }
                     </div>
                 </div>
 
                 <div class="ranking-info">
-                    @if(Model.MeanScore != null)
+                    @if(Model.Anime.MeanScore != null)
                     {
-                        <p class="score"><i class="fa-solid fa-star"></i> @Model.MeanScore </p>
+                        <p class="score"><i class="fa-solid fa-star"></i> @Model.Anime.MeanScore </p>
                     }
                     else
                     {
                         <p class="score"><i class="fa-solid fa-star"></i> No score </p>
                     }
                     <p class="separator">|</p>
-                    @if(Model.Rank != null)
+                    @if(Model.Anime.Rank != null)
                     {
-                        <p class="rank"> Ranked #@Model.Rank</p>
+                        <p class="rank"> Ranked #@Model.Anime.Rank</p>
                     }
                     else
                     {
                         <p class="rank"> Unranked</p>
                     }
                     <p class="separator">|</p>
-                    <p class="popularity"> Popularity #@Model.Popularity</p>
+                    <p class="popularity"> Popularity #@Model.Anime.Popularity</p>
                 </div>
 
             </div>
@@ -61,7 +66,7 @@
         <div class="anime-synopsis-container">
             <h3>Synopsis</h3>
             <div class="synopsis-lines-container">
-                @foreach(var line in Model.Synopsis.Split('\n'))
+                @foreach(var line in Model.Anime.Synopsis.Split('\n'))
                 {
                     <p>@line</p>
                 
@@ -74,9 +79,9 @@
                 <h3>Opening Themes</h3>
        
                 <ul class="song-list">
-                    @if(Model.OpeningSongs.Any())
+                    @if(Model.Anime.OpeningSongs.Any())
                     {
-                        @foreach(OpeningSong song in Model.OpeningSongs)
+                        @foreach(OpeningSong song in Model.Anime.OpeningSongs)
                         {
                             <li>
                                 <p>@song.Text</p>
@@ -95,9 +100,9 @@
             <div class="endings-list-container song-list-container">
                 <h3>Ending Themes</h3>
                 <ul class="song-list">
-                    @if(Model.EndingSongs.Any())
+                    @if(Model.Anime.EndingSongs.Any())
                     {
-                        @foreach(EndingSong song in Model.EndingSongs)
+                        @foreach(EndingSong song in Model.Anime.EndingSongs)
                         {
                             <li>
                                 <p>@song.Text</p>

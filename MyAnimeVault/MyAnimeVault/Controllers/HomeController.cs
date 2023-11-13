@@ -38,8 +38,18 @@ namespace MyAnimeVault.Controllers
         public async Task<IActionResult> AnimeDetails(int id) 
         {
             await StoreUserDataInSession();
-            Anime anime = await AnimeApiService.GetAnimeById(id);
-            return View(anime);
+
+            AnimeDetailsViewModel viewModel = new AnimeDetailsViewModel();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+
+            viewModel.Anime = await AnimeApiService.GetAnimeById(id);
+            if(uid != null)
+            {
+                viewModel.CurrentUser = await UserDataService.GetByUidAsync(uid);
+            }
+
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> SearchResults(string query)

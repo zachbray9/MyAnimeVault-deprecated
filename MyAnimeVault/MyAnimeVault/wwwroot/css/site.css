@@ -286,6 +286,7 @@ li {
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    row-gap: 5px;
 }
 
 .season-and-mediatype-container {
