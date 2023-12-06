@@ -18,6 +18,7 @@
                         else
                             @Model.Anime.Title
                     </h1>
+
                     <div class="season-and-mediatype-container">
                         @if(Model.Anime.StartSeason != null)
                         {
@@ -36,6 +37,7 @@
                             <p>@Model.Anime.Studios.First().Name</p>
                         }
                     </div>
+
                 </div>
 
                 <div class="ranking-info">
@@ -60,18 +62,57 @@
                     <p class="popularity"> Popularity #@Model.Anime.Popularity</p>
                 </div>
 
+                <div class="user-list-details-container">
+                    @if(Model.CurrentUser != null)
+                    {
+                        if(Model.AnimeIsOnUsersList)
+                        {
+                            <select id="watchStatus">
+                                <option value="watching">Watching</option>
+                                <option value="completed">Completed</option>
+                                <option value="plan_to_watch">Plan to Watch</option>
+                                <option value="on_hold">On-Hold</option>
+                                <option value="dropped">Dropped</option>
+                            </select>
+
+                            <select id="rating">
+                                <option value="0">Select</option>
+                                <option value="1">(1) Appalling</option>
+                                <option value="2">(2) Horrible</option>
+                                <option value="3">(3) Very Bad</option>
+                                <option value="4">(4) Bad</option>
+                                <option value="5">(5) Average</option>
+                                <option value="6">(6) Fine</option>
+                                <option value="7">(7) Good</option>
+                                <option value="8">(8) Very Good</option>
+                                <option value="9">(9) Great</option>
+                                <option value="10">(10) Masterpiece</option>
+                            </select>
+
+                        }
+                        else
+                        {
+                            <a class="addToList-button" asp-area="" asp-action="AddAnimeToUserList" asp-controller="Home" asp-route-id="@Model.Anime.Id">+ Add To List</a>
+                        }
+                    }
+                </div>
+
             </div>
         </div>
 
         <div class="anime-synopsis-container">
-            <h3>Synopsis</h3>
-            <div class="synopsis-lines-container">
-                @foreach(var line in Model.Anime.Synopsis.Split('\n'))
-                {
-                    <p>@line</p>
+            @if(Model.Anime.Synopsis != null)
+            {
+                <h3>Synopsis</h3>
+                <div class="synopsis-lines-container">
                 
-                }
-            </div>
+                    @foreach(var line in Model.Anime.Synopsis.Split('\n'))
+                    {
+                        <p>@line</p>
+                
+                    }
+                </div>
+            }
         </div>
 
         <div class="opening-and-ending-info-container">
@@ -120,5 +161,97 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // Add the AJAX call to your site.js file
+        // $(document).ready(function () {
+        //     $('#addToList').click(function () {
+        //         var animeId = @Model.Anime.Id;
+        //         var userId = @Model.CurrentUser?.Id;
+        //         var user = @Model.CurrentUser;
+        //         var title;
+        //         if (@Model.Anime.AlternativeTitles != null && !String.IsNullOrEmpty(@Model.Anime.AlternativeTitles?.en))
+        //         {
+        //             title = @Model.Anime.AlternativeTitles?.en;
+        //         }
+        //         else
+        //         {
+        //             title = @Model.Anime.Title;
+        //         }
+        //         var poster = @Model.Anime.Picture;
+        //         var startSeason = @Model.Anime.StartSeason;
+        //         var mediaType = @Model.Anime.MediaType;
+        //         var totalEpisodes = @Model.Anime.NumEpisodes;
+        //         var status = @Model.Anime.Status;
+
+        //         // Make an AJAX POST request to add the anime to the user's list
+        //         $.ajax({
+        //             url: '/Home/AddToUserList',
+        //             type: 'POST',
+        //             data: {
+        //                 animeId: animeId,
+        //                 userId: userId,
+        //                 user: user,
+        //                 title: title,
+        //                 mediaType: mediaType,
+        //                 totalEpisodes: totalEpisodes,
+        //                 status: status
+        //                 // Add other required data for adding to the list
+        //             },
+        //             success: function (response) {
+        //                 // Replace the button with watch status, rating, episodes watched inputs
+        //                 var userListDetailsContainer = $('.user-list-details-container');
+        //                 userListDetailsContainer.empty(); // Clear the container
+
+        //                 // Create and append inputs for watch status, rating, and episodes watched
+        //                 var { watchStatus, userRating, episodesWatched } = GenerateUserDetailsInputs();
+
+        //                 userListDetailsContainer.append(watchStatusInput);
+        //                 userListDetailsContainer.append(ratingInput);
+        //                 userListDetailsContainer.append(episodesWatchedInput);
+        //             },
+        //             error: function (error) {
+        //                 console.log('Error:', error);
+        //             }
+        //         });
+        //     });
+        // });
+
+
+
+        function GenerateUserDetailsInputs() 
+        { 
+            var watchStatusSelect = $('<select id="watchStatus">').append(
+                $('<option>', { value: 'watching', text: 'Watching' }),
+                $('<option>', { value: 'completed', text: 'Completed' }),
+                $('<option>', { value: 'plan_to_watch', text: 'Plan to Watch' }),
+                $('<option>', { value: 'on_hold', text: 'On-Hold' }),
+                $('<option>', { value: 'dropped', text: 'Dropped' })
+            );
+
+            var ratingSelect = $('<select id="userRating"').append(
+                $('<option>', { value: '0', text: 'Select' }),
+                $('<option>', { value: '1', text: '(1) Appalling' }),
+                $('<option>', { value: '2', text: '(2) Horrible' }),
+                $('<option>', { value: '3', text: '(3) Very Bad' }),
+                $('<option>', { value: '4', text: '(4) Bad' }),
+                $('<option>', { value: '5', text: '(5) Average' }),
+                $('<option>', { value: '6', text: '(6) Fine' }),
+                $('<option>', { value: '7', text: '(7) Good' }),
+                $('<option>', { value: '8', text: '(8) Very Good' }),
+                $('<option>', { value: '9', text: '(9) Great' }),
+                $('<option>', { value: '10', text: '(10) Masterpiece' })
+            );
+
+            var episodesWatchedInput = $('<input id="episodesWatched" type="number">');
+
+            return { watchStatusSelect, ratingSelect, episodesWatchedInput };
+        }
+    </script>
+
+}
 
 

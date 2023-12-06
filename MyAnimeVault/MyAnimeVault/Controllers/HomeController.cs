@@ -15,37 +15,44 @@ namespace MyAnimeVault.Controllers
         private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
         private readonly IUserDataService UserDataService;
+        private readonly IGenericDataService<UserAnime> UserAnimeDataService;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
             Authenticator = authenticator;
             UserDataService = userDataService;
+            UserAnimeDataService = userAnimeDataService;
             AnimeApiService = animeApiService;
         }
 
         public async Task<IActionResult> Index()
         {
-            await StoreUserDataInSession();
+            await ValidateUserSession();
             AnimeList = await AnimeApiService.GetAllAnime();
             return View(AnimeList);
         }
 
         public async Task<IActionResult> AnimeDetails(int id) 
         {
-            await StoreUserDataInSession();
+            await ValidateUserSession();
 
             AnimeDetailsViewModel viewModel = new AnimeDetailsViewModel();
             string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
 
             viewModel.Anime = await AnimeApiService.GetAnimeById(id);
-            if(uid != null)
+
+            if(uid != null)             //checks if there is a user logged in 
             {
                 viewModel.CurrentUser = await UserDataService.GetByUidAsync(uid);
+                if(viewModel.CurrentUser != null) 
+                {
+                    viewModel.AnimeIsOnUsersList = viewModel.CurrentUser.Animes.Any(a => a.AnimeId == viewModel.Anime.Id) ? true : false;
+                }
             }
 
 
@@ -54,14 +61,14 @@ namespace MyAnimeVault.Controllers
 
         public async Task<IActionResult> SearchResults(string query)
         {
-            await StoreUserDataInSession();
+            await ValidateUserSession();
             List<AnimeListNode> SearchResults = await AnimeApiService.GetListOfAnimeByQuery(query);
             return View(SearchResults);
         }
 
         public async Task<IActionResult> Vault() 
         {
-            await StoreUserDataInSession();
+            await ValidateUserSession();
             string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
 
             if(uid == null)
@@ -74,6 +81,26 @@ namespace MyAnimeVault.Controllers
 
         }
 
+        public async Task<IActionResult> AddAnimeToUserList(int id)
+        {
+            await ValidateUserSession();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+
+            if (uid == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            User? user = await UserDataService.GetByUidAsync(uid);
+
+            if(user != null && !user.Animes.Any(userAnime =>  userAnime.Id == id))
+            {
+                //add new UserAnime to users list
+            }
+
+            return RedirectToAction("AnimeDetails", "Home", new { id = id });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -81,18 +108,11 @@ namespace MyAnimeVault.Controllers
         }
 
         //helper methods
-        private async Task StoreUserDataInSession() //checks if the user is already logged in or has a session cookie. If not, user must login
+        private async Task ValidateUserSession() //checks if the session cookie is still valid and, if so, populates the session variables with uid, email, and display name. Otherwise does nothing
         {
-            bool UserAlreadyAuthenticated = HttpContextAccessor.HttpContext?.Session.GetString("UserId") != null ? true : false;
             string? sessionCookie = HttpContextAccessor.HttpContext?.Request.Cookies["Session"];
         
-            if(UserAlreadyAuthenticated) //checks if the user has already logged in during this session (The session variables are populated)
-            {
-                ViewBag.UserId = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
-                ViewBag.Email = HttpContextAccessor.HttpContext?.Session.GetString("Email");
-                ViewBag.DisplayName = HttpContextAccessor.HttpContext?.Session.GetString("DisplayName");
-            }
-            else if (!string.IsNullOrEmpty(sessionCookie)) //checks if there is a session cookie
+            if (!string.IsNullOrEmpty(sessionCookie)) //checks if there is a session cookie
             {
 
                 try
