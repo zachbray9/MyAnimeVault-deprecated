@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
-using System.Xml.Linq;
 
 namespace MyAnimeVault.Services.Database
 {
@@ -102,6 +101,19 @@ namespace MyAnimeVault.Services.Database
             EntityEntry<User> result = DbContext.Set<User>().Update(entity);
             await DbContext.SaveChangesAsync();
             return result.Entity;
+        }
+
+        public async Task<bool> AddAnimeToList(User user, UserAnime anime)
+        {
+            if(user == null || user.Animes.Any(ua => ua.AnimeId == anime.Id))
+            {
+                return false;
+            }
+
+            user.Animes.Add(anime);
+            await DbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }

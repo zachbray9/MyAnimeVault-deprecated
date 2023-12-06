@@ -1,9 +1,12 @@
 ﻿using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
+using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
+using MyAnimeVault.MyAnimeListApi.Models;
 using MyAnimeVault.Services.Authentication;
 using System.Diagnostics;
 
@@ -13,20 +16,26 @@ namespace MyAnimeVault.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
+        private readonly MyAnimeVaultDbContext DbContext;
         private readonly IAuthenticator Authenticator;
         private readonly IUserDataService UserDataService;
         private readonly IGenericDataService<UserAnime> UserAnimeDataService;
+        private readonly IGenericDataService<Poster> PosterDataService;
+        private readonly IGenericDataService<StartSeason> StartSeasonDataService; 
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, MyAnimeVaultDbContext dbContext, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IGenericDataService<Poster> posterDataService, IGenericDataService<StartSeason> startSeasonDataService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
+            DbContext = dbContext;
             Authenticator = authenticator;
             UserDataService = userDataService;
             UserAnimeDataService = userAnimeDataService;
+            PosterDataService = posterDataService;
+            StartSeasonDataService = startSeasonDataService;
             AnimeApiService = animeApiService;
         }
 
@@ -91,12 +100,57 @@ namespace MyAnimeVault.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            User? user = await UserDataService.GetByUidAsync(uid);
-
-            if(user != null && !user.Animes.Any(userAnime =>  userAnime.Id == id))
+            try
             {
-                //add new UserAnime to users list
+                User? user = await UserDataService.GetByUidAsync(uid);
+
+                if(user != null && !user.Animes.Any(userAnime =>  userAnime.Id == id))
+                {
+                    Anime anime = await AnimeApiService.GetAnimeById(id);
+                    Poster? existingPoster = null;
+                    StartSeason? existingStartSeason = null;
+
+                    //checks if the anime has a poster and, if so, checks if it's already in the database. If not, then add it to the database.
+                    if(anime.Picture != null)
+                    {
+                        existingPoster = await DbContext.Posters.FirstOrDefaultAsync(p => p.Medium == anime.Picture.Medium);
+                        if(existingPoster == null)
+                        {
+                            existingPoster = await PosterDataService.AddAsync(anime.Picture);
+                        }
+                    }
+
+                    //checks if the anime has a start season and, if so, checks if it's already in the database. If not, then add it to the database.
+                    if(anime.StartSeason != null)
+                    {
+                        existingStartSeason = await DbContext.StartSeasons.FirstOrDefaultAsync(ss => ss.Season == anime.StartSeason.Season && ss.Year == anime.StartSeason.Year);
+                        if(existingStartSeason == null)
+                        {
+                            existingStartSeason = await StartSeasonDataService.AddAsync(anime.StartSeason);
+                        }
+                    }
+
+                    UserAnime animeToAdd = new UserAnime
+                    {
+                        AnimeId = id,
+                        UserId = user.Id,
+                        Title = (anime.AlternativeTitles != null && !string.IsNullOrEmpty(anime.AlternativeTitles.en)) ? anime.AlternativeTitles.en : anime.Title,
+                        PosterId = existingPoster != null ? existingPoster.Id : null,
+                        StartSeasonId = existingStartSeason != null ? existingStartSeason.Id : null,
+                        MediaType = anime.MediaType,
+                        TotalEpisodes = anime.NumEpisodes,
+                        Status = anime.Status
+                    };
+
+                    await UserDataService.AddAnimeToList(user, animeToAdd);
+                }
+
             }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
 
             return RedirectToAction("AnimeDetails", "Home", new { id = id });
         }

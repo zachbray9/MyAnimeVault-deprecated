@@ -10,5 +10,6 @@ namespace MyAnimeVault.EntityFramework.Services
     public interface IUserDataService : IGenericDataService<User>
     {
         Task<User?> GetByUidAsync(string uid);
+        Task<bool> AddAnimeToList(User user, UserAnime anime);
     }
 }
