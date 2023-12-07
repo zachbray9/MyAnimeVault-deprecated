@@ -3,7 +3,6 @@ using Moq;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.Services.Database;
-using System.Xml.Serialization;
 
 namespace MyAnimeVault.UnitTests.ServiceTests
 {
@@ -12,6 +11,8 @@ namespace MyAnimeVault.UnitTests.ServiceTests
     {
         private MyAnimeVaultDbContext DbContext;
         private GenericDataService<UserAnime> UserAnimeService;
+        private GenericDataService<Poster> PosterDataService;
+        private GenericDataService<StartSeason> StartSeasonDataService;
 
         [TestInitialize]
         public async Task Setup()
@@ -23,6 +24,8 @@ namespace MyAnimeVault.UnitTests.ServiceTests
 
             DbContext = new MyAnimeVaultDbContext(options);
             UserAnimeService = new GenericDataService<UserAnime>(DbContext);
+            PosterDataService = new GenericDataService<Poster>(DbContext);
+            StartSeasonDataService = new GenericDataService<StartSeason>(DbContext);
 
             await DbContext.Users.AddAsync(
                 new User
@@ -132,10 +135,29 @@ namespace MyAnimeVault.UnitTests.ServiceTests
         [TestMethod]
         public async Task AddAsync_ShouldAddAndReturnUserAnime()
         {
+            Poster poster = new Poster
+            {
+                Medium = "testMedium",
+                Large = "testLarge"
+            };
+
+            poster = await PosterDataService.AddAsync(poster );
+
+            StartSeason startSeason = new StartSeason
+            {
+                Year = 2022,
+                Season = "winter"
+            };
+
+            startSeason = await StartSeasonDataService.AddAsync(startSeason);
+
             var userAnime = new UserAnime
             {
                 Id = 115,
+                AnimeId = 856,
                 Title = "TestName4",
+                PosterId = poster.Id,
+                StartSeasonId = startSeason.Id,
                 MediaType = "tv",
                 Rating = 10,
                 NumEpisodesWatched = 47,
@@ -148,7 +170,10 @@ namespace MyAnimeVault.UnitTests.ServiceTests
 
             Assert.IsNotNull(result);
             Assert.AreEqual(115, result.Id);
+            Assert.AreEqual(856, result.AnimeId);
             Assert.AreEqual("TestName4", result.Title);
+            Assert.AreEqual(poster.Id, result.PosterId);
+            Assert.AreEqual(startSeason.Id, result.StartSeasonId);
             Assert.AreEqual("tv", result.MediaType);
             Assert.AreEqual(10, result.Rating);
             Assert.AreEqual(47, result.NumEpisodesWatched);
