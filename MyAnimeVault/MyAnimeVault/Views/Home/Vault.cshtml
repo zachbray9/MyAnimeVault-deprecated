@@ -1,5 +1,5 @@
 ﻿@using MyAnimeVault.Domain.Models
-@model ICollection<UserAnime>
+@model List<UserAnime>
 
 @{
     ViewData["Title"] = "MyVault";
@@ -19,7 +19,7 @@
             {
                 <li class="user-anime-listitem">
                     <a class="user-anime-link">
-                        <img src="@anime.Poster?.Medium" alt="@anime.Title">
+                        <img src="@anime.Poster?.Medium" alt="@anime.Title" height="300" width="225">
                         <div class="user-anime-details-container">
                             <div class="user-anime-details-titleandmediatype-container">
                                 <h5 class="user-anime-title">@anime.Title</h5>

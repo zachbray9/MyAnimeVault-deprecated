@@ -38,62 +38,73 @@ namespace MyAnimeVault.Services.Database
 
         public async Task<List<User>?> GetAllAsync()
         {
-            var entityType = DbContext.Model.FindEntityType(typeof(User));
+            //var entityType = DbContext.Model.FindEntityType(typeof(User));
 
-            if (entityType == null)
-            {
-                return null;
-            }
+            //if (entityType == null)
+            //{
+            //    return null;
+            //}
 
-            var navigationProperties = entityType.GetNavigations();
-            IQueryable<User> query = DbContext.Set<User>();
+            //var navigationProperties = entityType.GetNavigations();
+            //IQueryable<User> query = DbContext.Set<User>();
 
-            foreach (var navigationProperty in navigationProperties)
-            {
-                query = query.Include(navigationProperty.Name);
-            }
+            //foreach (var navigationProperty in navigationProperties)
+            //{
+            //    query = query.Include(navigationProperty.Name);
+            //}
 
-            return await query.ToListAsync();
+            //return await query.ToListAsync();
+
+
+            List<User>? users = await DbContext.Users.Include(u => u.Animes).ThenInclude(a => a.Poster).Include(u => u.Animes).ThenInclude(a => a.StartSeason).ToListAsync();
+            return users;
         }
 
         public async Task<User?> GetByIdAsync(int id)
         {
-            var entityType = DbContext.Model.FindEntityType(typeof(User));
+            //var entityType = DbContext.Model.FindEntityType(typeof(User));
 
-            if (entityType == null)
-            {
-                return null;
-            }
+            //if (entityType == null)
+            //{
+            //    return null;
+            //}
 
-            var navigationProperties = entityType.GetNavigations();
-            IQueryable<User> query = DbContext.Set<User>();
+            //var navigationProperties = entityType.GetNavigations();
+            //IQueryable<User> query = DbContext.Set<User>();
 
-            foreach (var navigationProperty in navigationProperties)
-            {
-                query = query.Include(navigationProperty.Name);
-            }
+            //foreach (var navigationProperty in navigationProperties)
+            //{
+            //    query = query.Include(navigationProperty.Name);
+            //}
 
-            return await query.FirstOrDefaultAsync(e => e.Id == id);
+            //return await query.FirstOrDefaultAsync(e => e.Id == id);
+
+
+            User? user = await DbContext.Users.Include(u => u.Animes).ThenInclude(a => a.Poster).Include(u => u.Animes).ThenInclude(a => a.StartSeason).FirstOrDefaultAsync(u => u.Id == id);
+            return user;
         }
 
         public async Task<User?> GetByUidAsync(string uid)
         {
-            var entityType = DbContext.Model.FindEntityType(typeof(User));
+            //var entityType = DbContext.Model.FindEntityType(typeof(User));
 
-            if (entityType == null)
-            {
-                return null;
-            }
+            //if (entityType == null)
+            //{
+            //    return null;
+            //}
 
-            var navigationProperties = entityType.GetNavigations();
-            IQueryable<User> query = DbContext.Set<User>();
+            //var navigationProperties = entityType.GetNavigations();
+            //IQueryable<User> query = DbContext.Set<User>();
 
-            foreach (var navigationProperty in navigationProperties)
-            {
-                query = query.Include(navigationProperty.Name);
-            }
+            //foreach (var navigationProperty in navigationProperties)
+            //{
+            //    query = query.Include(navigationProperty.Name);
+            //}
 
-            return await query.FirstOrDefaultAsync(e => e.Uid == uid);
+            //return await query.FirstOrDefaultAsync(e => e.Uid == uid);
+
+            User? user = await DbContext.Users.Include(u => u.Animes).ThenInclude(a => a.Poster).Include(u => u.Animes).ThenInclude(a => a.StartSeason).FirstOrDefaultAsync(u => u.Uid == uid);
+            return user;
         }
 
         public async Task<User> UpdateAsync(User entity)

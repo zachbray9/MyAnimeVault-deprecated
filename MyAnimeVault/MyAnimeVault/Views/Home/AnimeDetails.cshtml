@@ -65,9 +65,9 @@
                 <div class="user-list-details-container">
                     @if(Model.CurrentUser != null)
                     {
-                        if(Model.AnimeIsOnUsersList)
+                        if(Model.UserAnime != null)
                         {
-                            <select id="watchStatus">
+                            <select class="watchStatus-select" asp-for="@Model.UserAnime.WatchStatus">
                                 <option value="watching">Watching</option>
                                 <option value="completed">Completed</option>
                                 <option value="plan_to_watch">Plan to Watch</option>
@@ -75,7 +75,7 @@
                                 <option value="dropped">Dropped</option>
                             </select>
 
-                            <select id="rating">
+                            <select class="rating-select" asp-for="@Model.UserAnime.Rating">
                                 <option value="0">Select</option>
                                 <option value="1">(1) Appalling</option>
                                 <option value="2">(2) Horrible</option>

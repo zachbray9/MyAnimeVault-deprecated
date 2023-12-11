@@ -31,13 +31,13 @@ namespace MyAnimeVault.EntityFramework
                 .HasOne(ua => ua.StartSeason)
                 .WithMany(ss => ss.Animes)
                 .HasForeignKey(ua => ua.StartSeasonId)
-                .IsRequired();
+                .IsRequired(false);
 
             modelBuilder.Entity<UserAnime>()
                 .HasOne(ua => ua.Poster)
                 .WithMany(p => p.UserAnimes)
                 .HasForeignKey(ua => ua.PosterId)
-                .IsRequired();
+                .IsRequired(false);
         }
     }
 }

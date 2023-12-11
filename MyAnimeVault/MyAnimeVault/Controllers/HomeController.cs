@@ -60,7 +60,8 @@ namespace MyAnimeVault.Controllers
                 viewModel.CurrentUser = await UserDataService.GetByUidAsync(uid);
                 if(viewModel.CurrentUser != null) 
                 {
-                    viewModel.AnimeIsOnUsersList = viewModel.CurrentUser.Animes.Any(a => a.AnimeId == viewModel.Anime.Id) ? true : false;
+                    //checks if the specific anime is already on the users list or not
+                    viewModel.UserAnime = viewModel.CurrentUser.Animes.FirstOrDefault(a => a.AnimeId == viewModel.Anime.Id);
                 }
             }
 
@@ -87,7 +88,6 @@ namespace MyAnimeVault.Controllers
 
             User? currentUser = await UserDataService.GetByUidAsync(uid); //if user is logged in, retrieve user from database and pass their anime list into the vault view
             return View(currentUser?.Animes);
-
         }
 
         public async Task<IActionResult> AddAnimeToUserList(int id)

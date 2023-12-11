@@ -250,6 +250,7 @@ li {
 }
 
 /*Anime Details Page*/
+
 .text-center {
     display: flex;
     flex-direction: column;
@@ -353,6 +354,24 @@ li {
     row-gap: 10px;
 }
 
+.addToList-button {
+    background: var(--accentblue);
+    color: white;
+    padding: 5px 10px;
+}
+
+.watchStatus-select {
+    color: black;
+}
+
+.rating-select {
+    color: black;
+}
+
+option {
+    color: black;
+}
+
 /*Search Results Page*/
 
 .search-results-container {
@@ -402,6 +421,18 @@ li {
     justify-content: start;
     align-items: center;
     margin-top: 100px;
+}
+
+.user-anime-link {
+    display: flex;
+    
+}
+
+.user-anime-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .progress-bar.completed {                          /*class created from javascript*/

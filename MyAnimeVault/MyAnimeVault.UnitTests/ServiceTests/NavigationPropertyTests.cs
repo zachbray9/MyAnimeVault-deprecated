@@ -110,7 +110,15 @@ namespace MyAnimeVault.UnitTests.ServiceTests
 
             bool actualResult = await UserDataService.AddAnimeToList(user, testUserAnime);
 
+            User? userWithNewUserAnime = await UserDataService.GetByUidAsync("testUid");
+            UserAnime? newUserAnime = userWithNewUserAnime?.Animes.FirstOrDefault(ua => ua.AnimeId == 2);
+
             Assert.AreEqual(true, actualResult);
+            Assert.IsNotNull(newUserAnime);
+            Assert.AreEqual("testMedium2", newUserAnime?.Poster?.Medium);
+            Assert.AreEqual("testLarge2", newUserAnime?.Poster?.Large);
+            Assert.AreEqual(2022, newUserAnime?.StartSeason?.Year);
+            Assert.AreEqual("spring", newUserAnime?.StartSeason?.Season);
         }
 
         [TestMethod]
@@ -159,7 +167,10 @@ namespace MyAnimeVault.UnitTests.ServiceTests
             Assert.AreEqual(user.Id, userAnimeNavigationProperty.UserId);
             Assert.AreEqual(1, userAnimeNavigationProperty.AnimeId);
             Assert.AreEqual("Test Title", userAnimeNavigationProperty.Title);
+            Assert.AreEqual("testMedium", userAnimeNavigationProperty.Poster?.Medium);
             Assert.AreEqual(expectedPoster.Id, userAnimeNavigationProperty.PosterId);
+            Assert.AreEqual(2022, userAnimeNavigationProperty.StartSeason?.Year);
+            Assert.AreEqual("winter", userAnimeNavigationProperty.StartSeason?.Season);
             Assert.AreEqual(expectedStartSeason.Id, userAnimeNavigationProperty.StartSeasonId);
             Assert.AreEqual("tv", userAnimeNavigationProperty.MediaType);
             Assert.AreEqual(100, userAnimeNavigationProperty.TotalEpisodes);
