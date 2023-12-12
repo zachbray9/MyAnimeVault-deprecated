@@ -19,11 +19,26 @@
             {
                 <li class="user-anime-listitem">
                     <a class="user-anime-link">
-                        <img src="@anime.Poster?.Medium" alt="@anime.Title" height="300" width="225">
+                        <img src="@anime.Poster?.Medium" alt="@anime.Title" height="200" width="160">
                         <div class="user-anime-details-container">
                             <div class="user-anime-details-titleandmediatype-container">
-                                <h5 class="user-anime-title">@anime.Title</h5>
-                                <p class="user-anime-mediatype">@anime.MediaType, @anime.StartSeason</p>
+                                <h4 class="user-anime-title">@anime.Title</h4>
+                                <div class="user-anime-details-mediatype-and-startseason">
+                                    @if(anime.MediaType.Length < 4)
+                                    {
+                                        <p>@anime.MediaType.ToUpper()</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@(char.ToUpper(anime.MediaType[0]) + anime.MediaType.Substring(1))</p>
+                                    }
+
+                                    @if (anime.StartSeason != null)
+                                    {
+                                        <p>, @(char.ToUpper(anime.StartSeason.Season[0]) + anime.StartSeason.Season.Substring(1)) @anime.StartSeason.Year</p>
+                                    }
+                                    
+                                </div>
                             </div>
                             <div class="user-anime-details-episodeinfo">
                                 <div class="progress-bar" data-watched="@anime.NumEpisodesWatched" data-total="@anime.TotalEpisodes"></div>

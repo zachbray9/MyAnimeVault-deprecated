@@ -419,23 +419,64 @@ option {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    align-items: center;
+    align-items: start;
     margin-top: 100px;
+    gap: 20px;
 }
 
 .user-anime-link {
     display: flex;
-    
+    column-gap: 10px;
+    justify-content: start;
+    align-items: start;
+    min-width: 700px;
+    padding: 15px;
+    transition: all 0.2s;
+}
+
+.user-anime-link:hover {
+    background: var(--darkmode1hover)
 }
 
 .user-anime-details-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 200px;
 }
 
-.progress-bar.completed {                          /*class created from javascript*/
+.user-anime-details-titleandmediatype-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    row-gap: 5px;
+}
+
+.user-anime-details-mediatype-and-startseason {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.user-anime-details-episodeinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.user-anime-details-ratingandepisodeswatched-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.progress-bar.completed { /*class created from javascript*/
     background-color: blue;
 }
 
