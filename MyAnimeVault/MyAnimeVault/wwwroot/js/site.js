@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //create a fill element for the progress bar
         const fill = document.createElement("div");
         fill.classList.add("progress-bar-fill");
-        fill.style.width = '${percentage}%';
+        fill.style.width = `${percentage}%`;
 
         if (watched === total) {
             progressBar.classList.add("completed");

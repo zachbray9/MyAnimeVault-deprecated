@@ -466,6 +466,7 @@ option {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     width: 100%;
 }
 
@@ -476,12 +477,21 @@ option {
     width: 100%;
 }
 
+.progress-bar {
+    width: 100%; 
+    height: 20px; 
+    background-color: var(--darkmode2); 
+    overflow: hidden; 
+}
+
 .progress-bar.completed { /*class created from javascript*/
     background-color: blue;
+    height: 100%;
 }
 
 .progress-bar.progress-bar-fill {                  /*class created from javascript*/
     background-color: green;
+    height: 100%;
 }
 
 /*Create Account Page*/
