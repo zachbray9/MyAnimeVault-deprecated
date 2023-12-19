@@ -67,7 +67,7 @@
                     {
                         if(Model.UserAnime != null)
                         {
-                            <select class="watchStatus-select" asp-for="@Model.UserAnime.WatchStatus">
+                            <select class="watchStatus-select" id="watchStatus" asp-for="@Model.UserAnime.WatchStatus">
                                 <option value="watching">Watching</option>
                                 <option value="completed">Completed</option>
                                 <option value="plan_to_watch">Plan to Watch</option>
@@ -75,7 +75,7 @@
                                 <option value="dropped">Dropped</option>
                             </select>
 
-                            <select class="rating-select" asp-for="@Model.UserAnime.Rating">
+                            <select class="rating-select" id="userRating" asp-for="@Model.UserAnime.Rating">
                                 <option value="0">Select</option>
                                 <option value="1">(1) Appalling</option>
                                 <option value="2">(2) Horrible</option>
@@ -166,90 +166,103 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
-        // Add the AJAX call to your site.js file
-        // $(document).ready(function () {
-        //     $('#addToList').click(function () {
-        //         var animeId = @Model.Anime.Id;
-        //         var userId = @Model.CurrentUser?.Id;
-        //         var user = @Model.CurrentUser;
-        //         var title;
-        //         if (@Model.Anime.AlternativeTitles != null && !String.IsNullOrEmpty(@Model.Anime.AlternativeTitles?.en))
-        //         {
-        //             title = @Model.Anime.AlternativeTitles?.en;
-        //         }
-        //         else
-        //         {
-        //             title = @Model.Anime.Title;
-        //         }
-        //         var poster = @Model.Anime.Picture;
-        //         var startSeason = @Model.Anime.StartSeason;
-        //         var mediaType = @Model.Anime.MediaType;
-        //         var totalEpisodes = @Model.Anime.NumEpisodes;
-        //         var status = @Model.Anime.Status;
+        $(document).ready(function () {
+            // Event listener for watch status select
+            $('#watchStatus').change(function () {
+                var newValue = $(this).val(); // Get the newly selected value
+                console.log("Selected value for watch status:", newValue);
+                updateWatchStatusInDatabase(newValue); // Call function to update the database
+            });
 
-        //         // Make an AJAX POST request to add the anime to the user's list
-        //         $.ajax({
-        //             url: '/Home/AddToUserList',
-        //             type: 'POST',
-        //             data: {
-        //                 animeId: animeId,
-        //                 userId: userId,
-        //                 user: user,
-        //                 title: title,
-        //                 mediaType: mediaType,
-        //                 totalEpisodes: totalEpisodes,
-        //                 status: status
-        //                 // Add other required data for adding to the list
-        //             },
-        //             success: function (response) {
-        //                 // Replace the button with watch status, rating, episodes watched inputs
-        //                 var userListDetailsContainer = $('.user-list-details-container');
-        //                 userListDetailsContainer.empty(); // Clear the container
+            // Event listener for rating select
+            $('#userRating').change(function () {
+                var newValue = $(this).val(); // Get the newly selected value
+                updateRatingOrEpisodesWatchedInDatabase('rating', newValue); // Call function to update the database
+            });
 
-        //                 // Create and append inputs for watch status, rating, and episodes watched
-        //                 var { watchStatus, userRating, episodesWatched } = GenerateUserDetailsInputs();
+            // Event listener for episodes watched
+            $('#episodesWatched').change(function () {
+                var newValue = $(this).val(); // Get the newly selected value
+                updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue); // Call function to update the database
+                updateProgressBar(newValue); // Update progress bar width
+            });
 
-        //                 userListDetailsContainer.append(watchStatusInput);
-        //                 userListDetailsContainer.append(ratingInput);
-        //                 userListDetailsContainer.append(episodesWatchedInput);
-        //             },
-        //             error: function (error) {
-        //                 console.log('Error:', error);
-        //             }
-        //         });
-        //     });
-        // });
+            //function to update the watch status via ajax
+            function updateWatchStatusInDatabase(value) 
+            {
+                var animeId = @Model.Anime.Id; // Replace with the ID of the anime
+                var userId = @Model.CurrentUser?.Id; // Replace with the ID of the user
+
+                // Make an AJAX POST request to update the database
+                $.ajax({
+                    url: '/Home/UpdateUserAnimeWatchStatus',
+                    type: 'POST',
+                    data: {
+                        userId: userId,
+                        animeId: animeId,
+                        value: value
+                    },
+                    success: function (response) {
+                        // Handle success
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+
+            // Function to update the rating or episodes watched via AJAX
+            function updateRatingOrEpisodesWatchedInDatabase(fieldName, value) 
+            {
+                var animeId = @Model.Anime.Id; // Replace with the ID of the anime
+                var userId = @Model.CurrentUser?.Id; // Replace with the ID of the user
+
+                // Make an AJAX POST request to update the database
+                $.ajax({
+                    url: '/Home/UpdateUserAnimeRatingOrEpisodesWatched',
+                    type: 'POST',
+                    data: {
+                        userId: userId,
+                        animeId: animeId,
+                        fieldName: fieldName,
+                        value: value
+                    },
+                    success: function (response) {
+                        // Handle success
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
 
 
+            function updateProgressBar(episodesWatched) 
+            {
+                const progressBars = document.querySelectorAll(".progress-bar");
 
-        function GenerateUserDetailsInputs() 
-        { 
-            var watchStatusSelect = $('<select id="watchStatus">').append(
-                $('<option>', { value: 'watching', text: 'Watching' }),
-                $('<option>', { value: 'completed', text: 'Completed' }),
-                $('<option>', { value: 'plan_to_watch', text: 'Plan to Watch' }),
-                $('<option>', { value: 'on_hold', text: 'On-Hold' }),
-                $('<option>', { value: 'dropped', text: 'Dropped' })
-            );
+                progressBars.forEach((progressBar) => {
+                    const watched = parseInt(episodesWatched);
+                    const total = parseInt(progressBar.dataset.total);
 
-            var ratingSelect = $('<select id="userRating"').append(
-                $('<option>', { value: '0', text: 'Select' }),
-                $('<option>', { value: '1', text: '(1) Appalling' }),
-                $('<option>', { value: '2', text: '(2) Horrible' }),
-                $('<option>', { value: '3', text: '(3) Very Bad' }),
-                $('<option>', { value: '4', text: '(4) Bad' }),
-                $('<option>', { value: '5', text: '(5) Average' }),
-                $('<option>', { value: '6', text: '(6) Fine' }),
-                $('<option>', { value: '7', text: '(7) Good' }),
-                $('<option>', { value: '8', text: '(8) Very Good' }),
-                $('<option>', { value: '9', text: '(9) Great' }),
-                $('<option>', { value: '10', text: '(10) Masterpiece' })
-            );
+                    let percentage = 0;
+                    if (total > 0) {
+                        percentage = (watched / total) * 100;
+                    }
 
-            var episodesWatchedInput = $('<input id="episodesWatched" type="number">');
+                    const fill = progressBar.querySelector(".progress-bar-fill");
+                    if (fill) {
+                        fill.style.width = `${percentage}%`;
 
-            return { watchStatusSelect, ratingSelect, episodesWatchedInput };
-        }
+                        if (watched === total) {
+                            progressBar.classList.add("completed");
+                        } else {
+                            progressBar.classList.remove("completed");
+                        }
+                    }
+                });
+            }
+        })
     </script>
 
 }

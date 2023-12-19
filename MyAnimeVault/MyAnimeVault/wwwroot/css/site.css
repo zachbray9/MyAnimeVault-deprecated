@@ -484,7 +484,7 @@ option {
     overflow: hidden; 
 }
 
-.progress-bar.completed { /*class created from javascript*/
+.progress-bar.completed {                          /*class created from javascript*/
     background-color: blue;
     height: 100%;
 }

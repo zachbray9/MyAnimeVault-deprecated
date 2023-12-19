@@ -18,7 +18,7 @@
             @foreach(UserAnime anime in Model)
             {
                 <li class="user-anime-listitem">
-                    <a class="user-anime-link">
+                    <a class="user-anime-link" asp-area="" asp-action="AnimeDetails" asp-controller="Home" asp-route-id="@anime.AnimeId">
                         <img src="@anime.Poster?.Medium" alt="@anime.Title" height="200" width="160">
                         <div class="user-anime-details-container">
                             <div class="user-anime-details-titleandmediatype-container">

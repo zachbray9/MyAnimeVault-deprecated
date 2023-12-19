@@ -155,6 +155,88 @@ namespace MyAnimeVault.Controllers
             return RedirectToAction("AnimeDetails", "Home", new { id = id });
         }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUserAnimeWatchStatus(int userId, int animeId, string value)
+        {
+            await ValidateUserSession();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+
+            if (uid == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            try
+            {
+                User? user = await UserDataService.GetByIdAsync(userId);
+                if (user != null)
+                {
+                    UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
+                    if (userAnime != null)
+                    {
+                        userAnime.WatchStatus = value;
+                        userAnime = await UserAnimeDataService.UpdateAsync(userAnime);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return Json(new { success = false });
+            }
+
+            return Json(new { success = true });
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUserAnimeRatingOrEpisodesWatched(int userId, int animeId, string fieldName, int value)
+        {
+            await ValidateUserSession();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+
+            if (uid == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            try
+            {
+                User? user = await UserDataService.GetByIdAsync(userId);
+                if (user != null)
+                {
+                    UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
+                    if (userAnime != null)
+                    {
+                        switch (fieldName)
+                        {
+                            case "rating":
+                                userAnime.Rating = value;
+                                break;
+                            case "episodesWatched":
+                                userAnime.NumEpisodesWatched = value;
+                                break;
+                            default:
+                                return Json(new { success = false });
+                        }
+                        userAnime = await UserAnimeDataService.UpdateAsync(userAnime);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return Json(new { success = false });
+            }
+
+            return Json(new { success = true });
+        }
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
