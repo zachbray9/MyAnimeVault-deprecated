@@ -89,6 +89,11 @@
                                 <option value="10">(10) Masterpiece</option>
                             </select>
 
+                            <div class="episodes-watched-input-container">
+                                <p class="episodes-watched-input-text">Episodes: </p>
+                                <input class="user-anime-property-input" id="episodesWatched" type="number" min="0" max="@Model.UserAnime.TotalEpisodes" asp-for="@Model.UserAnime.NumEpisodesWatched"/>
+                                <p class="episodes-watched-input-text">/     @Model.UserAnime.TotalEpisodes</p>
+                            </div>
                         }
                         else
                         {
@@ -167,6 +172,8 @@
 
     <script>
         $(document).ready(function () {
+            let episodesWatchedDebounceTimer;
+
             // Event listener for watch status select
             $('#watchStatus').change(function () {
                 var newValue = $(this).val(); // Get the newly selected value
@@ -181,10 +188,16 @@
             });
 
             // Event listener for episodes watched
-            $('#episodesWatched').change(function () {
-                var newValue = $(this).val(); // Get the newly selected value
-                updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue); // Call function to update the database
-                updateProgressBar(newValue); // Update progress bar width
+            $('#episodesWatched').on('input', function () {
+                clearTimeout(episodesWatchedDebounceTimer);
+
+                episodesWatchedDebounceTimer = setTimeout(function () {
+                    var newValue = $('#episodesWatched').val();
+                    if (newValue > 0 && newValue < @Model.UserAnime?.TotalEpisodes) { 
+                        updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue);
+                        updateProgressBar(newValue);
+                    }
+                }, 500);
             });
 
             //function to update the watch status via ajax

@@ -217,6 +217,10 @@ namespace MyAnimeVault.Controllers
                                 userAnime.Rating = value;
                                 break;
                             case "episodesWatched":
+                                if(!(value > 0 && value < userAnime.TotalEpisodes))
+                                {
+                                    return Json(new { success = false });
+                                }
                                 userAnime.NumEpisodesWatched = value;
                                 break;
                             default:

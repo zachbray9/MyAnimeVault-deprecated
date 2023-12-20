@@ -354,6 +354,13 @@ li {
     row-gap: 10px;
 }
 
+.user-list-details-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
 .addToList-button {
     background: var(--accentblue);
     color: white;
@@ -366,12 +373,57 @@ select {
     border: none;
     outline: none;
     padding: 5px 10px;
+    transition: all 0.2s;
+}
+
+select:hover {
+    background-color: var(--darkmode3);
 }
 
 option {
     color: white;
     background-color: var(--darkmode2);
-    transition: 0.2s all;
+}
+
+.episodes-watched-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--darkmode2);
+    padding: 5px 10px;
+}
+
+.episodes-watched-input-text {
+    font-size: 14px;
+}
+
+.user-anime-property-input {
+    color: white;
+    text-align: right;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.user-anime-property-input:hover {
+    background-color: var(--darkmode3)
+}
+
+.user-anime-property-input::-webkit-inner-spin-button,
+.user-anime-property-input::-webkit-outer-spin-button {
+     /*Hide arrows for Chrome, Safari, etc. */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+}
+
+/* Show arrows on hover */
+.user-anime-property-input:hover::-webkit-inner-spin-button,
+.user-anime-property-input:hover::-webkit-outer-spin-button {
+    -webkit-appearance: revert;
+    margin-left: 5px;
 }
 
 /*Search Results Page*/
