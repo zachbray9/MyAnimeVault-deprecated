@@ -67,7 +67,7 @@
                     {
                         if(Model.UserAnime != null)
                         {
-                            <select class="watchStatus-select" id="watchStatus" asp-for="@Model.UserAnime.WatchStatus">
+                            <select class="user-anime-property-select" id="watchStatus" asp-for="@Model.UserAnime.WatchStatus">
                                 <option value="watching">Watching</option>
                                 <option value="completed">Completed</option>
                                 <option value="plan_to_watch">Plan to Watch</option>
@@ -75,7 +75,7 @@
                                 <option value="dropped">Dropped</option>
                             </select>
 
-                            <select class="rating-select" id="userRating" asp-for="@Model.UserAnime.Rating">
+                            <select class="user-anime-property-select" id="userRating" asp-for="@Model.UserAnime.Rating">
                                 <option value="0">Select</option>
                                 <option value="1">(1) Appalling</option>
                                 <option value="2">(2) Horrible</option>

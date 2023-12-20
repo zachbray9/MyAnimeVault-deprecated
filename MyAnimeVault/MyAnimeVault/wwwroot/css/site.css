@@ -360,16 +360,18 @@ li {
     padding: 5px 10px;
 }
 
-.watchStatus-select {
-    color: black;
-}
-
-.rating-select {
-    color: black;
+select {
+    color: white;
+    background-color: var(--darkmode2);
+    border: none;
+    outline: none;
+    padding: 5px 10px;
 }
 
 option {
-    color: black;
+    color: white;
+    background-color: var(--darkmode2);
+    transition: 0.2s all;
 }
 
 /*Search Results Page*/
