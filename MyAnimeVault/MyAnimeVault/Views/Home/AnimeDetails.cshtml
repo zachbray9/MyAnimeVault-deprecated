@@ -193,9 +193,8 @@
 
                 episodesWatchedDebounceTimer = setTimeout(function () {
                     var newValue = $('#episodesWatched').val();
-                    if (newValue > 0 && newValue < @Model.UserAnime?.TotalEpisodes) { 
+                    if (newValue > 0 && newValue <= @Model.UserAnime?.TotalEpisodes) { 
                         updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue);
-                        updateProgressBar(newValue);
                     }
                 }, 500);
             });
@@ -249,32 +248,6 @@
                 });
             }
 
-
-            function updateProgressBar(episodesWatched) 
-            {
-                const progressBars = document.querySelectorAll(".progress-bar");
-
-                progressBars.forEach((progressBar) => {
-                    const watched = parseInt(episodesWatched);
-                    const total = parseInt(progressBar.dataset.total);
-
-                    let percentage = 0;
-                    if (total > 0) {
-                        percentage = (watched / total) * 100;
-                    }
-
-                    const fill = progressBar.querySelector(".progress-bar-fill");
-                    if (fill) {
-                        fill.style.width = `${percentage}%`;
-
-                        if (watched === total) {
-                            progressBar.classList.add("completed");
-                        } else {
-                            progressBar.classList.remove("completed");
-                        }
-                    }
-                });
-            }
         })
     </script>
 

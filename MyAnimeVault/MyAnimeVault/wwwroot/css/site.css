@@ -538,13 +538,8 @@ option {
     overflow: hidden; 
 }
 
-.progress-bar.completed {                          /*class created from javascript*/
-    background-color: blue;
-    height: 100%;
-}
-
-.progress-bar.progress-bar-fill {                  /*class created from javascript*/
-    background-color: green;
+.progress-bar-fill { /*class created from javascript*/
+    background-color: #048c4c;
     height: 100%;
 }
 

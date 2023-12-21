@@ -4,7 +4,6 @@
 // Write your JavaScript code.
 
 //dropdown menu
-
 document.addEventListener("click", e => {
     const isDropdownButton = e.target.matches("[data-dropdown-button]");
 
@@ -47,9 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
         fill.classList.add("progress-bar-fill");
         fill.style.width = `${percentage}%`;
 
-        if (watched === total) {
-            progressBar.classList.add("completed");
-        }
+        //if (watched === total) {
+        //    progressBar.classList.add("completed");
+        //}
 
         progressBar.appendChild(fill);
     });
