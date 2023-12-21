@@ -168,9 +168,9 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
     <script>
+
         $(document).ready(function () {
             let episodesWatchedDebounceTimer;
 
@@ -193,15 +193,14 @@
 
                 episodesWatchedDebounceTimer = setTimeout(function () {
                     var newValue = $('#episodesWatched').val();
-                    if (newValue > 0 && newValue <= @Model.UserAnime?.TotalEpisodes) { 
+                    if (newValue > 0 && newValue <= @Model.UserAnime?.TotalEpisodes) {
                         updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue);
                     }
                 }, 500);
             });
 
             //function to update the watch status via ajax
-            function updateWatchStatusInDatabase(value) 
-            {
+            function updateWatchStatusInDatabase(value) {
                 var animeId = @Model.Anime.Id; // Replace with the ID of the anime
                 var userId = @Model.CurrentUser?.Id; // Replace with the ID of the user
 
@@ -224,8 +223,7 @@
             }
 
             // Function to update the rating or episodes watched via AJAX
-            function updateRatingOrEpisodesWatchedInDatabase(fieldName, value) 
-            {
+            function updateRatingOrEpisodesWatchedInDatabase(fieldName, value) {
                 var animeId = @Model.Anime.Id; // Replace with the ID of the anime
                 var userId = @Model.CurrentUser?.Id; // Replace with the ID of the user
 
@@ -248,7 +246,7 @@
                 });
             }
 
-        })
+        });
     </script>
 
 }

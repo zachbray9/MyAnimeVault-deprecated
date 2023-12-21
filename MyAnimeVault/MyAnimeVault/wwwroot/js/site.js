@@ -8,22 +8,21 @@ document.addEventListener("click", e => {
     const isDropdownButton = e.target.matches("[data-dropdown-button]");
 
     if (!isDropdownButton && e.target.closest('[data-dropdown]') != null)
-        return
+        return;
 
-    let CurrentDropdown
-    if (isDropdownButton)
-    {
-        CurrentDropdown = e.target.closest('[data-dropdown]')
-        CurrentDropdown.classList.toggle('active')
+    let CurrentDropdown;
+    if (isDropdownButton) {
+        CurrentDropdown = e.target.closest('[data-dropdown]');
+        CurrentDropdown.classList.toggle('active');
     }
 
     document.querySelectorAll("[data-dropdown].active").forEach(dropdown => {
         if (dropdown === CurrentDropdown)
-            return
+            return;
 
-        dropdown.classList.remove('active')
-    })
-})
+        dropdown.classList.remove('active');
+    });
+});
 
 //UserAnime progress bar
 document.addEventListener("DOMContentLoaded", function () {
@@ -45,10 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const fill = document.createElement("div");
         fill.classList.add("progress-bar-fill");
         fill.style.width = `${percentage}%`;
-
-        //if (watched === total) {
-        //    progressBar.classList.add("completed");
-        //}
 
         progressBar.appendChild(fill);
     });
