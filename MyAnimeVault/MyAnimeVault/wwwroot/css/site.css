@@ -356,9 +356,18 @@ li {
 
 .user-list-details-container {
     display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    height: 100%;
+}
+
+.user-list-listitem-properties-container {
+    display: flex;
     justify-content: start;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .addToList-button {
@@ -426,8 +435,19 @@ option {
     margin-left: 5px;
 }
 
-/*Search Results Page*/
+.remove-from-list-button-container {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    height: 100%;
+    width: 100%;
+}
 
+.remove-from-list-button-icon {
+    color: var(--darkmode3);
+}
+
+/*Search Results Page*/
 .search-results-container {
     display: flex;
     justify-content: center;
@@ -476,6 +496,12 @@ option {
     align-items: start;
     margin-top: 100px;
     gap: 20px;
+}
+
+.user-anime-listitem {
+    display: flex;
+    justify-content: start;
+    align-items: start;
 }
 
 .user-anime-link {
@@ -541,6 +567,14 @@ option {
 .progress-bar-fill { /*class created from javascript*/
     background-color: #048c4c;
     height: 100%;
+}
+
+.user-anime-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: stretch;
 }
 
 /*Create Account Page*/

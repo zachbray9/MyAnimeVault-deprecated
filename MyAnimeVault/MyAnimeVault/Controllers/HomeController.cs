@@ -90,7 +90,7 @@ namespace MyAnimeVault.Controllers
             return View(currentUser?.Animes);
         }
 
-        public async Task<IActionResult> AddAnimeToUserList(int id)
+        public async Task<IActionResult> AddAnimeToUserList(int animeId)
         {
             await ValidateUserSession();
             string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
@@ -104,9 +104,9 @@ namespace MyAnimeVault.Controllers
             {
                 User? user = await UserDataService.GetByUidAsync(uid);
 
-                if(user != null && !user.Animes.Any(userAnime =>  userAnime.Id == id))
+                if(user != null && !user.Animes.Any(userAnime =>  userAnime.AnimeId == animeId))
                 {
-                    Anime anime = await AnimeApiService.GetAnimeById(id);
+                    Anime anime = await AnimeApiService.GetAnimeById(animeId);
                     Poster? existingPoster = null;
                     StartSeason? existingStartSeason = null;
 
@@ -132,7 +132,7 @@ namespace MyAnimeVault.Controllers
 
                     UserAnime animeToAdd = new UserAnime
                     {
-                        AnimeId = id,
+                        AnimeId = animeId,
                         UserId = user.Id,
                         Title = (anime.AlternativeTitles != null && !string.IsNullOrEmpty(anime.AlternativeTitles.en)) ? anime.AlternativeTitles.en : anime.Title,
                         PosterId = existingPoster != null ? existingPoster.Id : null,
@@ -152,7 +152,39 @@ namespace MyAnimeVault.Controllers
             }
 
 
-            return RedirectToAction("AnimeDetails", "Home", new { id = id });
+            return RedirectToAction("AnimeDetails", "Home", new { id = animeId });
+        }
+
+        public async Task<IActionResult> RemoveAnimeFromUserList(int animeId, int userAnimeId)
+        {
+            await ValidateUserSession();
+            string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
+
+            if (uid == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            try
+            {
+                User? user = await UserDataService.GetByUidAsync(uid);
+
+                if(user != null && user.Animes.Any(ua => ua.AnimeId == animeId))
+                {
+                    UserAnime? userAnime = await UserAnimeDataService.GetByIdAsync(userAnimeId);
+                    if(userAnime != null)
+                    {
+                        await UserDataService.RemoveAnimeFromList(user, userAnime);
+                    }
+                }
+                    
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            return RedirectToAction("AnimeDetails", "Home", new { id = animeId });
         }
 
 

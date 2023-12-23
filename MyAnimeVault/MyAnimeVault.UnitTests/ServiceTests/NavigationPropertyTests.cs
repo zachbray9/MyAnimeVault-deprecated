@@ -31,6 +31,7 @@ namespace MyAnimeVault.UnitTests.ServiceTests
 
             DbContext = new MyAnimeVaultDbContext(options);
             UserDataService = new UserDataService(DbContext);
+            UserAnimeDataService = new GenericDataService<UserAnime>(DbContext);
             PosterDataService = new GenericDataService<Poster>(DbContext);
             StartSeasonDataService = new GenericDataService<StartSeason>(DbContext);
 
@@ -178,6 +179,30 @@ namespace MyAnimeVault.UnitTests.ServiceTests
             Assert.AreEqual(0, userAnimeNavigationProperty.Rating);
             Assert.AreEqual(0, userAnimeNavigationProperty.NumEpisodesWatched);
             Assert.AreEqual("watching", userAnimeNavigationProperty.WatchStatus);
+        }
+
+        [TestMethod]
+        public async Task RemoveUserAnimeFromUserListAndDeleteFromDatabase()
+        {
+            User? user = await UserDataService.GetByUidAsync("testUid");
+            Assert.IsNotNull(user);
+
+            UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == 1);
+            Assert.IsNotNull(userAnime);
+
+            bool removalWasSuccessful = await UserDataService.RemoveAnimeFromList(user, userAnime);
+            Assert.IsTrue(removalWasSuccessful);
+
+            //bool deleteWasSuccessful = await UserAnimeDataService.DeleteAsync(userAnime.Id);
+            //Assert.IsTrue(deleteWasSuccessful);
+
+            user = await UserDataService.GetByUidAsync("testUid");
+            Assert.IsNotNull(user);
+            userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == 1);
+            Assert.IsNull(userAnime);
+
+            userAnime = await UserAnimeDataService.GetByIdAsync(1);
+            Assert.IsNull(userAnime);
         }
     }
 }

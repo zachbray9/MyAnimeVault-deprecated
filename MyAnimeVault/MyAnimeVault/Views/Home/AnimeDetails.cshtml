@@ -67,37 +67,42 @@
                     {
                         if(Model.UserAnime != null)
                         {
-                            <select class="user-anime-property-select" id="watchStatus" asp-for="@Model.UserAnime.WatchStatus">
-                                <option value="watching">Watching</option>
-                                <option value="completed">Completed</option>
-                                <option value="plan_to_watch">Plan to Watch</option>
-                                <option value="on_hold">On-Hold</option>
-                                <option value="dropped">Dropped</option>
-                            </select>
+                            <div class="user-list-listitem-properties-container">
+                                <select class="user-anime-property-select" id="watchStatus" asp-for="@Model.UserAnime.WatchStatus">
+                                    <option value="watching">Watching</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="plan_to_watch">Plan to Watch</option>
+                                    <option value="on_hold">On-Hold</option>
+                                    <option value="dropped">Dropped</option>
+                                </select>
 
-                            <select class="user-anime-property-select" id="userRating" asp-for="@Model.UserAnime.Rating">
-                                <option value="0">Select</option>
-                                <option value="1">(1) Appalling</option>
-                                <option value="2">(2) Horrible</option>
-                                <option value="3">(3) Very Bad</option>
-                                <option value="4">(4) Bad</option>
-                                <option value="5">(5) Average</option>
-                                <option value="6">(6) Fine</option>
-                                <option value="7">(7) Good</option>
-                                <option value="8">(8) Very Good</option>
-                                <option value="9">(9) Great</option>
-                                <option value="10">(10) Masterpiece</option>
-                            </select>
+                                <select class="user-anime-property-select" id="userRating" asp-for="@Model.UserAnime.Rating">
+                                    <option value="0">Select</option>
+                                    <option value="1">(1) Appalling</option>
+                                    <option value="2">(2) Horrible</option>
+                                    <option value="3">(3) Very Bad</option>
+                                    <option value="4">(4) Bad</option>
+                                    <option value="5">(5) Average</option>
+                                    <option value="6">(6) Fine</option>
+                                    <option value="7">(7) Good</option>
+                                    <option value="8">(8) Very Good</option>
+                                    <option value="9">(9) Great</option>
+                                    <option value="10">(10) Masterpiece</option>
+                                </select>
 
-                            <div class="episodes-watched-input-container">
-                                <p class="episodes-watched-input-text">Episodes: </p>
-                                <input class="user-anime-property-input" id="episodesWatched" type="number" min="0" max="@Model.UserAnime.TotalEpisodes" asp-for="@Model.UserAnime.NumEpisodesWatched"/>
-                                <p class="episodes-watched-input-text">/     @Model.UserAnime.TotalEpisodes</p>
+                                <div class="episodes-watched-input-container">
+                                    <p class="episodes-watched-input-text">Episodes: </p>
+                                    <input class="user-anime-property-input" id="episodesWatched" type="number" min="0" max="@Model.UserAnime.TotalEpisodes" asp-for="@Model.UserAnime.NumEpisodesWatched"/>
+                                    <p class="episodes-watched-input-text">/     @Model.UserAnime.TotalEpisodes</p>
+                                </div>
+
+                                <a class="remove-from-list-button" title="Remove from vault" asp-area="" asp-action="RemoveAnimeFromUserList" asp-controller="Home" asp-route-animeId="@Model.Anime.Id" asp-route-userAnimeId="@Model.UserAnime.Id"><i class="fa-solid fa-trash remove-from-list-button-icon"></i></a>
                             </div>
+
                         }
                         else
                         {
-                            <a class="addToList-button" asp-area="" asp-action="AddAnimeToUserList" asp-controller="Home" asp-route-id="@Model.Anime.Id">+ Add To List</a>
+                            <a class="addToList-button" asp-area="" asp-action="AddAnimeToUserList" asp-controller="Home" asp-route-animeId="@Model.Anime.Id">+ Add To List</a>
                         }
                     }
                 </div>

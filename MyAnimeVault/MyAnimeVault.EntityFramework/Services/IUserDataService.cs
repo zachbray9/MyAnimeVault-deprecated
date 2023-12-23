@@ -11,5 +11,6 @@ namespace MyAnimeVault.EntityFramework.Services
     {
         Task<User?> GetByUidAsync(string uid);
         Task<bool> AddAnimeToList(User user, UserAnime anime);
+        Task<bool> RemoveAnimeFromList(User user, UserAnime anime);
     }
 }
