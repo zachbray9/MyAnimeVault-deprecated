@@ -1,0 +1,733 @@
+/*css variables*/
+
+:root {
+    /*1 being darkest*/
+    --darkmode1: #18191a;
+    --darkmode1hover: #242627;
+    --darkmode2: #242526;
+    --darkmode3: #3a3b3c;
+    --accentblue: #3772ff;
+}
+
+.separator {
+    opacity: 0.3;
+}
+
+.text-center {
+    min-height: 800px;
+}
+
+/*CSS Reset*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    color: #fff;
+    font-family: Roboto;
+}
+
+body {
+    background-color: var(--darkmode1);
+}
+
+p {
+    font-size: 16px;
+    color: #fff;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul ol {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+/*Navbar*/
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    margin-bottom: 25px;
+    background-color: var(--darkmode2);
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+}
+
+.navbar-list {
+    display: flex;
+    column-gap: 20px;
+}
+
+.navbar-searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    background-color: var(--darkmode3);
+    border-radius: 60px;
+    padding: 10px 20px;
+}
+
+.navbar-searchbar-textbox {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.navbar-searchbar-searchbutton {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.fa-solid {
+    color: gray;
+}
+
+.navbar-account-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.navbar-signup-button {
+    background-color: var(--accentblue);
+    border-radius: 40px;
+    padding: 7px 15px;
+}
+
+.navbar-dropdown-menu-container {
+    position: relative;
+}
+
+.navbar-dropdown-menu-button {
+    background-color: transparent;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.navbar-dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + .25rem);
+    background-color: var(--darkmode2);
+    padding: .75rem;
+    min-width: 160px;
+    border-radius: .25rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .1);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.15s ease-in-out;
+}
+
+.navbar-dropdown-menu-container.active > .navbar-dropdown-menu-button + .navbar-dropdown-menu {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0px);
+} 
+
+.navbar-dropdown-menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+}
+
+.navbar-dropdown-menu-listitem {
+    background-color: transparent;
+    width: 100%;
+    padding: 5px 5px;
+    border-radius: .25rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.navbar-dropdown-menu-listitem:hover {
+    background-color: var(--darkmode3);
+}
+
+/*Homepage anime list*/
+.anime-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    margin: 120px 40px 0px 40px;
+}
+
+.anime-list-title-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 0px 40px;
+    width: 100%;
+}
+
+.anime-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    column-gap: 80px;
+    row-gap: 80px;
+}
+
+.anime-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: min-content;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s;
+}
+
+.anime-card:hover {
+    transform: translateY(-10%);
+}
+
+.anime-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: skewX(45deg) translateX(-300px);
+    transition: all 0.5s;
+}
+
+.anime-card:hover::before {
+    transform: skewX(45deg) translateX(450px);
+}
+
+.anime-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+.anime-title {
+    text-align: center;
+}
+
+/*Anime Details Page*/
+
+.text-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.anime-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 80px;
+    margin: 120px 40px 0px 40px;
+    max-width: 1000px;
+}
+
+.image-and-rankinginfo-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    column-gap: 20px;
+}
+
+.rankinginfo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 20px;
+}
+
+.title-and-season {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 5px;
+}
+
+.season-and-mediatype-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.ranking-info {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    column-gap: 10px;
+}
+
+.score {
+    font-size: 20px;
+}
+
+.fa-star {
+    color: yellow;
+}
+
+.anime-synopsis-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 10px;
+    width: 100%;
+}
+
+.synopsis-lines-container {
+    display: flex;
+    flex-direction:column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 5px;
+}
+
+.opening-and-ending-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    column-gap: 40px;
+    width: 100%;
+}
+
+.song-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 10px;
+}
+
+.user-list-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+    height: 100%;
+}
+
+.user-list-listitem-properties-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.addToList-button {
+    background: var(--accentblue);
+    color: white;
+    padding: 5px 10px;
+}
+
+select {
+    color: white;
+    background-color: var(--darkmode2);
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    transition: all 0.2s;
+}
+
+select:hover {
+    background-color: var(--darkmode3);
+}
+
+option {
+    color: white;
+    background-color: var(--darkmode2);
+}
+
+.episodes-watched-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--darkmode2);
+    padding: 5px 10px;
+}
+
+.episodes-watched-input-text {
+    font-size: 14px;
+}
+
+.user-anime-property-input {
+    color: white;
+    text-align: right;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.user-anime-property-input:hover {
+    background-color: var(--darkmode3)
+}
+
+.user-anime-property-input::-webkit-inner-spin-button,
+.user-anime-property-input::-webkit-outer-spin-button {
+     /*Hide arrows for Chrome, Safari, etc. */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+}
+
+/* Show arrows on hover */
+.user-anime-property-input:hover::-webkit-inner-spin-button,
+.user-anime-property-input:hover::-webkit-outer-spin-button {
+    -webkit-appearance: revert;
+    margin-left: 5px;
+}
+
+.remove-from-list-button-container {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+    height: 100%;
+    width: 100%;
+}
+
+.remove-from-list-button-icon {
+    color: var(--darkmode3);
+}
+
+/*Search Results Page*/
+.search-results-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 100px 40px 0px 40px;
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.search-result {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+
+.search-result-link {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    width: 100%;
+    padding: 10px 20px;
+    transition: all 0.1s;
+}
+
+.search-result-link:hover {
+    background-color: var(--darkmode1hover);
+}
+
+/*Vault Page*/
+
+.user-anime-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin-top: 100px;
+    gap: 20px;
+}
+
+.user-anime-listitem {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.user-anime-link {
+    display: flex;
+    column-gap: 10px;
+    justify-content: start;
+    align-items: start;
+    min-width: 700px;
+    padding: 15px;
+    transition: all 0.2s;
+}
+
+.user-anime-link:hover {
+    background: var(--darkmode1hover)
+}
+
+.user-anime-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    width: 100%;
+    height: 200px;
+}
+
+.user-anime-details-titleandmediatype-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    row-gap: 5px;
+}
+
+.user-anime-details-mediatype-and-startseason {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.user-anime-details-episodeinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.user-anime-details-ratingandepisodeswatched-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.progress-bar {
+    width: 100%; 
+    height: 20px; 
+    background-color: var(--darkmode2); 
+    overflow: hidden; 
+}
+
+.progress-bar-fill { /*class created from javascript*/
+    background-color: #048c4c;
+    height: 100%;
+}
+
+.user-anime-buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: stretch;
+}
+
+/*Create Account Page*/
+
+.register-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    margin: 200px 0px 80px 0px;
+    max-width: 500px;
+    width: 100%;
+    background-color: var(--darkmode2);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.register-form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    width: 100%;
+}
+
+.register-input {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0px 20px;
+    width: 100%;
+    border-radius: 500px;
+    background-color: var(--darkmode3);
+}
+
+.register-input-textbox {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+}
+
+div.validation-summary-errors ul li {
+    color: #ff0000;
+}
+
+.register-button {
+    background-color: var(--accentblue);
+    border-radius: 500px;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+/*Login Page*/
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    margin: 200px 0px 180px 0px;
+    max-width: 500px;
+    width: 100%;
+    background-color: var(--darkmode2);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.login-form-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 40px;
+    width: 100%;
+}
+
+.login-input {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 20px;
+    padding: 0px 20px;
+    width: 100%;
+    border-radius: 500px;
+    background-color: var(--darkmode3);
+}
+
+.login-input-textbox {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px 0px;
+}
+
+.login-button {
+    background-color: var(--accentblue);
+    border-radius: 500px;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+/*footer*/
+
+.footer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: var(--darkmode2);
+    margin: 100px 0px 0px 0px;
+    padding: 20px 40px;
+}
+
+.social-links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.github-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 500px;
+}
+
+.fa-github {
+    font-size: 24px;
+}
+

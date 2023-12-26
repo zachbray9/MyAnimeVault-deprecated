@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8qnp4rlrfEOrr5bIw2mmUAAAAAACAAAAAAAQZgAAAAEAACAAAABUsCWW0foxBZwzjafZqzz2Z7VKxjO23dnP2r1nz5VnsgAAAAAOgAAAAAIAACAAAAArulZ8akCWJYNYiCGX0XvI3imL2tD2EYPFLbmbrJ2V8YAAAABE/GMM42Yhb5tHBwCqygJHf0XpiDhE35Gr0M8a/Wpb2yWAv97UUYNykeEeRRc3nUDW236/5fAvI8TYB0Gz9DD/5NUvyro/d1bTqs3T08lHZ6GtYtpipBQ0FKj6GKFPVC2V59qBmOeyPNEIo04hhAy7VlAMGdUahpPPptvqn2znSEAAAABMP9HBYQ1BaXyGoHODXlbAW+Y7tpn+Wo5Mw+YXD3GORiwxnDdvbUNyoZGwHWWOMq9p+qNeyfZQSy/Ncho+BRrX</EncryptedPassword>
+    <History>True|2023-12-26T05:32:51.3282422Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="ConnectionString">
+      <Value>Server=tcp:myanimevault-server.database.windows.net,1433%3bInitial Catalog=MyAnimeVaultDb%3bPersist Security Info=False%3bUser ID=zachbray9%40aol.com%40myanimevault-server%3bPassword=Zbbutternuts9#%3bMultipleActiveResultSets=False%3bEncrypt=True%3bTrustServerCertificate=False%3bConnection Timeout=30%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

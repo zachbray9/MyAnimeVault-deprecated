@@ -1,0 +1,12 @@
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\bin\Release\net6.0\MyAnimeVault.Domain.deps.json
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\bin\Release\net6.0\MyAnimeVault.Domain.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\bin\Release\net6.0\MyAnimeVault.Domain.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.csproj.AssemblyReference.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.AssemblyInfoInputs.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.AssemblyInfo.cs
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.csproj.CoreCompileInputs.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\refint\MyAnimeVault.Domain.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\MyAnimeVault.Domain.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.Domain\obj\Release\net6.0\ref\MyAnimeVault.Domain.dll

@@ -15,26 +15,25 @@ using MyAnimeVault.Services.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//SecretClient keyVaultClient = new SecretClient(
-//    new Uri(builder.Configuration.GetValue<string>("KeyVaultUri")),
-//    new DefaultAzureCredential()
-//    );
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("AzureKeyVaultUri"));
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 //gets the Firebase Api Key and project id from user secrets file (will change this to azure key vault later)
-string Firebase_Api_Key = builder.Configuration["Firebase_Api_Key"];
-string Firebase_Project_Id = builder.Configuration["Firebase_Project_Id"];
-string Firebase_Private_Key = builder.Configuration["Firebase_Private_Key"];
+
+string FirebaseApiKey = builder.Configuration["FirebaseApiKey"];
+string FirebaseProjectId = builder.Configuration["FirebaseProjectId"];
+string FirebasePrivateKey = builder.Configuration["FirebasePrivateKey"];
 string ConnectionString = builder.Configuration["ConnectionString"];
 
 FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions
 {
-    Credential = GoogleCredential.FromJson(Firebase_Private_Key),
+    Credential = GoogleCredential.FromJson(FirebasePrivateKey),
 });
 
 FirebaseAuthConfig FirebaseConfig = new FirebaseAuthConfig
 {
-    ApiKey = Firebase_Api_Key,
-    AuthDomain = $"{Firebase_Project_Id}.firebaseapp.com",
+    ApiKey = FirebaseApiKey,
+    AuthDomain = $"{FirebaseProjectId}.firebaseapp.com",
     Providers = new FirebaseAuthProvider[]
     {
         new EmailProvider()

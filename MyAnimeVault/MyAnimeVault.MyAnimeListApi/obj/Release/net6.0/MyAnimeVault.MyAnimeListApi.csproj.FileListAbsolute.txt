@@ -1,0 +1,15 @@
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Release\net6.0\MyAnimeVault.MyAnimeListApi.deps.json
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Release\net6.0\MyAnimeVault.MyAnimeListApi.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Release\net6.0\MyAnimeVault.MyAnimeListApi.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Release\net6.0\MyAnimeVault.Domain.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\bin\Release\net6.0\MyAnimeVault.Domain.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.csproj.AssemblyReference.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.AssemblyInfoInputs.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.AssemblyInfo.cs
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.csproj.CoreCompileInputs.cache
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.csproj.CopyComplete
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\refint\MyAnimeVault.MyAnimeListApi.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\MyAnimeVault.MyAnimeListApi.pdb
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.MyAnimeListApi\obj\Release\net6.0\ref\MyAnimeVault.MyAnimeListApi.dll

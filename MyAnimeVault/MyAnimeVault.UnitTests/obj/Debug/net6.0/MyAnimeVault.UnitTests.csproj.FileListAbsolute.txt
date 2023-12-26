@@ -16,6 +16,7 @@ C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVa
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\MyAnimeVault.UnitTests.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\MyAnimeVault.UnitTests.pdb
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\Azure.Extensions.AspNetCore.Configuration.Secrets.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\Azure.Security.KeyVault.Secrets.dll
 C:\Users\zachb\Documents\Github Repositories\MyAnimeVault\MyAnimeVault\MyAnimeVault.UnitTests\bin\Debug\net6.0\Castle.Core.dll
