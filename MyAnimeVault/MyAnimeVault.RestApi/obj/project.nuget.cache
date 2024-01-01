@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0BS06wbiJoMBO18j+2og3I9Cwx5O8UKeKKvO1sMKylpB1mOvgOZgJMcEjYZRD4KnhGc+v1K2luLgDh/gy8MUUg==",
+  "dgSpecHash": "c8knfUEQcPBA2jGtnJI+LBVJgIIclo9AHwIpVsrGzRQxVJ076sBqun+ANrM9/dn9aONOY7UB+9k2yvNF+Tv0PA==",
   "success": true,
   "projectFilePath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.RestApi\\MyAnimeVault.RestApi.csproj",
   "expectedPackageFiles": [
@@ -22,6 +22,7 @@
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.13\\microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.13\\microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.13\\microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",
+    "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\7.0.13\\microsoft.entityframeworkcore.inmemory.7.0.13.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.13\\microsoft.entityframeworkcore.relational.7.0.13.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.13\\microsoft.entityframeworkcore.sqlserver.7.0.13.nupkg.sha512",
     "C:\\Users\\zachb\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

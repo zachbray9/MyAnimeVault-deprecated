@@ -24,6 +24,14 @@ namespace MyAnimeVault.RestApi.Services
             return createdResult.Entity;
         }
 
+        public async Task<UserDTO> AddAndReturnDTOAsync(User entity)
+        {
+            EntityEntry<User> createdResult = await DbContext.Set<User>().AddAsync(entity);
+            await DbContext.SaveChangesAsync();
+            UserDTO userDTO = MapToDTO(createdResult.Entity);
+            return userDTO;
+        }
+
         public async Task<bool> DeleteAsync(int id)
         {
             User? entity = await DbContext.Set<User>().FirstOrDefaultAsync(e => e.Id == id);

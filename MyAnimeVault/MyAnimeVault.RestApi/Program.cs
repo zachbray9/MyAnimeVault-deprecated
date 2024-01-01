@@ -10,7 +10,8 @@ string ConnectionString = builder.Configuration["ConnectionString"];
 // Add services to the container.
 builder.Services.AddDbContext<MyAnimeVaultDbContext>(options =>
 {
-    options.UseSqlServer(ConnectionString);
+    options.UseInMemoryDatabase("TestDb");
+    //options.UseSqlServer(ConnectionString);
 });
 
 builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataService<>));

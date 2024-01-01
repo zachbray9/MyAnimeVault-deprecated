@@ -47,5 +47,12 @@ namespace MyAnimeVault.RestApi.Controllers
             List<UserDTO>? Users = await UserDataService.GetAllAsDTOsAsync();
             return Ok(Users);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUser(User user)
+        {
+            UserDTO userDTO = await UserDataService.AddAndReturnDTOAsync(user);
+            return Ok(user);
+        }
     }
 }
