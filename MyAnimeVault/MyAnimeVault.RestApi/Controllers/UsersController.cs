@@ -52,7 +52,28 @@ namespace MyAnimeVault.RestApi.Controllers
         public async Task<IActionResult> AddUser(User user)
         {
             UserDTO userDTO = await UserDataService.AddAndReturnDTOAsync(user);
-            return Ok(user);
+            return Ok(userDTO);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser(User user)
+        {
+            UserDTO userDTO = await UserDataService.UpdateAndReturnDTOAsync(user);
+            return Ok(userDTO);
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] int id)
+        {
+            bool success = await UserDataService.DeleteAsync(id);
+
+            if (success)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

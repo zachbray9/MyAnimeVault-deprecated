@@ -105,6 +105,14 @@ namespace MyAnimeVault.RestApi.Services
             return result.Entity;
         }
 
+        public async Task<UserDTO> UpdateAndReturnDTOAsync(User entity)
+        {
+            EntityEntry<User> result = DbContext.Set<User>().Update(entity);
+            await DbContext.SaveChangesAsync();
+            UserDTO userDTO = MapToDTO(result.Entity);
+            return userDTO;
+        }
+
         public async Task<bool> AddAnimeToList(User user, UserAnime anime)
         {
             if (user == null || user.Animes.Any(ua => ua.AnimeId == anime.Id))

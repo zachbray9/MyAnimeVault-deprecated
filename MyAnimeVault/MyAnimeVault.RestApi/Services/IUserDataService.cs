@@ -11,6 +11,7 @@ namespace MyAnimeVault.RestApi.Services
         Task<UserDTO?> GetByIdAsDTOAsync(int id);
         Task<List<UserDTO>?> GetAllAsDTOsAsync();
         Task<UserDTO> AddAndReturnDTOAsync(User user);
+        Task<UserDTO> UpdateAndReturnDTOAsync(User user);
         Task<bool> AddAnimeToList(User user, UserAnime anime);
         Task<bool> RemoveAnimeFromList(User user, UserAnime anime);
     }
