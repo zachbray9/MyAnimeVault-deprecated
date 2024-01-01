@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAnimeVault.MyAnimeListApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAnimeVault.Domain", "MyAnimeVault.Domain\MyAnimeVault.Domain.csproj", "{5A4EA101-0FC1-4127-B4FA-B10A7D32E2BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault.UnitTests", "MyAnimeVault.UnitTests\MyAnimeVault.UnitTests.csproj", "{DD39A2CC-D6A9-4EE0-87EE-E9B7400E4964}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyAnimeVault.UnitTests", "MyAnimeVault.UnitTests\MyAnimeVault.UnitTests.csproj", "{DD39A2CC-D6A9-4EE0-87EE-E9B7400E4964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyAnimeVault.RestApi", "MyAnimeVault.RestApi\MyAnimeVault.RestApi.csproj", "{3BF6BF6E-3556-40E4-AB51-E05F2436A714}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DD39A2CC-D6A9-4EE0-87EE-E9B7400E4964}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD39A2CC-D6A9-4EE0-87EE-E9B7400E4964}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD39A2CC-D6A9-4EE0-87EE-E9B7400E4964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF6BF6E-3556-40E4-AB51-E05F2436A714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF6BF6E-3556-40E4-AB51-E05F2436A714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF6BF6E-3556-40E4-AB51-E05F2436A714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF6BF6E-3556-40E4-AB51-E05F2436A714}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
