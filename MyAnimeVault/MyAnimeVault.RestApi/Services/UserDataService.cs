@@ -54,8 +54,7 @@ namespace MyAnimeVault.RestApi.Services
 
         public async Task<List<UserDTO>?> GetAllAsDTOsAsync()
         {
-            List<User>? users = await DbContext.Users.Include(u => u.Animes).ThenInclude(a => a.Poster).Include(u => u.Animes).ThenInclude(a => a.StartSeason).ToListAsync();
-            List<UserDTO>? userDTOs = MapToListOfDTOs(users);
+            List<UserDTO>? userDTOs = MapToListOfDTOs(await DbContext.Users.Include(u => u.Animes).ThenInclude(a => a.Poster).Include(u => u.Animes).ThenInclude(a => a.StartSeason).ToListAsync());
             return userDTOs;
 
         }
@@ -159,18 +158,18 @@ namespace MyAnimeVault.RestApi.Services
                     TotalEpisodes = anime.TotalEpisodes,
                     WatchStatus = anime.WatchStatus,
                     Status = anime.Status,
-                    PosterDTO = new PosterDTO
+                    PosterDTO = anime.Poster != null ? new PosterDTO
                     {
                         Id = anime.Poster.Id,
                         Large = anime.Poster.Large,
                         Medium = anime.Poster.Medium
-                    },
-                    StartSeasonDTO = new StartSeasonDTO
+                    } : null,
+                    StartSeasonDTO = anime.StartSeason != null ? new StartSeasonDTO
                     {
                         Id = anime.StartSeason.Id,
                         Year = anime.StartSeason.Year,
                         Season = anime.StartSeason.Season
-                    }
+                    } : null,
                 }).ToList()
             };
         }
@@ -195,18 +194,18 @@ namespace MyAnimeVault.RestApi.Services
                     WatchStatus = ua.WatchStatus,
                     Status = ua.Status,
                     
-                    PosterDTO = new PosterDTO
+                    PosterDTO = ua.Poster != null ? new PosterDTO
                     {
                         Id = ua.Poster.Id,
                         Large = ua.Poster.Large,
                         Medium = ua.Poster.Medium
-                    },
-                    StartSeasonDTO = new StartSeasonDTO
+                    } : null,
+                    StartSeasonDTO = ua.StartSeason != null ? new StartSeasonDTO
                     {
                         Id = ua.StartSeason.Id,
                         Year = ua.StartSeason.Year,
                         Season = ua.StartSeason.Season
-                    }
+                    } : null
                 }).ToList()
             }).ToList();
 
