@@ -55,6 +55,19 @@ namespace MyAnimeVault.RestApi.Controllers
             return Ok(userDTO);
         }
 
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<IActionResult> AddAnimeToList(User user, UserAnime anime)
+        {
+            bool success = await UserDataService.AddAnimeToListAsync(user, anime);
+            if (success)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateUser(User user)
         {
@@ -69,6 +82,18 @@ namespace MyAnimeVault.RestApi.Controllers
             bool success = await UserDataService.DeleteAsync(id);
 
             if (success)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAnimeFromList(User user, UserAnime anime)
+        {
+            bool success = await UserDataService.RemoveAnimeFromListAsync(user, anime);
+            if(success)
             {
                 return Ok();
             }

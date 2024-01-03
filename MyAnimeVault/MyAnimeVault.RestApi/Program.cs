@@ -18,6 +18,7 @@ builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataServ
 builder.Services.AddScoped(typeof(MyAnimeVault.RestApi.Services.IUserDataService), typeof(UserDataService));
 builder.Services.AddScoped(typeof(IUserAnimeDataService), typeof(UserAnimeDataService));
 builder.Services.AddScoped(typeof(IPosterDataService), typeof(PosterDataService));
+builder.Services.AddScoped(typeof(IStartSeasonDataService), typeof(StartSeasonDataService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

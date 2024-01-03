@@ -112,7 +112,7 @@ namespace MyAnimeVault.RestApi.Services
             return userDTO;
         }
 
-        public async Task<bool> AddAnimeToList(User user, UserAnime anime)
+        public async Task<bool> AddAnimeToListAsync(User user, UserAnime anime)
         {
             if (user == null || user.Animes.Any(ua => ua.AnimeId == anime.Id))
             {
@@ -125,7 +125,7 @@ namespace MyAnimeVault.RestApi.Services
             return true;
         }
 
-        public async Task<bool> RemoveAnimeFromList(User user, UserAnime anime)
+        public async Task<bool> RemoveAnimeFromListAsync(User user, UserAnime anime)
         {
             if (user == null || !(user.Animes.Any(ua => ua.Id == anime.Id)))
             {
