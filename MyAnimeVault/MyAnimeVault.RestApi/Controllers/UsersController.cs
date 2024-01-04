@@ -5,6 +5,7 @@ using MyAnimeVault.RestApi.Models.DTOs;
 
 namespace MyAnimeVault.RestApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
@@ -56,10 +57,10 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpPost]
-        [Route("[action]")]
-        public async Task<IActionResult> AddAnimeToList(User user, UserAnime anime)
+        [Route("[action]/{userId}:int")]
+        public async Task<IActionResult> AddAnimeToList([FromRoute] int userId, UserAnime anime)
         {
-            bool success = await UserDataService.AddAnimeToListAsync(user, anime);
+            bool success = await UserDataService.AddAnimeToListAsync(userId, anime);
             if (success)
             {
                 return Ok();
@@ -90,9 +91,10 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> RemoveAnimeFromList(User user, UserAnime anime)
+        [Route("[action]/{userId:int}")]
+        public async Task<IActionResult> RemoveAnimeFromList([FromRoute] int userId, UserAnime anime)
         {
-            bool success = await UserDataService.RemoveAnimeFromListAsync(user, anime);
+            bool success = await UserDataService.RemoveAnimeFromListAsync(userId, anime);
             if(success)
             {
                 return Ok();

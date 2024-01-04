@@ -4,6 +4,7 @@ using MyAnimeVault.Domain.Models;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.RestApi.Models.DTOs;
+using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
 namespace MyAnimeVault.RestApi.Services
@@ -112,8 +113,10 @@ namespace MyAnimeVault.RestApi.Services
             return userDTO;
         }
 
-        public async Task<bool> AddAnimeToListAsync(User user, UserAnime anime)
+        public async Task<bool> AddAnimeToListAsync(int userId, UserAnime anime)
         {
+            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
             if (user == null || user.Animes.Any(ua => ua.AnimeId == anime.Id))
             {
                 return false;
@@ -125,8 +128,10 @@ namespace MyAnimeVault.RestApi.Services
             return true;
         }
 
-        public async Task<bool> RemoveAnimeFromListAsync(User user, UserAnime anime)
+        public async Task<bool> RemoveAnimeFromListAsync(int userId, UserAnime anime)
         {
+            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
             if (user == null || !(user.Animes.Any(ua => ua.Id == anime.Id)))
             {
                 return false;

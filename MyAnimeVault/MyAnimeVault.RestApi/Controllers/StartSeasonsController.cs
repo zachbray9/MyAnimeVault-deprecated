@@ -5,6 +5,7 @@ using MyAnimeVault.RestApi.Services;
 
 namespace MyAnimeVault.RestApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class StartSeasonsController : Controller
     {

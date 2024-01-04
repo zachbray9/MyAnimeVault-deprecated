@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.Domain.Models.Database;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.Services.Database;
 
 namespace MyAnimeVault.RestApi.Services
 {

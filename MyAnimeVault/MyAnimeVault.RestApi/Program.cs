@@ -1,17 +1,22 @@
+using Azure.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
+using MyAnimeVault.RestApi.Authentication.Api;
 using MyAnimeVault.RestApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("AzureKeyVaultUri"));
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 string ConnectionString = builder.Configuration["ConnectionString"];
 
 // Add services to the container.
 builder.Services.AddDbContext<MyAnimeVaultDbContext>(options =>
 {
-    options.UseInMemoryDatabase("TestDb");
-    //options.UseSqlServer(ConnectionString);
+    //options.UseInMemoryDatabase("TestDb");
+    options.UseSqlServer(ConnectionString);
 });
 
 builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataService<>));
@@ -24,10 +29,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureSwaggerGen(setup =>
+{
+    setup.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "MyAnimeVaultApi",
+        Version = "v1"
+    });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -35,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ApiKeyAuthMiddleware>();
 
 app.UseAuthorization();
 

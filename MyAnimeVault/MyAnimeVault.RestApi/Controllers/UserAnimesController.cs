@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 
 namespace MyAnimeVault.RestApi.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class UserAnimesController : Controller
     {

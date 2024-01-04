@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Azure.Core/1.35.0": {
+      "Azure.Core/1.36.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Bcl.AsyncInterfaces": "1.1.1",
@@ -24,10 +24,11 @@
           }
         }
       },
-      "Azure.Extensions.AspNetCore.Configuration.Secrets/1.0.0": {
+      "Azure.Extensions.AspNetCore.Configuration.Secrets/1.3.0": {
         "type": "package",
         "dependencies": {
-          "Azure.Security.KeyVault.Secrets": "4.0.1",
+          "Azure.Core": "1.35.0",
+          "Azure.Security.KeyVault.Secrets": "4.2.0",
           "Microsoft.Extensions.Configuration": "2.1.0"
         },
         "compile": {
@@ -41,10 +42,10 @@
           }
         }
       },
-      "Azure.Identity/1.10.3": {
+      "Azure.Identity/1.10.4": {
         "type": "package",
         "dependencies": {
-          "Azure.Core": "1.35.0",
+          "Azure.Core": "1.36.0",
           "Microsoft.Identity.Client": "4.56.0",
           "Microsoft.Identity.Client.Extensions.Msal": "4.56.0",
           "System.Memory": "4.5.4",
@@ -63,13 +64,13 @@
           }
         }
       },
-      "Azure.Security.KeyVault.Secrets/4.5.0": {
+      "Azure.Security.KeyVault.Secrets/4.2.0": {
         "type": "package",
         "dependencies": {
-          "Azure.Core": "1.30.0",
+          "Azure.Core": "1.15.0",
           "System.Memory": "4.5.4",
-          "System.Text.Json": "4.7.2",
-          "System.Threading.Tasks.Extensions": "4.5.4"
+          "System.Text.Json": "4.6.0",
+          "System.Threading.Tasks.Extensions": "4.5.2"
         },
         "compile": {
           "lib/netstandard2.0/Azure.Security.KeyVault.Secrets.dll": {
@@ -82,122 +83,16 @@
           }
         }
       },
-      "FirebaseAdmin/2.4.0": {
+      "Humanizer.Core/2.8.26": {
         "type": "package",
-        "dependencies": {
-          "Google.Api.Gax.Rest": "3.2.0",
-          "Google.Apis.Auth": "1.49.0",
-          "System.Collections.Immutable": "1.7.1"
-        },
         "compile": {
-          "lib/netstandard2.0/FirebaseAdmin.dll": {
+          "lib/netstandard2.0/_._": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/FirebaseAdmin.dll": {
+          "lib/netstandard2.0/Humanizer.dll": {
             "related": ".xml"
-          }
-        }
-      },
-      "FirebaseAuthentication.net/4.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.2"
-        },
-        "compile": {
-          "lib/netstandard2.0/Firebase.Auth.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Firebase.Auth.dll": {
-            "related": ".xml"
-          }
-        }
-      },
-      "Google.Api.Gax/3.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "1.0.0",
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "compile": {
-          "lib/netstandard2.0/Google.Api.Gax.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Api.Gax.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "Google.Api.Gax.Rest/3.2.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Api.Gax": "3.2.0",
-          "Google.Apis.Auth": "[1.48.0, 2.0.0)"
-        },
-        "compile": {
-          "lib/netstandard2.0/Google.Api.Gax.Rest.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Api.Gax.Rest.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "Google.Apis/1.49.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis.Core": "1.49.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Google.Apis.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Apis.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "Google.Apis.Auth/1.49.0": {
-        "type": "package",
-        "dependencies": {
-          "Google.Apis": "1.49.0",
-          "Google.Apis.Core": "1.49.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
-          "lib/netstandard2.0/Google.Apis.Auth.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
-          "lib/netstandard2.0/Google.Apis.Auth.dll": {
-            "related": ".pdb;.xml"
-          }
-        }
-      },
-      "Google.Apis.Core/1.49.0": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "12.0.3"
-        },
-        "compile": {
-          "lib/netstandard2.0/Google.Apis.Core.dll": {
-            "related": ".pdb;.xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Google.Apis.Core.dll": {
-            "related": ".pdb;.xml"
           }
         }
       },
@@ -325,6 +220,26 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.Design/6.0.14": {
+        "type": "package",
+        "dependencies": {
+          "Humanizer.Core": "2.8.26",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.14"
+        },
+        "compile": {
+          "lib/net6.0/_._": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/net6.0/Microsoft.EntityFrameworkCore.Design.props": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.InMemory/7.0.13": {
         "type": "package",
         "dependencies": {
@@ -373,6 +288,18 @@
           "lib/net6.0/Microsoft.EntityFrameworkCore.SqlServer.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "Microsoft.EntityFrameworkCore.Tools/6.0.14": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Design": "6.0.14"
+        },
+        "compile": {
+          "lib/net6.0/_._": {}
+        },
+        "runtime": {
+          "lib/net6.0/_._": {}
         }
       },
       "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
@@ -491,28 +418,6 @@
         },
         "runtime": {
           "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/net6.0/_._": {}
-        }
-      },
-      "Microsoft.Extensions.Http/7.0.0": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Logging": "7.0.0",
-          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Options": "7.0.0"
-        },
-        "compile": {
-          "lib/net6.0/Microsoft.Extensions.Http.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/Microsoft.Extensions.Http.dll": {
             "related": ".xml"
           }
         },
@@ -871,19 +776,6 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
-      },
-      "System.Collections.Immutable/1.7.1": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/System.Collections.Immutable.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.Collections.Immutable.dll": {
-            "related": ".xml"
-          }
-        }
       },
       "System.Configuration.ConfigurationManager/6.0.1": {
         "type": "package",
@@ -1310,31 +1202,6 @@
           }
         }
       },
-      "MyAnimeVault/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Azure.Extensions.AspNetCore.Configuration.Secrets": "1.0.0",
-          "Azure.Identity": "1.10.3",
-          "Azure.Security.KeyVault.Secrets": "4.5.0",
-          "FirebaseAdmin": "2.4.0",
-          "FirebaseAuthentication.net": "4.1.0",
-          "Microsoft.EntityFrameworkCore": "7.0.13",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13",
-          "MyAnimeVault.Domain": "1.0.0",
-          "MyAnimeVault.EntityFramework": "1.0.0",
-          "MyAnimeVault.MyAnimeListApi": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/MyAnimeVault.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MyAnimeVault.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "MyAnimeVault.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1362,35 +1229,20 @@
         "runtime": {
           "bin/placeholder/MyAnimeVault.EntityFramework.dll": {}
         }
-      },
-      "MyAnimeVault.MyAnimeListApi/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.Extensions.Http": "7.0.0",
-          "MyAnimeVault.Domain": "1.0.0",
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "compile": {
-          "bin/placeholder/MyAnimeVault.MyAnimeListApi.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MyAnimeVault.MyAnimeListApi.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "Azure.Core/1.35.0": {
-      "sha512": "hENcx03Jyuqv05F4RBEPbxz29UrM3Nbhnr6Wl6NQpoU9BCIbL3XLentrxDCTrH54NLS11Exxi/o8MYgT/cnKFA==",
+    "Azure.Core/1.36.0": {
+      "sha512": "vwqFZdHS4dzPlI7FFRkPx9ctA+aGGeRev3gnzG8lntWvKMmBhAmulABi1O9CEvS3/jzYt7yA+0pqVdxkpAd7dQ==",
       "type": "package",
-      "path": "azure.core/1.35.0",
+      "path": "azure.core/1.36.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.core.1.35.0.nupkg.sha512",
+        "azure.core.1.36.0.nupkg.sha512",
         "azure.core.nuspec",
         "azureicon.png",
         "lib/net461/Azure.Core.dll",
@@ -1407,191 +1259,68 @@
         "lib/netstandard2.0/Azure.Core.xml"
       ]
     },
-    "Azure.Extensions.AspNetCore.Configuration.Secrets/1.0.0": {
-      "sha512": "G5KbKkQNgc+IDdykJrrSYYus027Reub3E9EEQGqmZwiU+RYM339VwiBoQlz1cpV/C6yTsq9y9e22JTP3BkpQXg==",
+    "Azure.Extensions.AspNetCore.Configuration.Secrets/1.3.0": {
+      "sha512": "1ugCXAzxwfx/8DbOMlPbVr80++1O6xXUXtXWo7fNRmFnQC4mclDaml2H26kvhaWbof7XHnwt7/9g5dDIoU3FIw==",
       "type": "package",
-      "path": "azure.extensions.aspnetcore.configuration.secrets/1.0.0",
+      "path": "azure.extensions.aspnetcore.configuration.secrets/1.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.extensions.aspnetcore.configuration.secrets.1.0.0.nupkg.sha512",
+        "azure.extensions.aspnetcore.configuration.secrets.1.3.0.nupkg.sha512",
         "azure.extensions.aspnetcore.configuration.secrets.nuspec",
+        "azureicon.png",
         "lib/netstandard2.0/Azure.Extensions.AspNetCore.Configuration.Secrets.dll",
-        "lib/netstandard2.0/Azure.Extensions.AspNetCore.Configuration.Secrets.xml",
-        "pkgicon.png"
+        "lib/netstandard2.0/Azure.Extensions.AspNetCore.Configuration.Secrets.xml"
       ]
     },
-    "Azure.Identity/1.10.3": {
-      "sha512": "l1Xm2MWOF2Mzcwuarlw8kWQXLZk3UeB55aQXVyjj23aBfDwOZ3gu5GP2kJ6KlmZeZv2TCzw7x4L3V36iNr3gww==",
+    "Azure.Identity/1.10.4": {
+      "sha512": "hSvisZy9sld0Gik1X94od3+rRXCx+AKgi+iLH6fFdlnRZRePn7RtrqUGSsORiH2h8H2sc4NLTrnuUte1WL+QuQ==",
       "type": "package",
-      "path": "azure.identity/1.10.3",
+      "path": "azure.identity/1.10.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.identity.1.10.3.nupkg.sha512",
+        "azure.identity.1.10.4.nupkg.sha512",
         "azure.identity.nuspec",
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
       ]
     },
-    "Azure.Security.KeyVault.Secrets/4.5.0": {
-      "sha512": "ztr26Ai4K7AZGuw68/ffLDn+2G3WL0myjC7nY1RYkxPMnsplTPEH+Ke4RGxvSkg4kC7bJ9NwdlqpEwfDX0qhdw==",
+    "Azure.Security.KeyVault.Secrets/4.2.0": {
+      "sha512": "ujVMKVzEtVNQom5A0iEXSDovNGoSidV0RO5QlOBFfcIZlXwFnBmO5OhOfS4D/F1gbMNCCFS3re39qd/Bgh6+QQ==",
       "type": "package",
-      "path": "azure.security.keyvault.secrets/4.5.0",
+      "path": "azure.security.keyvault.secrets/4.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "CHANGELOG.md",
         "README.md",
-        "azure.security.keyvault.secrets.4.5.0.nupkg.sha512",
+        "azure.security.keyvault.secrets.4.2.0.nupkg.sha512",
         "azure.security.keyvault.secrets.nuspec",
-        "azureicon.png",
         "lib/netstandard2.0/Azure.Security.KeyVault.Secrets.dll",
-        "lib/netstandard2.0/Azure.Security.KeyVault.Secrets.xml"
+        "lib/netstandard2.0/Azure.Security.KeyVault.Secrets.xml",
+        "pkgicon.png"
       ]
     },
-    "FirebaseAdmin/2.4.0": {
-      "sha512": "0O89+8oFnHys8TPsk6af0nqcthedok4R467q/tQ/mUyKsXgG45fu1U0acnkKpOGSXT+550cyFfcUj5QlicoOvg==",
+    "Humanizer.Core/2.8.26": {
+      "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
-      "path": "firebaseadmin/2.4.0",
+      "path": "humanizer.core/2.8.26",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "firebaseadmin.2.4.0.nupkg.sha512",
-        "firebaseadmin.nuspec",
-        "lib/net461/FirebaseAdmin.dll",
-        "lib/net461/FirebaseAdmin.xml",
-        "lib/netstandard2.0/FirebaseAdmin.dll",
-        "lib/netstandard2.0/FirebaseAdmin.xml"
-      ]
-    },
-    "FirebaseAuthentication.net/4.1.0": {
-      "sha512": "pShi5v9cvT5bUWZDm261lO4uxJHvzOvpj46YHrL3uCB1WBeyCIcpoVakAQ2xHTu1dpmV86/BzSNRpqIGNp860g==",
-      "type": "package",
-      "path": "firebaseauthentication.net/4.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.txt",
-        "README.md",
-        "firebase.png",
-        "firebaseauthentication.net.4.1.0.nupkg.sha512",
-        "firebaseauthentication.net.nuspec",
-        "lib/netstandard2.0/Firebase.Auth.dll",
-        "lib/netstandard2.0/Firebase.Auth.xml"
-      ]
-    },
-    "Google.Api.Gax/3.2.0": {
-      "sha512": "0OjahFAHTOoprSgvJiQ6/fIQLrUYU4QIFgkuJ51/lcmhZbuXxB3ycPk3JTVEvx6A5yQBL14wgmHgwXLcEsnu3Q==",
-      "type": "package",
-      "path": "google.api.gax/3.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "NuGetIcon.png",
-        "google.api.gax.3.2.0.nupkg.sha512",
-        "google.api.gax.nuspec",
-        "lib/net461/Google.Api.Gax.dll",
-        "lib/net461/Google.Api.Gax.pdb",
-        "lib/net461/Google.Api.Gax.xml",
-        "lib/netstandard2.0/Google.Api.Gax.dll",
-        "lib/netstandard2.0/Google.Api.Gax.pdb",
-        "lib/netstandard2.0/Google.Api.Gax.xml"
-      ]
-    },
-    "Google.Api.Gax.Rest/3.2.0": {
-      "sha512": "YY4mD0nGxTx1uez7Perm+zAd3FH50dd3+7HTYsRFCywDEtj3RkrMjcAmw6mNpKkw2sRICu7aYNy1mgMjd3nVbw==",
-      "type": "package",
-      "path": "google.api.gax.rest/3.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "NuGetIcon.png",
-        "google.api.gax.rest.3.2.0.nupkg.sha512",
-        "google.api.gax.rest.nuspec",
-        "lib/net461/Google.Api.Gax.Rest.dll",
-        "lib/net461/Google.Api.Gax.Rest.pdb",
-        "lib/net461/Google.Api.Gax.Rest.xml",
-        "lib/netstandard2.0/Google.Api.Gax.Rest.dll",
-        "lib/netstandard2.0/Google.Api.Gax.Rest.pdb",
-        "lib/netstandard2.0/Google.Api.Gax.Rest.xml"
-      ]
-    },
-    "Google.Apis/1.49.0": {
-      "sha512": "fmXQQTxZFOBlnvokvdQMzq0Lt+g2QzpZ4H6U8lMMFHgAR8ZqxQnPN5yHDpoHf7a++hJHb5W3pALxauGsq+afKQ==",
-      "type": "package",
-      "path": "google.apis/1.49.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "NuGetIcon.png",
-        "google.apis.1.49.0.nupkg.sha512",
-        "google.apis.nuspec",
-        "lib/net45/Google.Apis.PlatformServices.dll",
-        "lib/net45/Google.Apis.dll",
-        "lib/net45/Google.Apis.pdb",
-        "lib/net45/Google.Apis.xml",
-        "lib/netstandard1.3/Google.Apis.dll",
-        "lib/netstandard1.3/Google.Apis.pdb",
-        "lib/netstandard1.3/Google.Apis.xml",
-        "lib/netstandard2.0/Google.Apis.dll",
-        "lib/netstandard2.0/Google.Apis.pdb",
-        "lib/netstandard2.0/Google.Apis.xml"
-      ]
-    },
-    "Google.Apis.Auth/1.49.0": {
-      "sha512": "3V9ohvixQtjaEvk7T9Ac7E/KvwEPa7eL4aMNreJDI0CEPzCdQdk2zCvaJPRrNIjhe+UuBeOeom1oAOMFB74JHg==",
-      "type": "package",
-      "path": "google.apis.auth/1.49.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "NuGetIcon.png",
-        "google.apis.auth.1.49.0.nupkg.sha512",
-        "google.apis.auth.nuspec",
-        "lib/net45/Google.Apis.Auth.PlatformServices.dll",
-        "lib/net45/Google.Apis.Auth.dll",
-        "lib/net45/Google.Apis.Auth.pdb",
-        "lib/net45/Google.Apis.Auth.xml",
-        "lib/netstandard1.3/Google.Apis.Auth.PlatformServices.dll",
-        "lib/netstandard1.3/Google.Apis.Auth.dll",
-        "lib/netstandard1.3/Google.Apis.Auth.pdb",
-        "lib/netstandard1.3/Google.Apis.Auth.xml",
-        "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll",
-        "lib/netstandard2.0/Google.Apis.Auth.dll",
-        "lib/netstandard2.0/Google.Apis.Auth.pdb",
-        "lib/netstandard2.0/Google.Apis.Auth.xml"
-      ]
-    },
-    "Google.Apis.Core/1.49.0": {
-      "sha512": "9DgGdtyzgrCfHWwc/HiDXDbykNMeKQozbEHYEUEcezRuH+YR3fvq7YGVBDmUM8g6qEL3kDk6h5EU4h0IJwue1w==",
-      "type": "package",
-      "path": "google.apis.core/1.49.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "NuGetIcon.png",
-        "google.apis.core.1.49.0.nupkg.sha512",
-        "google.apis.core.nuspec",
-        "lib/net45/Google.Apis.Core.dll",
-        "lib/net45/Google.Apis.Core.pdb",
-        "lib/net45/Google.Apis.Core.xml",
-        "lib/netstandard1.3/Google.Apis.Core.dll",
-        "lib/netstandard1.3/Google.Apis.Core.pdb",
-        "lib/netstandard1.3/Google.Apis.Core.xml",
-        "lib/netstandard2.0/Google.Apis.Core.dll",
-        "lib/netstandard2.0/Google.Apis.Core.pdb",
-        "lib/netstandard2.0/Google.Apis.Core.xml"
+        "humanizer.core.2.8.26.nupkg.sha512",
+        "humanizer.core.nuspec",
+        "lib/netstandard1.0/Humanizer.dll",
+        "lib/netstandard1.0/Humanizer.xml",
+        "lib/netstandard2.0/Humanizer.dll",
+        "lib/netstandard2.0/Humanizer.xml",
+        "logo.png"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -1807,6 +1536,21 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
+    "Microsoft.EntityFrameworkCore.Design/6.0.14": {
+      "sha512": "/AbhTGuC1YmFK0T2VDUqYAFT/WYta3jK1AHyqFcsQFMqxv42bOJQ5rDeQy6+eUvozBrYlhA4VYSaqmnlrFokdw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.design/6.0.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "build/net6.0/Microsoft.EntityFrameworkCore.Design.props",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.Design.xml",
+        "microsoft.entityframeworkcore.design.6.0.14.nupkg.sha512",
+        "microsoft.entityframeworkcore.design.nuspec"
+      ]
+    },
     "Microsoft.EntityFrameworkCore.InMemory/7.0.13": {
       "sha512": "HFSMOeNNfCQ16Moy6Rv99/xhVOzW27ND9YcoDJrQ9KocJP8ZONuz5OtTJg9pfKFKblBPj6LWNI496VrAWkECyg==",
       "type": "package",
@@ -1847,6 +1591,31 @@
         "lib/net6.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
         "microsoft.entityframeworkcore.sqlserver.7.0.13.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.Tools/6.0.14": {
+      "sha512": "bWVJAYk67pVzhqzvs2dR+WbrnI8ioCZQZLyKGDcGAb0Kf0VLhMv0RvP0vshicYl+IWt8C90rMHZspzD0T+sevw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.tools/6.0.14",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/_._",
+        "microsoft.entityframeworkcore.tools.6.0.14.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.nuspec",
+        "tools/EntityFrameworkCore.PS2.psd1",
+        "tools/EntityFrameworkCore.PS2.psm1",
+        "tools/EntityFrameworkCore.psd1",
+        "tools/EntityFrameworkCore.psm1",
+        "tools/about_EntityFrameworkCore.help.txt",
+        "tools/init.ps1",
+        "tools/net461/any/ef.exe",
+        "tools/net461/win-arm64/ef.exe",
+        "tools/net461/win-x86/ef.exe",
+        "tools/netcoreapp2.0/any/ef.dll",
+        "tools/netcoreapp2.0/any/ef.runtimeconfig.json"
       ]
     },
     "Microsoft.Extensions.ApiDescription.Server/6.0.5": {
@@ -2229,33 +1998,6 @@
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec",
-        "useSharedDesignerContext.txt"
-      ]
-    },
-    "Microsoft.Extensions.Http/7.0.0": {
-      "sha512": "9Pq9f/CvOSz0t9yQa6g1uWpxa2sm13daLFm8EZwy9MaQUjKXWdNUXQwIxwhmba5N83UIqURiPHSNqGK1vfWF2w==",
-      "type": "package",
-      "path": "microsoft.extensions.http/7.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/net461/Microsoft.Extensions.Http.targets",
-        "buildTransitive/net462/_._",
-        "buildTransitive/net6.0/_._",
-        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Http.targets",
-        "lib/net462/Microsoft.Extensions.Http.dll",
-        "lib/net462/Microsoft.Extensions.Http.xml",
-        "lib/net6.0/Microsoft.Extensions.Http.dll",
-        "lib/net6.0/Microsoft.Extensions.Http.xml",
-        "lib/net7.0/Microsoft.Extensions.Http.dll",
-        "lib/net7.0/Microsoft.Extensions.Http.xml",
-        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
-        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
-        "microsoft.extensions.http.7.0.0.nupkg.sha512",
-        "microsoft.extensions.http.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -2801,32 +2543,6 @@
         "lib/netstandard2.0/Swashbuckle.AspNetCore.SwaggerUI.xml",
         "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
-      ]
-    },
-    "System.Collections.Immutable/1.7.1": {
-      "sha512": "B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q==",
-      "type": "package",
-      "path": "system.collections.immutable/1.7.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net461/System.Collections.Immutable.dll",
-        "lib/net461/System.Collections.Immutable.xml",
-        "lib/netstandard1.0/System.Collections.Immutable.dll",
-        "lib/netstandard1.0/System.Collections.Immutable.xml",
-        "lib/netstandard1.3/System.Collections.Immutable.dll",
-        "lib/netstandard1.3/System.Collections.Immutable.xml",
-        "lib/netstandard2.0/System.Collections.Immutable.dll",
-        "lib/netstandard2.0/System.Collections.Immutable.xml",
-        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
-        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml",
-        "system.collections.immutable.1.7.1.nupkg.sha512",
-        "system.collections.immutable.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Configuration.ConfigurationManager/6.0.1": {
@@ -3690,11 +3406,6 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "MyAnimeVault/1.0.0": {
-      "type": "project",
-      "path": "../MyAnimeVault/MyAnimeVault.csproj",
-      "msbuildProject": "../MyAnimeVault/MyAnimeVault.csproj"
-    },
     "MyAnimeVault.Domain/1.0.0": {
       "type": "project",
       "path": "../MyAnimeVault.Domain/MyAnimeVault.Domain.csproj",
@@ -3704,19 +3415,17 @@
       "type": "project",
       "path": "../MyAnimeVault.EntityFramework/MyAnimeVault.EntityFramework.csproj",
       "msbuildProject": "../MyAnimeVault.EntityFramework/MyAnimeVault.EntityFramework.csproj"
-    },
-    "MyAnimeVault.MyAnimeListApi/1.0.0": {
-      "type": "project",
-      "path": "../MyAnimeVault.MyAnimeListApi/MyAnimeVault.MyAnimeListApi.csproj",
-      "msbuildProject": "../MyAnimeVault.MyAnimeListApi/MyAnimeVault.MyAnimeListApi.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Azure.Extensions.AspNetCore.Configuration.Secrets >= 1.3.0",
+      "Azure.Identity >= 1.10.4",
       "Microsoft.EntityFrameworkCore >= 7.0.13",
       "Microsoft.EntityFrameworkCore.InMemory >= 7.0.13",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.13",
-      "MyAnimeVault >= 1.0.0",
+      "Microsoft.EntityFrameworkCore.Tools >= 6.0.14",
+      "MyAnimeVault.Domain >= 1.0.0",
       "MyAnimeVault.EntityFramework >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -3753,11 +3462,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj": {
+              "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj"
+            },
             "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.EntityFramework\\MyAnimeVault.EntityFramework.csproj": {
               "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.EntityFramework\\MyAnimeVault.EntityFramework.csproj"
-            },
-            "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.csproj": {
-              "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.csproj"
             }
           }
         }
@@ -3772,6 +3481,14 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Azure.Extensions.AspNetCore.Configuration.Secrets": {
+            "target": "Package",
+            "version": "[1.3.0, )"
+          },
+          "Azure.Identity": {
+            "target": "Package",
+            "version": "[1.10.4, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.13, )"
@@ -3783,6 +3500,12 @@
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[7.0.13, )"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[6.0.14, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
