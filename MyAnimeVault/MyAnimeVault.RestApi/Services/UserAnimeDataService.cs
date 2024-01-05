@@ -103,13 +103,13 @@ namespace MyAnimeVault.RestApi.Services
                 TotalEpisodes = userEntity.TotalEpisodes,
                 WatchStatus = userEntity.WatchStatus,
                 Status = userEntity.Status,
-                PosterDTO = userEntity.Poster != null ? new PosterDTO
+                Poster = userEntity.Poster != null ? new PosterDTO
                 {
                     Id = userEntity.Poster.Id,
                     Large = userEntity.Poster.Large,
                     Medium = userEntity.Poster.Medium
                 } : null,
-                StartSeasonDTO = userEntity.StartSeason != null ? new StartSeasonDTO
+                StartSeason = userEntity.StartSeason != null ? new StartSeasonDTO
                 {
                     Id = userEntity.StartSeason.Id,
                     Year = userEntity.StartSeason.Year,
@@ -131,13 +131,13 @@ namespace MyAnimeVault.RestApi.Services
                 TotalEpisodes = ua.TotalEpisodes,
                 WatchStatus = ua.WatchStatus,
                 Status = ua.Status,
-                PosterDTO = ua.Poster != null ? new PosterDTO
+                Poster = ua.Poster != null ? new PosterDTO
                 {
                     Id = ua.Poster.Id,
                     Large = ua.Poster.Large,
                     Medium = ua.Poster.Medium
                 } : null,
-                StartSeasonDTO = ua.StartSeason != null ? new StartSeasonDTO
+                StartSeason = ua.StartSeason != null ? new StartSeasonDTO
                 {
                     Id = ua.StartSeason.Id,
                     Year = ua.StartSeason.Year,

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Services;
+using MyAnimeVault.Domain.Services.Api.Database;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
@@ -21,12 +22,13 @@ namespace MyAnimeVault.Controllers
         private readonly IUserDataService UserDataService;
         private readonly IGenericDataService<UserAnime> UserAnimeDataService;
         private readonly IGenericDataService<Poster> PosterDataService;
-        private readonly IGenericDataService<StartSeason> StartSeasonDataService; 
+        private readonly IGenericDataService<StartSeason> StartSeasonDataService;
+        private readonly IUserApiService UserApiService;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, MyAnimeVaultDbContext dbContext, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IGenericDataService<Poster> posterDataService, IGenericDataService<StartSeason> startSeasonDataService, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, MyAnimeVaultDbContext dbContext, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IGenericDataService<Poster> posterDataService, IGenericDataService<StartSeason> startSeasonDataService, IUserApiService userApiService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
@@ -36,6 +38,7 @@ namespace MyAnimeVault.Controllers
             UserAnimeDataService = userAnimeDataService;
             PosterDataService = posterDataService;
             StartSeasonDataService = startSeasonDataService;
+            UserApiService = userApiService;
             AnimeApiService = animeApiService;
         }
 
@@ -203,6 +206,7 @@ namespace MyAnimeVault.Controllers
             try
             {
                 User? user = await UserDataService.GetByIdAsync(userId);
+                //User? user = await UserApiService.GetUserByIdAsync(userId);
                 if (user != null)
                 {
                     UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);

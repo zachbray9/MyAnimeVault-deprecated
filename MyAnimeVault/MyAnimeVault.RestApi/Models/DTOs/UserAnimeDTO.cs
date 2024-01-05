@@ -11,7 +11,7 @@
         public int TotalEpisodes { get; set; }
         public string WatchStatus { get; set; } = "watching";
         public string Status { get; set; } = null!;
-        public PosterDTO? PosterDTO { get; set; }
-        public StartSeasonDTO? StartSeasonDTO { get; set; }
+        public PosterDTO? Poster { get; set; }
+        public StartSeasonDTO? StartSeason { get; set; }
     }
 }
