@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.EntityFramework;
-using MyAnimeVault.RestApi.Models.DTOs;
 
 namespace MyAnimeVault.RestApi.Services
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.RestApi.Models.DTOs;
 
 namespace MyAnimeVault.RestApi.Controllers
 {
@@ -50,15 +50,15 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(User user)
+        public async Task<IActionResult> AddUser(UserDTO newUser)
         {
-            UserDTO userDTO = await UserDataService.AddAndReturnDTOAsync(user);
+            UserDTO? userDTO = await UserDataService.AddAndReturnDTOAsync(newUser);
             return Ok(userDTO);
         }
 
         [HttpPost]
         [Route("[action]/{userId}:int")]
-        public async Task<IActionResult> AddAnimeToList([FromRoute] int userId, UserAnime anime)
+        public async Task<IActionResult> AddAnimeToList([FromRoute] int userId, UserAnimeDTO anime)
         {
             bool success = await UserDataService.AddAnimeToListAsync(userId, anime);
             if (success)
@@ -70,10 +70,15 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(User user)
+        public async Task<IActionResult> UpdateUser(UserDTO user)
         {
-            UserDTO userDTO = await UserDataService.UpdateAndReturnDTOAsync(user);
-            return Ok(userDTO);
+            UserDTO? userDTO = await UserDataService.UpdateAndReturnDTOAsync(user);
+            if (userDTO != null)
+            {
+                return Ok(userDTO);
+            }
+
+            return BadRequest();
         }
 
         [HttpDelete]
@@ -92,7 +97,7 @@ namespace MyAnimeVault.RestApi.Controllers
 
         [HttpDelete]
         [Route("[action]/{userId:int}")]
-        public async Task<IActionResult> RemoveAnimeFromList([FromRoute] int userId, UserAnime anime)
+        public async Task<IActionResult> RemoveAnimeFromList([FromRoute] int userId, UserAnimeDTO anime)
         {
             bool success = await UserDataService.RemoveAnimeFromListAsync(userId, anime);
             if(success)

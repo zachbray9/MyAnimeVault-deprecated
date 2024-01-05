@@ -1,6 +1,6 @@
 ﻿using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.RestApi.Models.DTOs;
 
 namespace MyAnimeVault.RestApi.Services
 {

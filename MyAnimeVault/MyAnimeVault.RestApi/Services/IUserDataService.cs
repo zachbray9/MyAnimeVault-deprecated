@@ -1,6 +1,6 @@
 ﻿using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.RestApi.Models.DTOs;
 
 namespace MyAnimeVault.RestApi.Services
 {
@@ -10,9 +10,9 @@ namespace MyAnimeVault.RestApi.Services
         Task<UserDTO?> GetByUidAsDTOAsync(string uid);
         Task<UserDTO?> GetByIdAsDTOAsync(int id);
         Task<List<UserDTO>?> GetAllAsDTOsAsync();
-        Task<UserDTO> AddAndReturnDTOAsync(User user);
-        Task<UserDTO> UpdateAndReturnDTOAsync(User user);
-        Task<bool> AddAnimeToListAsync(int userId, UserAnime anime);
-        Task<bool> RemoveAnimeFromListAsync(int userId, UserAnime anime);
+        Task<UserDTO?> AddAndReturnDTOAsync(UserDTO newUser);
+        Task<UserDTO?> UpdateAndReturnDTOAsync(UserDTO user);
+        Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnimeDTO);
+        Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnimeDTO);
     }
 }

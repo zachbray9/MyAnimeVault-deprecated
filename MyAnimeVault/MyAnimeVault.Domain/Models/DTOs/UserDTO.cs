@@ -1,4 +1,4 @@
-﻿namespace MyAnimeVault.RestApi.Models.DTOs
+﻿namespace MyAnimeVault.Domain.Models.DTOs
 {
     public class UserDTO
     {
@@ -7,6 +7,5 @@
         public string DisplayName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public List<UserAnimeDTO> Animes { get; set; } = new List<UserAnimeDTO>();
-
     }
 }

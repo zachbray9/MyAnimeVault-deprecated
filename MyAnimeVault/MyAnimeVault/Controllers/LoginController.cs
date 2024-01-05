@@ -1,6 +1,8 @@
 ﻿using Firebase.Auth;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using MyAnimeVault.Domain.Models.DTOs;
+using MyAnimeVault.Domain.Services.Api.Database;
 using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
 using MyAnimeVault.Services.Authentication;
@@ -13,13 +15,15 @@ namespace MyAnimeVault.Controllers
         private readonly IHttpContextAccessor HttpContextAccessor;
         private readonly IAuthenticator Authenticator;
         private readonly IUserDataService UserDataService;
+        private readonly IUserApiService UserApiService;
 
-        public LoginController(ILogger<LoginController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService)
+        public LoginController(ILogger<LoginController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserDataService userDataService, IUserApiService userApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
             Authenticator = authenticator;
             UserDataService = userDataService;
+            UserApiService = userApiService;
         }
 
         public IActionResult Index()
@@ -90,13 +94,20 @@ namespace MyAnimeVault.Controllers
                 {
                     //store current user and redirect to home page
                     UserCredential userCredential = await Authenticator.RegisterAsync(viewModel.Email, viewModel.Password, viewModel.DisplayName);
-                    MyAnimeVault.Domain.Models.User newUser = new MyAnimeVault.Domain.Models.User
+                    //MyAnimeVault.Domain.Models.User newUser = new MyAnimeVault.Domain.Models.User
+                    //{
+                    //    Uid = userCredential.User.Uid,
+                    //    Email = userCredential.User.Info.Email,
+                    //    DisplayName = userCredential.User.Info.DisplayName
+                    //};
+                    //await UserDataService.AddAsync(newUser);
+                    UserDTO newUser = new UserDTO
                     {
                         Uid = userCredential.User.Uid,
                         Email = userCredential.User.Info.Email,
                         DisplayName = userCredential.User.Info.DisplayName
                     };
-                    await UserDataService.AddAsync(newUser);
+                    await UserApiService.AddUserAsync(newUser);
 
                     return RedirectToAction("Index", "Home");
                 }

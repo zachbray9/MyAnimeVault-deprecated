@@ -1,6 +1,9 @@
-﻿using MyAnimeVault.Domain.Models;
+﻿using Firebase.Auth;
+using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.Domain.Services.Api.Database;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace MyAnimeVault.Services.Api.Database
 {
@@ -18,50 +21,92 @@ namespace MyAnimeVault.Services.Api.Database
             HttpClient.BaseAddress = new Uri("https://myanimevaultapi.azurewebsites.net/");
             HttpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
         }
-        public Task<bool> AddAnimeToList(int userId, UserAnime userAnime)
+        public async Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnime)
         {
-            throw new NotImplementedException();
+            string jsonString = JsonConvert.SerializeObject(userAnime);
+            StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await HttpClient.PostAsync($"api/users/AddAnimeToList", content);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public Task<User> AddUser(User user)
+        public async Task<UserDTO?> AddUserAsync(UserDTO user)
         {
-            throw new NotImplementedException();
+            string jsonString = JsonConvert.SerializeObject(user);
+            StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await HttpClient.PostAsync($"api/users", content);
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+                UserDTO? returnedUser = JsonConvert.DeserializeObject<UserDTO>(jsonString);
+                return returnedUser;
+            }
+
+            return null;
         }
 
-        public Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await HttpClient.DeleteAsync($"api/users/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public Task<List<User>> GetAllUsers()
+        public async Task<List<UserDTO>?> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await HttpClient.GetAsync($"api/users");
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                List<UserDTO>? users = JsonConvert.DeserializeObject<List<UserDTO>?>(jsonString);
+                return users;
+            }
+
+            return null;
         }
 
-        public async Task<User?> GetUserByIdAsync(int id)
+        public async Task<UserDTO?> GetUserByIdAsync(int id)
         {
             HttpResponseMessage response = await HttpClient.GetAsync($"api/users/{id}");
             if(response.IsSuccessStatusCode)
             {
                 string jsonString = await response.Content.ReadAsStringAsync();
-                User? user = JsonConvert.DeserializeObject<User>(jsonString);
+                UserDTO? user = JsonConvert.DeserializeObject<UserDTO>(jsonString);
                 return user;
             }
 
             return null;
         }
 
-        public Task<User> GetUserByUid(int uid)
+        public async Task<UserDTO?> GetUserByUidAsync(string uid)
+        {
+            HttpResponseMessage response = await HttpClient.GetAsync($"api/users/{uid}");
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                UserDTO? user = JsonConvert.DeserializeObject<UserDTO>(jsonString);
+                return user;
+            }
+
+            return null;
+        }
+
+        public Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnime)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> RemoveAnimeFromList(int userId, UserAnime userAnime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> UpdateUser(User user)
+        public Task<UserDTO?> UpdateUserAsync(UserDTO user)
         {
             throw new NotImplementedException();
         }

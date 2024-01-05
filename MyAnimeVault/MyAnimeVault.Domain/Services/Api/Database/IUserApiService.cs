@@ -1,4 +1,5 @@
 ﻿using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,14 @@ namespace MyAnimeVault.Domain.Services.Api.Database
 {
     public interface IUserApiService
     {
-        Task<User?> GetUserByIdAsync(int id);
-        Task<User> GetUserByUid(int uid);
-        Task<List<User>>GetAllUsers();
-        Task<User> AddUser(User user);
-        Task<bool> AddAnimeToList(int userId, UserAnime userAnime);
-        Task<User> UpdateUser(User user);
-        Task<bool> DeleteUser(int id);
-        Task<bool> RemoveAnimeFromList(int userId, UserAnime userAnime);
+        Task<UserDTO?> GetUserByIdAsync(int id);
+        Task<UserDTO?> GetUserByUidAsync(string uid);
+        Task<List<UserDTO>?>GetAllUsersAsync();
+        Task<UserDTO?> AddUserAsync(UserDTO user);
+        Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnime);
+        Task<UserDTO?> UpdateUserAsync(UserDTO user);
+        Task<bool> DeleteUserAsync(int id);
+        Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnime);
 
     }
 }

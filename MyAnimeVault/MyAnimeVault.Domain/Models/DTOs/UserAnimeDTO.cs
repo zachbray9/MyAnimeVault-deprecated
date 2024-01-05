@@ -1,4 +1,4 @@
-﻿namespace MyAnimeVault.RestApi.Models.DTOs
+﻿namespace MyAnimeVault.Domain.Models.DTOs
 {
     public class UserAnimeDTO
     {

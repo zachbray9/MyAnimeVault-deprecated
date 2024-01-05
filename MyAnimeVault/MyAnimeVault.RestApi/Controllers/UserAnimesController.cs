@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyAnimeVault.Domain.Models;
-using MyAnimeVault.RestApi.Models.DTOs;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.RestApi.Services;
 using System.Runtime.CompilerServices;
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.Domain.Services;
 using MyAnimeVault.Domain.Services.Api.Database;
 using MyAnimeVault.EntityFramework;
@@ -93,7 +94,7 @@ namespace MyAnimeVault.Controllers
             return View(currentUser?.Animes);
         }
 
-        public async Task<IActionResult> AddAnimeToUserList(int animeId)
+        public async Task<IActionResult> AddAnimeToUserList(int userId, int animeId)
         {
             await ValidateUserSession();
             string? uid = HttpContextAccessor.HttpContext?.Session.GetString("UserId");
@@ -103,57 +104,28 @@ namespace MyAnimeVault.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
-            try
-            {
-                User? user = await UserDataService.GetByUidAsync(uid);
+            Anime anime = await AnimeApiService.GetAnimeById(animeId);
 
-                if(user != null && !user.Animes.Any(userAnime =>  userAnime.AnimeId == animeId))
+            UserAnimeDTO userAnimeDTO = new UserAnimeDTO
+            {
+                AnimeId = animeId,
+                Title = (anime.AlternativeTitles != null && !string.IsNullOrEmpty(anime.AlternativeTitles.en)) ? anime.AlternativeTitles.en : anime.Title,
+                MediaType = anime.MediaType,
+                TotalEpisodes = anime.NumEpisodes,
+                Status = anime.Status,
+                Poster = anime.Picture != null ? new PosterDTO
                 {
-                    Anime anime = await AnimeApiService.GetAnimeById(animeId);
-                    Poster? existingPoster = null;
-                    StartSeason? existingStartSeason = null;
+                    Large = anime.Picture.Large,
+                    Medium = anime.Picture.Medium
+                } : null,
+                StartSeason = anime.StartSeason != null ? new StartSeasonDTO
+                {
+                    Year = anime.StartSeason.Year,
+                    Season = anime.StartSeason.Season,
+                } : null
+            };
 
-                    //checks if the anime has a poster and, if so, checks if it's already in the database. If not, then add it to the database.
-                    if(anime.Picture != null)
-                    {
-                        existingPoster = await DbContext.Posters.FirstOrDefaultAsync(p => p.Medium == anime.Picture.Medium);
-                        if(existingPoster == null)
-                        {
-                            existingPoster = await PosterDataService.AddAsync(anime.Picture);
-                        }
-                    }
-
-                    //checks if the anime has a start season and, if so, checks if it's already in the database. If not, then add it to the database.
-                    if(anime.StartSeason != null)
-                    {
-                        existingStartSeason = await DbContext.StartSeasons.FirstOrDefaultAsync(ss => ss.Season == anime.StartSeason.Season && ss.Year == anime.StartSeason.Year);
-                        if(existingStartSeason == null)
-                        {
-                            existingStartSeason = await StartSeasonDataService.AddAsync(anime.StartSeason);
-                        }
-                    }
-
-                    UserAnime animeToAdd = new UserAnime
-                    {
-                        AnimeId = animeId,
-                        UserId = user.Id,
-                        Title = (anime.AlternativeTitles != null && !string.IsNullOrEmpty(anime.AlternativeTitles.en)) ? anime.AlternativeTitles.en : anime.Title,
-                        PosterId = existingPoster != null ? existingPoster.Id : null,
-                        StartSeasonId = existingStartSeason != null ? existingStartSeason.Id : null,
-                        MediaType = anime.MediaType,
-                        TotalEpisodes = anime.NumEpisodes,
-                        Status = anime.Status
-                    };
-
-                    await UserDataService.AddAnimeToList(user, animeToAdd);
-                }
-
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
+            await UserApiService.AddAnimeToListAsync(userId, userAnimeDTO);
 
             return RedirectToAction("AnimeDetails", "Home", new { id = animeId });
         }
@@ -206,7 +178,6 @@ namespace MyAnimeVault.Controllers
             try
             {
                 User? user = await UserDataService.GetByIdAsync(userId);
-                //User? user = await UserApiService.GetUserByIdAsync(userId);
                 if (user != null)
                 {
                     UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);

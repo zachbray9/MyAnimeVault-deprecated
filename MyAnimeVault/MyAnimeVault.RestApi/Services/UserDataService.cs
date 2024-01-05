@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.EntityFramework;
 using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.RestApi.Models.DTOs;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
 
@@ -12,10 +12,12 @@ namespace MyAnimeVault.RestApi.Services
     public class UserDataService : IUserDataService
     {
         private readonly MyAnimeVaultDbContext DbContext;
+        private readonly IUserAnimeDataService UserAnimeDataService;
 
-        public UserDataService(MyAnimeVaultDbContext dbContext)
+        public UserDataService(MyAnimeVaultDbContext dbContext, IUserAnimeDataService userAnimeDataService)
         {
             DbContext = dbContext;
+            UserAnimeDataService = userAnimeDataService;
         }
 
         public async Task<User> AddAsync(User entity)
@@ -25,12 +27,25 @@ namespace MyAnimeVault.RestApi.Services
             return createdResult.Entity;
         }
 
-        public async Task<UserDTO> AddAndReturnDTOAsync(User entity)
+        public async Task<UserDTO?> AddAndReturnDTOAsync(UserDTO newUser)
         {
-            EntityEntry<User> createdResult = await DbContext.Set<User>().AddAsync(entity);
-            await DbContext.SaveChangesAsync();
-            UserDTO userDTO = MapToDTO(createdResult.Entity);
-            return userDTO;
+            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Uid == newUser.Uid);
+            if (user == null)
+            {
+                user = new User
+                {
+                    Uid = newUser.Uid,
+                    Email = newUser.Email,
+                    DisplayName = newUser.DisplayName
+                };
+
+                EntityEntry<User> createdResult = await DbContext.Set<User>().AddAsync(user);
+                await DbContext.SaveChangesAsync();
+                UserDTO userDTO = MapToDTO(createdResult.Entity);
+                return userDTO;
+            }
+
+            return null;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -105,42 +120,99 @@ namespace MyAnimeVault.RestApi.Services
             return result.Entity;
         }
 
-        public async Task<UserDTO> UpdateAndReturnDTOAsync(User entity)
+        public async Task<UserDTO?> UpdateAndReturnDTOAsync(UserDTO userDTO)
         {
-            EntityEntry<User> result = DbContext.Set<User>().Update(entity);
-            await DbContext.SaveChangesAsync();
-            UserDTO userDTO = MapToDTO(result.Entity);
-            return userDTO;
+            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userDTO.Id);
+
+            if(user != null)
+            {
+                user.Uid = userDTO.Uid;
+                user.Email = userDTO.Email;
+                user.DisplayName = userDTO.DisplayName;
+
+                EntityEntry<User> result = DbContext.Set<User>().Update(user);
+                await DbContext.SaveChangesAsync();
+                userDTO = MapToDTO(result.Entity);
+                return userDTO;
+            }
+
+            return null;
         }
 
-        public async Task<bool> AddAnimeToListAsync(int userId, UserAnime anime)
+        public async Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnimeDTO)
         {
             User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-            if (user == null || user.Animes.Any(ua => ua.AnimeId == anime.Id))
+            if (user == null || user.Animes.Any(ua => ua.AnimeId == userAnimeDTO.Id))
             {
                 return false;
             }
 
-            user.Animes.Add(anime);
+            Poster? existingPoster = null;
+            StartSeason? existingStartSeason = null;
+
+            if(userAnimeDTO.Poster != null)
+            {
+                existingPoster = await DbContext.Posters.FirstOrDefaultAsync(p => p.Medium == userAnimeDTO.Poster.Medium);
+                if(existingPoster == null)
+                {
+                    EntityEntry<Poster> createdEntity = await DbContext.Posters.AddAsync(new Poster
+                    {
+                        Large = userAnimeDTO.Poster.Large,
+                        Medium = userAnimeDTO.Poster.Medium
+                    });
+                    existingPoster = createdEntity.Entity;
+                }
+            }
+
+            if (userAnimeDTO.StartSeason != null)
+            {
+                existingStartSeason = await DbContext.StartSeasons.FirstOrDefaultAsync(ss => ss.Year == userAnimeDTO.StartSeason.Year && ss.Season == userAnimeDTO.StartSeason.Season);
+                if (existingStartSeason == null)
+                {
+                    EntityEntry<StartSeason> createdEntity = await DbContext.StartSeasons.AddAsync(new StartSeason
+                    {
+                        Year = userAnimeDTO.StartSeason.Year,
+                        Season = userAnimeDTO.StartSeason.Season,
+                    });
+                    existingStartSeason = createdEntity.Entity;
+                }
+            }
+
+            user.Animes.Add(new UserAnime
+            {
+                AnimeId = userAnimeDTO.AnimeId,
+                UserId = user.Id,
+                Title = userAnimeDTO.Title,
+                PosterId = existingPoster != null ? existingPoster.Id : null,
+                StartSeasonId = existingStartSeason != null ? existingStartSeason.Id : null,
+                MediaType = userAnimeDTO.MediaType,
+                TotalEpisodes = userAnimeDTO.TotalEpisodes,
+                Status = userAnimeDTO.Status
+            });
+
             await DbContext.SaveChangesAsync();
 
             return true;
         }
 
-        public async Task<bool> RemoveAnimeFromListAsync(int userId, UserAnime anime)
+        public async Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnimeDTO)
         {
-            User? user = await DbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            User? user = await GetByIdAsync(userId);
 
-            if (user == null || !(user.Animes.Any(ua => ua.Id == anime.Id)))
+            if (user != null && user.Animes.Any(ua => ua.AnimeId == userAnimeDTO.AnimeId))
             {
-                return false;
+                UserAnime? animeToRemove = await UserAnimeDataService.GetByIdAsync(userAnimeDTO.Id);
+                if(animeToRemove != null)
+                {
+                    user.Animes.Remove(animeToRemove);
+                    await DbContext.SaveChangesAsync();
+                    return true;
+                }
             }
 
-            user.Animes.Remove(anime);
-            await DbContext.SaveChangesAsync();
 
-            return true;
+            return false;
         }
 
         //Map to DTO method

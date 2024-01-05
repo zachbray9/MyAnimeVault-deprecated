@@ -102,7 +102,7 @@
                         }
                         else
                         {
-                            <a class="addToList-button" asp-area="" asp-action="AddAnimeToUserList" asp-controller="Home" asp-route-animeId="@Model.Anime.Id">+ Add To List</a>
+                            <a class="addToList-button" asp-area="" asp-action="AddAnimeToUserList" asp-controller="Home" asp-route-userId="@Model.CurrentUser.Id" asp-route-animeId="@Model.Anime.Id">+ Add To List</a>
                         }
                     }
                 </div>
