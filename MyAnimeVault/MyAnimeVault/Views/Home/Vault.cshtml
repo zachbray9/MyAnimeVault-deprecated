@@ -1,5 +1,5 @@
-﻿@using MyAnimeVault.Domain.Models
-@model List<UserAnime>
+﻿@using MyAnimeVault.Domain.Models.DTOs;
+@model List<UserAnimeDTO>
 
 @{
     ViewData["Title"] = "MyVault";
@@ -15,7 +15,7 @@
         }
         else
         {
-            @foreach(UserAnime anime in Model)
+            @foreach(UserAnimeDTO anime in Model)
             {
                 <li class="user-anime-listitem">
                     <a class="user-anime-link" asp-area="" asp-action="AnimeDetails" asp-controller="Home" asp-route-id="@anime.AnimeId">

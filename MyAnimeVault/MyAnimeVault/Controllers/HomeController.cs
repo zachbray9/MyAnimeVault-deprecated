@@ -1,14 +1,10 @@
 ﻿using FirebaseAdmin.Auth;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MyAnimeVault.Domain.Models;
 using MyAnimeVault.Domain.Models.DTOs;
 using MyAnimeVault.Domain.Services;
 using MyAnimeVault.Domain.Services.Api.Database;
-using MyAnimeVault.EntityFramework;
-using MyAnimeVault.EntityFramework.Services;
 using MyAnimeVault.Models;
-using MyAnimeVault.MyAnimeListApi.Models;
 using MyAnimeVault.Services.Authentication;
 using System.Diagnostics;
 
@@ -18,28 +14,20 @@ namespace MyAnimeVault.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor HttpContextAccessor;
-        private readonly MyAnimeVaultDbContext DbContext;
         private readonly IAuthenticator Authenticator;
-        private readonly IUserDataService UserDataService;
-        private readonly IGenericDataService<UserAnime> UserAnimeDataService;
-        private readonly IGenericDataService<Poster> PosterDataService;
-        private readonly IGenericDataService<StartSeason> StartSeasonDataService;
         private readonly IUserApiService UserApiService;
+        private readonly IUserAnimeApiService UserAnimeApiService;
         private readonly IAnimeApiService AnimeApiService;
 
         public List<AnimeListNode> AnimeList { get; set; } = new List<AnimeListNode>();
 
-        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, MyAnimeVaultDbContext dbContext, IAuthenticator authenticator, IUserDataService userDataService, IGenericDataService<UserAnime> userAnimeDataService, IGenericDataService<Poster> posterDataService, IGenericDataService<StartSeason> startSeasonDataService, IUserApiService userApiService, IAnimeApiService animeApiService)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IAuthenticator authenticator, IUserApiService userApiService, IUserAnimeApiService userAnimeApiService, IAnimeApiService animeApiService)
         {
             _logger = logger;
             HttpContextAccessor = httpContextAccessor;
-            DbContext = dbContext;
             Authenticator = authenticator;
-            UserDataService = userDataService;
-            UserAnimeDataService = userAnimeDataService;
-            PosterDataService = posterDataService;
-            StartSeasonDataService = startSeasonDataService;
             UserApiService = userApiService;
+            UserAnimeApiService = userAnimeApiService;
             AnimeApiService = animeApiService;
         }
 
@@ -61,7 +49,7 @@ namespace MyAnimeVault.Controllers
 
             if(uid != null)             //checks if there is a user logged in 
             {
-                viewModel.CurrentUser = await UserDataService.GetByUidAsync(uid);
+                viewModel.CurrentUser = await UserApiService.GetUserByUidAsync(uid);
                 if(viewModel.CurrentUser != null) 
                 {
                     //checks if the specific anime is already on the users list or not
@@ -90,7 +78,7 @@ namespace MyAnimeVault.Controllers
                 return RedirectToAction("Index", "Login"); //if user is not logged in, redirect to login page
             }
 
-            User? currentUser = await UserDataService.GetByUidAsync(uid); //if user is logged in, retrieve user from database and pass their anime list into the vault view
+            UserDTO? currentUser = await UserApiService.GetUserByUidAsync(uid); //if user is logged in, retrieve user from database and pass their anime list into the vault view
             return View(currentUser?.Animes);
         }
 
@@ -142,14 +130,14 @@ namespace MyAnimeVault.Controllers
 
             try
             {
-                User? user = await UserDataService.GetByUidAsync(uid);
+                UserDTO? user = await UserApiService.GetUserByUidAsync(uid);
 
                 if(user != null && user.Animes.Any(ua => ua.AnimeId == animeId))
                 {
-                    UserAnime? userAnime = await UserAnimeDataService.GetByIdAsync(userAnimeId);
+                    UserAnimeDTO? userAnime = await UserAnimeApiService.GetUserAnimeByIdAsync(userAnimeId);
                     if(userAnime != null)
                     {
-                        await UserDataService.RemoveAnimeFromList(user, userAnime);
+                        await UserApiService.RemoveAnimeFromListAsync(user.Id, userAnime.Id);
                     }
                 }
                     
@@ -177,14 +165,14 @@ namespace MyAnimeVault.Controllers
 
             try
             {
-                User? user = await UserDataService.GetByIdAsync(userId);
+                UserDTO? user = await UserApiService.GetUserByIdAsync(userId);
                 if (user != null)
                 {
-                    UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
+                    UserAnimeDTO? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
                     if (userAnime != null)
                     {
                         userAnime.WatchStatus = value;
-                        userAnime = await UserAnimeDataService.UpdateAsync(userAnime);
+                        userAnime = await UserAnimeApiService.UpdateUserAnimeAsync(userAnime);
                     }
                 }
             }
@@ -212,10 +200,10 @@ namespace MyAnimeVault.Controllers
 
             try
             {
-                User? user = await UserDataService.GetByIdAsync(userId);
+                UserDTO? user = await UserApiService.GetUserByIdAsync(userId);
                 if (user != null)
                 {
-                    UserAnime? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
+                    UserAnimeDTO? userAnime = user.Animes.FirstOrDefault(ua => ua.AnimeId == animeId);
                     if (userAnime != null)
                     {
                         switch (fieldName)
@@ -233,7 +221,7 @@ namespace MyAnimeVault.Controllers
                             default:
                                 return Json(new { success = false });
                         }
-                        userAnime = await UserAnimeDataService.UpdateAsync(userAnime);
+                        userAnime = await UserAnimeApiService.UpdateUserAnimeAsync(userAnime);
                     }
                 }
             }

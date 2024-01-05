@@ -16,12 +16,42 @@ namespace MyAnimeVault.RestApi.Services
             DbContext = dbContext;
         }
 
-        public async Task<UserAnimeDTO?> AddAndReturnDTOAsync(UserAnime entity)
+        public async Task<UserAnimeDTO?> AddAndReturnDTOAsync(UserAnimeDTO userAnimeDTO)
         {
-            EntityEntry<UserAnime> createdResult = await DbContext.Set<UserAnime>().AddAsync(entity);
-            await DbContext.SaveChangesAsync();
-            UserAnimeDTO userAnimeDTO = MapToDTO(createdResult.Entity);
-            return userAnimeDTO;
+            UserAnime? userAnimeToAdd = await DbContext.Animes.FirstOrDefaultAsync(ua => ua.Id == userAnimeDTO.Id);
+            if (userAnimeToAdd == null)
+            {
+                userAnimeToAdd = new UserAnime
+                {
+                    AnimeId = userAnimeDTO.AnimeId,
+                    Title = userAnimeDTO.Title,
+                    MediaType = userAnimeDTO.MediaType,
+                    Rating = userAnimeDTO.Rating,
+                    NumEpisodesWatched = userAnimeDTO.NumEpisodesWatched,
+                    TotalEpisodes = userAnimeDTO.TotalEpisodes,
+                    WatchStatus = userAnimeDTO.WatchStatus,
+                    Status = userAnimeDTO.Status,
+                    Poster = userAnimeDTO.Poster != null ? new Poster
+                    {
+                        Id = userAnimeDTO.Poster.Id,
+                        Large = userAnimeDTO.Poster.Large,
+                        Medium = userAnimeDTO.Poster.Medium
+                    } : null,
+                    StartSeason = userAnimeDTO.StartSeason != null ? new StartSeason
+                    {
+                        Id = userAnimeDTO.StartSeason.Id,
+                        Year = userAnimeDTO.StartSeason.Year,
+                        Season = userAnimeDTO.StartSeason.Season
+                    } : null
+                };
+
+                EntityEntry<UserAnime> createdResult = await DbContext.Set<UserAnime>().AddAsync(userAnimeToAdd);
+                await DbContext.SaveChangesAsync();
+                userAnimeDTO = MapToDTO(createdResult.Entity);
+                return userAnimeDTO;
+            }
+
+            return null;
         }
 
         public async Task<UserAnime> AddAsync(UserAnime entity)
@@ -74,12 +104,25 @@ namespace MyAnimeVault.RestApi.Services
             return user;
         }
 
-        public async Task<UserAnimeDTO?> UpdateAndReturnDTOAsync(UserAnime entity)
+        public async Task<UserAnimeDTO?> UpdateAndReturnDTOAsync(UserAnimeDTO userAnimeDTO)
         {
-            EntityEntry<UserAnime> result = DbContext.Set<UserAnime>().Update(entity);
-            await DbContext.SaveChangesAsync();
-            UserAnimeDTO userAnimeDTO = MapToDTO(result.Entity);
-            return userAnimeDTO;
+            UserAnime? userAnime = await DbContext.Animes.FirstOrDefaultAsync(u => u.Id == userAnimeDTO.Id);
+
+            if (userAnime != null)
+            {
+                userAnime.Rating = userAnimeDTO.Rating;
+                userAnime.NumEpisodesWatched = userAnimeDTO.NumEpisodesWatched;
+                userAnime.TotalEpisodes = userAnimeDTO.TotalEpisodes;
+                userAnime.WatchStatus = userAnimeDTO.WatchStatus;
+                userAnime.Status = userAnimeDTO.Status;
+
+                EntityEntry<UserAnime> result = DbContext.Set<UserAnime>().Update(userAnime);
+                await DbContext.SaveChangesAsync();
+                userAnimeDTO = MapToDTO(result.Entity);
+                return userAnimeDTO;
+            }
+
+            return null;
         }
 
         public async Task<UserAnime> UpdateAsync(UserAnime entity)

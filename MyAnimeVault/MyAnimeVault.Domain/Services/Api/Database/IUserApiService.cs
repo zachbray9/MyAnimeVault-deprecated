@@ -13,11 +13,11 @@ namespace MyAnimeVault.Domain.Services.Api.Database
         Task<UserDTO?> GetUserByIdAsync(int id);
         Task<UserDTO?> GetUserByUidAsync(string uid);
         Task<List<UserDTO>?>GetAllUsersAsync();
-        Task<UserDTO?> AddUserAsync(UserDTO user);
-        Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnime);
-        Task<UserDTO?> UpdateUserAsync(UserDTO user);
+        Task<UserDTO?> AddUserAsync(UserDTO userDTO);
+        Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnimeDTO);
+        Task<UserDTO?> UpdateUserAsync(UserDTO userDTO);
         Task<bool> DeleteUserAsync(int id);
-        Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnime);
+        Task<bool> RemoveAnimeFromListAsync(int userId, int userAnimeId);
 
     }
 }

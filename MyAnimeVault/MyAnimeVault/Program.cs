@@ -4,28 +4,22 @@ using Firebase.Auth;
 using Firebase.Auth.Providers;
 using MyAnimeVault.Services.Authentication;
 using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using FirebaseAdmin.Auth;
-using MyAnimeVault.EntityFramework;
-using Microsoft.EntityFrameworkCore;
-using MyAnimeVault.EntityFramework.Services;
-using MyAnimeVault.Services.Database;
 using MyAnimeVault.Domain.Services.Api.Database;
 using MyAnimeVault.Services.Api.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("AzureKeyVaultUri"));
-//builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("AzureKeyVaultUri"));
+builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
 //gets the Firebase Api Key and project id from user secrets file (will change this to azure key vault later)
 
 string FirebaseApiKey = builder.Configuration["FirebaseApiKey"];
 string FirebaseProjectId = builder.Configuration["FirebaseProjectId"];
 string FirebasePrivateKey = builder.Configuration["FirebasePrivateKey"];
-string ConnectionString = builder.Configuration["ConnectionString"];
 string MyAnimeVaultApiKey = builder.Configuration["MyAnimeVaultApiKey"];
 
 FirebaseApp firebaseApp = FirebaseApp.Create(new AppOptions
@@ -58,12 +52,6 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddDbContext<MyAnimeVaultDbContext>(options =>
-{
-    options.UseSqlServer(ConnectionString);
-    options.EnableSensitiveDataLogging(true);
-});
-
 builder.Services.AddSingleton<FirebaseAuth>(provider =>
 {
     return FirebaseAuth.GetAuth(FirebaseApp.DefaultInstance);
@@ -78,9 +66,8 @@ builder.Services.AddTransient<FirebaseAuthClient>(provider =>
 
 builder.Services.AddTransient<IAnimeApiService, AnimeApiService>();
 builder.Services.AddTransient<IAuthenticator, Authenticator>();
-builder.Services.AddScoped(typeof(IGenericDataService<>), typeof(GenericDataService<>));
-builder.Services.AddScoped(typeof(IUserDataService), typeof(UserDataService));
 builder.Services.AddScoped<IUserApiService, UserApiService>();
+builder.Services.AddScoped<IUserAnimeApiService, UserAnimeApiService>();
 
 var app = builder.Build();
 

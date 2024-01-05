@@ -1,4 +1,5 @@
 ﻿using MyAnimeVault.Domain.Models;
+using MyAnimeVault.Domain.Models.DTOs;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyAnimeVault.Models
@@ -7,7 +8,7 @@ namespace MyAnimeVault.Models
     {
         [Required]
         public Anime Anime { get; set; } = null!;
-        public User? CurrentUser { get; set; }
-        public UserAnime? UserAnime { get; set; }
+        public UserDTO? CurrentUser { get; set; }
+        public UserAnimeDTO? UserAnime { get; set; }
     }
 }

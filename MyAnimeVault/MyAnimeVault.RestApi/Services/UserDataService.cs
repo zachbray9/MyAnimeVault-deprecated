@@ -161,7 +161,10 @@ namespace MyAnimeVault.RestApi.Services
                         Large = userAnimeDTO.Poster.Large,
                         Medium = userAnimeDTO.Poster.Medium
                     });
+
+                    await DbContext.SaveChangesAsync();
                     existingPoster = createdEntity.Entity;
+
                 }
             }
 
@@ -175,6 +178,8 @@ namespace MyAnimeVault.RestApi.Services
                         Year = userAnimeDTO.StartSeason.Year,
                         Season = userAnimeDTO.StartSeason.Season,
                     });
+
+                    await DbContext.SaveChangesAsync();
                     existingStartSeason = createdEntity.Entity;
                 }
             }
@@ -196,21 +201,17 @@ namespace MyAnimeVault.RestApi.Services
             return true;
         }
 
-        public async Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnimeDTO)
+        public async Task<bool> RemoveAnimeFromListAsync(int userId, int userAnimeId)
         {
             User? user = await GetByIdAsync(userId);
+            UserAnime? animeToRemove = await UserAnimeDataService.GetByIdAsync(userAnimeId);
 
-            if (user != null && user.Animes.Any(ua => ua.AnimeId == userAnimeDTO.AnimeId))
+            if (user != null && animeToRemove != null && user.Animes.Any(ua => ua.AnimeId == animeToRemove.AnimeId))
             {
-                UserAnime? animeToRemove = await UserAnimeDataService.GetByIdAsync(userAnimeDTO.Id);
-                if(animeToRemove != null)
-                {
-                    user.Animes.Remove(animeToRemove);
-                    await DbContext.SaveChangesAsync();
-                    return true;
-                }
+                user.Animes.Remove(animeToRemove);
+                await DbContext.SaveChangesAsync();
+                return true;
             }
-
 
             return false;
         }

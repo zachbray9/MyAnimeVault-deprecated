@@ -344,9 +344,6 @@
               "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj": {
                 "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.Domain\\MyAnimeVault.Domain.csproj"
               },
-              "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.EntityFramework\\MyAnimeVault.EntityFramework.csproj": {
-                "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.EntityFramework\\MyAnimeVault.EntityFramework.csproj"
-              },
               "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.MyAnimeListApi\\MyAnimeVault.MyAnimeListApi.csproj": {
                 "projectPath": "C:\\Users\\zachb\\Documents\\Github Repositories\\MyAnimeVault\\MyAnimeVault\\MyAnimeVault.MyAnimeListApi\\MyAnimeVault.MyAnimeListApi.csproj"
               }
@@ -382,26 +379,6 @@
             "FirebaseAuthentication.net": {
               "target": "Package",
               "version": "[4.1.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[7.0.13, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.13, )"
             }
           },
           "imports": [

@@ -1,27 +1,13 @@
 {
   "dependencies": {
-    "mssql1": {
-      "restored": true,
-      "restoreTime": "2023-12-24T02:14:13.9638956Z"
-    },
     "secrets1": {
       "restored": true,
       "restoreTime": "2023-12-23T11:07:47.5818292Z"
     }
   },
   "parameters": {
-    "mssql1.subscriptionId": {
-      "Name": "mssql1.subscriptionId",
-      "Type": "subscription",
-      "Value": "7070e8d4-9acd-475e-b722-21b3be47ae22"
-    },
     "secrets1.resourceGroupName": {
       "Name": "secrets1.resourceGroupName",
-      "Type": "resourceGroup",
-      "Value": "MyAnimeVault"
-    },
-    "mssql1.resourceGroupName": {
-      "Name": "mssql1.resourceGroupName",
       "Type": "resourceGroup",
       "Value": "MyAnimeVault"
     },

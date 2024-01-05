@@ -4,10 +4,6 @@
       "type": "secrets",
       "connectionId": "AzureKeyVaultUri",
       "dynamicId": null
-    },
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "ConnectionString"
     }
   }
 }

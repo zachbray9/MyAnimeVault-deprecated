@@ -1831,10 +1831,7 @@
           "Azure.Security.KeyVault.Secrets": "4.5.0",
           "FirebaseAdmin": "2.4.0",
           "FirebaseAuthentication.net": "4.1.0",
-          "Microsoft.EntityFrameworkCore": "7.0.13",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13",
           "MyAnimeVault.Domain": "1.0.0",
-          "MyAnimeVault.EntityFramework": "1.0.0",
           "MyAnimeVault.MyAnimeListApi": "1.0.0"
         },
         "compile": {

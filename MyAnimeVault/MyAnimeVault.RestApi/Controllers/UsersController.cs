@@ -57,7 +57,7 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpPost]
-        [Route("[action]/{userId}:int")]
+        [Route("[action]/{userId:int}")]
         public async Task<IActionResult> AddAnimeToList([FromRoute] int userId, UserAnimeDTO anime)
         {
             bool success = await UserDataService.AddAnimeToListAsync(userId, anime);
@@ -96,10 +96,10 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpDelete]
-        [Route("[action]/{userId:int}")]
-        public async Task<IActionResult> RemoveAnimeFromList([FromRoute] int userId, UserAnimeDTO anime)
+        [Route("[action]/{userId:int}/{userAnimeId:int}")]
+        public async Task<IActionResult> RemoveAnimeFromList([FromRoute] int userId, [FromRoute] int userAnimeId)
         {
-            bool success = await UserDataService.RemoveAnimeFromListAsync(userId, anime);
+            bool success = await UserDataService.RemoveAnimeFromListAsync(userId, userAnimeId);
             if(success)
             {
                 return Ok();

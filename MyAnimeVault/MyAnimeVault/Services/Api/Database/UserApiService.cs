@@ -21,12 +21,13 @@ namespace MyAnimeVault.Services.Api.Database
             HttpClient.BaseAddress = new Uri("https://myanimevaultapi.azurewebsites.net/");
             HttpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
         }
-        public async Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnime)
-        {
-            string jsonString = JsonConvert.SerializeObject(userAnime);
-            StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await HttpClient.PostAsync($"api/users/AddAnimeToList", content);
+        public async Task<bool> AddAnimeToListAsync(int userId, UserAnimeDTO userAnimeDTO)
+        {
+            var jsonString = JsonConvert.SerializeObject(userAnimeDTO);
+            var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await HttpClient.PostAsync($"api/users/addanimetolist/{userId}", content);
             if (response.IsSuccessStatusCode)
             {
                 return true;
@@ -35,9 +36,9 @@ namespace MyAnimeVault.Services.Api.Database
             return false;
         }
 
-        public async Task<UserDTO?> AddUserAsync(UserDTO user)
+        public async Task<UserDTO?> AddUserAsync(UserDTO userDTO)
         {
-            string jsonString = JsonConvert.SerializeObject(user);
+            string jsonString = JsonConvert.SerializeObject(userDTO);
             StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await HttpClient.PostAsync($"api/users", content);
@@ -101,14 +102,31 @@ namespace MyAnimeVault.Services.Api.Database
             return null;
         }
 
-        public Task<bool> RemoveAnimeFromListAsync(int userId, UserAnimeDTO userAnime)
+        public async Task<bool> RemoveAnimeFromListAsync(int userId, int userAnimeId)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await HttpClient.DeleteAsync($"api/users/RemoveAnimeFromList/{userId}/{userAnimeId}");
+            if(response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public Task<UserDTO?> UpdateUserAsync(UserDTO user)
+        public async Task<UserDTO?> UpdateUserAsync(UserDTO userDTO)
         {
-            throw new NotImplementedException();
+            string jsonString = JsonConvert.SerializeObject(userDTO);
+            StringContent content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await HttpClient.PutAsync($"api/users", content);
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = await response.Content.ReadAsStringAsync();
+                UserDTO? updatedUserDTO = JsonConvert.DeserializeObject<UserDTO>(jsonString);
+                return updatedUserDTO;
+            }
+
+            return null;
         }
     }
 }

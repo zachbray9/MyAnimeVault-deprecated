@@ -38,14 +38,14 @@ namespace MyAnimeVault.RestApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUserAnime(UserAnime userAnime)
+        public async Task<IActionResult> AddUserAnime(UserAnimeDTO userAnime)
         {
             UserAnimeDTO? userAnimeDTO = await UserAnimeDataService.AddAndReturnDTOAsync(userAnime);
             return Ok(userAnimeDTO);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUserAnime(UserAnime userAnime)
+        public async Task<IActionResult> UpdateUserAnime(UserAnimeDTO userAnime)
         {
             UserAnimeDTO? userAnimeDTO = await UserAnimeDataService.UpdateAndReturnDTOAsync(userAnime);
             return Ok(userAnimeDTO);
