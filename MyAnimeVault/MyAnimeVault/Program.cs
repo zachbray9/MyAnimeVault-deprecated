@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("AzureKeyVaultUri"));
 builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
-//gets the Firebase Api Key and project id from user secrets file (will change this to azure key vault later)
+//gets secret values from Azure Keyvault for Production or User Secrets for Development (have to comment out above code for development)
 
 string FirebaseApiKey = builder.Configuration["FirebaseApiKey"];
 string FirebaseProjectId = builder.Configuration["FirebaseProjectId"];

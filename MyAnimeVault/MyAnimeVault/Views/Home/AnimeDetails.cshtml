@@ -219,10 +219,11 @@
                         value: value
                     },
                     success: function (response) {
-                        // Handle success
+                        toastr.success("Entry was successfully updated.");
                     },
                     error: function (error) {
                         console.log('Error:', error);
+                        toastr.error("Entry could not be updated. Please try again.")
                     }
                 });
             }
@@ -243,10 +244,11 @@
                         value: value
                     },
                     success: function (response) {
-                        // Handle success
+                        toastr.success("Entry was successfully updated");
                     },
                     error: function (error) {
                         console.log('Error:', error);
+                        toastr.error("Entry could not be updated. Please try again.")
                     }
                 });
             }
