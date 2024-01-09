@@ -13,7 +13,8 @@
    
 ## Tech Stack
 * ASP.Net Core MVC with C# backend for business logic.
-* Azure SQL Database and Entity Framework Core for database storage and interaction.
+* Azure SQL Database and Entity Framework Core.
+* RESTful API for database interaction.
 * Firebase for authentication and authorization (account creation and login).
 * Azure Keyvault for secret storage and Azure App Service for deployment.
 * HTML, CSS, and Javascript for frontend.
