@@ -44,7 +44,14 @@
                                 <div class="progress-bar" data-watched="@anime.NumEpisodesWatched" data-total="@anime.TotalEpisodes"></div>
                                 <div class="user-anime-details-ratingandepisodeswatched-container">
                                     <p><i class="fa-solid fa-star"></i> @anime.Rating</p>
-                                    <p>@anime.NumEpisodesWatched / @anime.TotalEpisodes ep</p>
+                                    @if(anime.TotalEpisodes != 0)
+                                    {
+                                        <p>@anime.NumEpisodesWatched / @anime.TotalEpisodes ep</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@anime.NumEpisodesWatched / ??</p>
+                                    }
                                 </div>
                             </div>
                         </div>

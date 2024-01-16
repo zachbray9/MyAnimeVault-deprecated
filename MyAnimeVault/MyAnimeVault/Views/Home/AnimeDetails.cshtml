@@ -92,8 +92,15 @@
 
                                 <div class="episodes-watched-input-container">
                                     <p class="episodes-watched-input-text">Episodes: </p>
-                                    <input class="user-anime-property-input" id="episodesWatched" type="number" min="0" max="@Model.UserAnime.TotalEpisodes" asp-for="@Model.UserAnime.NumEpisodesWatched"/>
-                                    <p class="episodes-watched-input-text">/     @Model.UserAnime.TotalEpisodes</p>
+                                    <input class="user-anime-property-input" id="episodesWatched" type="number" min="0" asp-for="@Model.UserAnime.NumEpisodesWatched"/>
+                                    @if(Model.UserAnime.TotalEpisodes != 0)
+                                    {
+                                        <p class="episodes-watched-input-text">/     @Model.UserAnime.TotalEpisodes</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="episodes-watched-input-text">/     ??</p>
+                                    }
                                 </div>
 
                                 <a class="remove-from-list-button" title="Remove from vault" asp-area="" asp-action="RemoveAnimeFromUserList" asp-controller="Home" asp-route-animeId="@Model.Anime.Id" asp-route-userAnimeId="@Model.UserAnime.Id"><i class="fa-solid fa-trash remove-from-list-button-icon"></i></a>
@@ -198,8 +205,11 @@
 
                 episodesWatchedDebounceTimer = setTimeout(function () {
                     var newValue = $('#episodesWatched').val();
-                    if (newValue > 0 && newValue <= @Model.UserAnime?.TotalEpisodes) {
-                        updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue);
+                    if(newValue != null)
+                    {
+                        if ((newValue > -1 && newValue <= @Model.UserAnime?.TotalEpisodes) || (newValue > -1 && @Model.UserAnime?.TotalEpisodes == 0)) {
+                            updateRatingOrEpisodesWatchedInDatabase('episodesWatched', newValue);
+                        }
                     }
                 }, 500);
             });
