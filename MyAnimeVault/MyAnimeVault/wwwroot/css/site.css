@@ -54,6 +54,21 @@ li {
     list-style: none;
 }
 
+@media (max-width: 768px)
+{
+    p {
+        font-size: 10px;
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    h3 {
+        font-size: 12px;
+    }
+}
+
 /*Navbar*/
 
 .header {
@@ -379,12 +394,27 @@ li {
     column-gap: 20px;
 }
 
+.anime-details-poster {
+    height: 400px;
+    width: 300px;
+}
+
+@media (max-width: 768px)
+{
+    .anime-details-poster {
+        height: 200px;
+        width: 150px;
+    }
+}
+
+
 .rankinginfo-container {
     display: flex;
     flex-direction: column;
     align-items: start;
     row-gap: 20px;
 }
+
 
 .title-and-season {
     display: flex;
@@ -401,11 +431,49 @@ li {
     column-gap: 10px;
 }
 
+@media (max-width: 768px)
+{
+    .season-and-mediatype-container{
+        column-gap: 5px;
+    }
+
+    .season {
+        font-size: 8px;
+    }
+
+    .mediatype {
+        font-size: 8px;
+    }
+
+    .studio {
+        font-size: 8px;
+    }
+}
+
 .ranking-info {
     display: flex;
     align-items: center;
     justify-content: start;
     column-gap: 10px;
+}
+
+.anime-details-separator {
+    opacity: 0.3;
+}
+
+@media (max-width: 768px)
+{
+    .ranking-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        gap: 5px;
+    }
+
+    .anime-details-separator {
+        display: none;
+    }
 }
 
 .score {
@@ -414,6 +482,17 @@ li {
 
 .fa-star {
     color: yellow;
+}
+
+@media (max-width: 768px)
+{
+    .score {
+        font-size: 10px;
+    }
+
+    .fa-star {
+        font-size: 10px;
+    }
 }
 
 .anime-synopsis-container {
@@ -467,11 +546,33 @@ li {
     height: 100%;
 }
 
+
 .user-list-listitem-properties-container {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 10px;
+}
+
+@media (max-width: 768px)
+{
+    .user-list-listitem-properties-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        gap: 5px;
+    }
+
+    .user-anime-property-select{
+        font-size: 10px;
+    }
+
+    .user-anime-property-input{
+        font-size: 10px;
+        height: 20px;
+        width: 40px;
+    }
 }
 
 .addToList-button {
@@ -505,10 +606,6 @@ option {
     gap: 5px;
     background-color: var(--darkmode2);
     padding: 5px 10px;
-}
-
-.episodes-watched-input-text {
-    font-size: 14px;
 }
 
 .user-anime-property-input {

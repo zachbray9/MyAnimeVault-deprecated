@@ -8,7 +8,7 @@
 <div class="text-center">
     <div class="anime-details-container">
         <div class="image-and-rankinginfo-container">
-            <img src="@Model.Anime.Picture?.Large" alt="@Model.Anime.Title" height="400" width="300"/>
+            <img class="anime-details-poster" src="@Model.Anime.Picture?.Large" alt="@Model.Anime.Title" height="400" width="300"/>
 
             <div class="rankinginfo-container">
                 <div class="title-and-season">
@@ -34,7 +34,7 @@
                         @if(Model.Anime.Studios.Count > 0)
                         {
                             <p class="separator">|</p>
-                            <p>@Model.Anime.Studios.First().Name</p>
+                            <p class="studio">@Model.Anime.Studios.First().Name</p>
                         }
                     </div>
 
@@ -49,7 +49,7 @@
                     {
                         <p class="score"><i class="fa-solid fa-star"></i> No score </p>
                     }
-                    <p class="separator">|</p>
+                    <p class="anime-details-separator">|</p>
                     @if(Model.Anime.Rank != null)
                     {
                         <p class="rank"> Ranked #@Model.Anime.Rank</p>
@@ -58,7 +58,7 @@
                     {
                         <p class="rank"> Unranked</p>
                     }
-                    <p class="separator">|</p>
+                    <p class="anime-details-separator">|</p>
                     <p class="popularity"> Popularity #@Model.Anime.Popularity</p>
                 </div>
 
