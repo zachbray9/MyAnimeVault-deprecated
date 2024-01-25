@@ -5,16 +5,18 @@
 }
 
 <div class="text-center">
+
     <div class="anime-list-container">
         <div class="anime-list-title-container">
             <h2 class="anime-list-title">Top Anime Series</h2>
         </div>
+
         <ul class="anime-list">
             @foreach(var node in Model)
             {
                 <li class="anime-card">
                     <a class="anime-link" asp-area="" asp-controller="Home" asp-action="AnimeDetails" asp-route-id="@node.Anime.Id">
-                        <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" height="300" width="225">
+                        <img class="anime-poster" src="@node.Anime.Picture.Medium" alt="@node.Anime.Title" @* height="300" width="225" *@>
                         <p class="anime-title">
                             @if(node.Anime.AlternativeTitles != null && !String.IsNullOrEmpty(node.Anime.AlternativeTitles.en))
                                 @node.Anime.AlternativeTitles.en

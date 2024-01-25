@@ -14,6 +14,7 @@
 }
 
 .text-center {
+    margin-top: 120px;
     min-height: 800px;
 }
 
@@ -79,12 +80,19 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 40px;
+    column-gap: 20px;
 }
 
 .navbar-list {
     display: flex;
     column-gap: 20px;
+}
+
+.nav-link-icon 
+{
+    display: none;
+    font-size: 10px;
+    color: white;
 }
 
 .navbar-searchbar {
@@ -105,13 +113,16 @@ li {
 }
 
 .navbar-searchbar-searchbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
 }
 
-.fa-solid {
+.fa-magnifying-glass {
     color: gray;
 }
 
@@ -133,10 +144,12 @@ li {
 }
 
 .navbar-dropdown-menu-button {
-    background-color: transparent;
+    background-color: darkgreen;
     font-size: 16px;
     border: none;
     outline: none;
+    border-radius: 500px;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
@@ -181,14 +194,68 @@ li {
     background-color: var(--darkmode3);
 }
 
+@media (max-width: 768px)
+{
+    .navbar-brand {
+        font-size: 10px;
+    }
+
+    .navbar-menu {
+        column-gap: 10px;
+    }
+
+    .nav-link {
+        display: none;
+        font-size: 10px;
+    }
+
+    .nav-link-icon {
+        display: block;
+    }
+
+    .navbar-searchbar {
+        width: 80px;
+        height: 25px;
+        column-gap: 5px;
+        padding: 5px 10px;
+    }
+
+    .navbar-searchbar-textbox {
+        width: 100%;
+        height: 100%;
+        font-size: 10px;
+    }
+
+    .fa-magnifying-glass {
+        font-size: 10px;
+    }
+
+    .navbar-dropdown-menu-button {
+        font-size: 10px;
+        padding: 2.5px 7px;
+    }
+
+    .navbar-signin-button {
+        font-size: 10px;
+        padding: 5px 5px;
+    }
+
+    .navbar-signup-button {
+        font-size: 10px;
+        /*padding: 5px 10px;*/
+        padding: 5px 5px;
+    }
+}
+
 /*Homepage anime list*/
 .anime-list-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     row-gap: 40px;
-    margin: 120px 40px 0px 40px;
+    margin: 20px 40px 0px 40px;
+    max-width: 1600px;
 }
 
 .anime-list-title-container {
@@ -196,14 +263,38 @@ li {
     justify-content: start;
     align-items: center;
     margin: 0px 40px;
-    width: 100%;
+    width: calc(100% - 60px);
+}
+
+@media (max-width: 600px)
+{
+    .anime-list-title-container {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .anime-list-title {
+        font-size: 16px;
+    }
 }
 
 .anime-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    column-gap: 80px;
-    row-gap: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    flex-wrap: wrap;
+    gap: 80px;
+}
+
+@media (max-width: 600px)
+{
+    .anime-list {
+        gap: 40px;
+    }
+
+    .anime-title {
+        font-size: 10px;
+    }
 }
 
 .anime-card {
@@ -249,6 +340,19 @@ li {
     text-align: center;
 }
 
+.anime-poster {
+    width: 225px;
+    height: 300px;
+}
+
+@media(max-width: 600px)
+{
+    .anime-poster {
+        width: 112.5px;
+        height: 150px;
+    }
+}
+
 /*Anime Details Page*/
 
 .text-center {
@@ -264,7 +368,7 @@ li {
     justify-content: center;
     align-items: center;
     row-gap: 80px;
-    margin: 120px 40px 0px 40px;
+    margin: 0px 40px 0px 40px;
     max-width: 1000px;
 }
 
@@ -454,7 +558,7 @@ option {
     align-items: center;
     max-width: 1000px;
     width: 100%;
-    margin: 100px 40px 0px 40px;
+    margin: 0px 40px 0px 40px;
 }
 
 .search-results {
@@ -494,7 +598,6 @@ option {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    margin-top: 100px;
     gap: 20px;
 }
 
