@@ -465,15 +465,12 @@ li {
 {
     .ranking-info {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: start;
-        align-items: start;
+        align-items: center;
         gap: 5px;
     }
 
-    .anime-details-separator {
-        display: none;
-    }
 }
 
 .score {
@@ -549,6 +546,7 @@ li {
 
 .user-list-listitem-properties-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: start;
     align-items: center;
     gap: 10px;
@@ -557,10 +555,6 @@ li {
 @media (max-width: 768px)
 {
     .user-list-listitem-properties-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        align-items: start;
         gap: 5px;
     }
 
@@ -568,10 +562,8 @@ li {
         font-size: 10px;
     }
 
-    .user-anime-property-input{
-        font-size: 10px;
-        height: 20px;
-        width: 40px;
+    .fa-trash {
+        font-size: 12px;
     }
 }
 
@@ -599,6 +591,17 @@ option {
     background-color: var(--darkmode2);
 }
 
+.episodes-watched-input-text {
+    font-size: 14.5px;
+}
+
+@media (max-width: 768px)
+{
+    .episodes-watched-input-text {
+        font-size: 10px;
+    }
+}
+
 .episodes-watched-input-container {
     display: flex;
     justify-content: center;
@@ -610,11 +613,21 @@ option {
 
 .user-anime-property-input {
     color: white;
+    font-size: 16px;
     text-align: right;
     border: none;
     outline: none;
     background-color: transparent;
+    padding: 0px;
     transition: all 0.2s;
+}
+
+@media (max-width: 768px) {
+    .user-anime-property-input {
+        font-size: 10px;
+        height: 20px;
+        width: 40px;
+    }
 }
 
 .user-anime-property-input:hover {
@@ -785,12 +798,19 @@ option {
     justify-content: center;
     align-items: center;
     row-gap: 40px;
-    margin: 200px 0px 80px 0px;
+    margin: 0px 0px 80px 0px;
     max-width: 500px;
     width: 100%;
     background-color: var(--darkmode2);
     padding: 40px;
     border-radius: 10px;
+}
+
+@media (max-width: 768px)
+{
+    .register-form-container {
+        max-width: 350px;
+    }
 }
 
 .register-form-header {
@@ -850,12 +870,19 @@ div.validation-summary-errors ul li {
     justify-content: center;
     align-items: center;
     row-gap: 40px;
-    margin: 200px 0px 180px 0px;
+    margin: 0px 0px 180px 0px;
     max-width: 500px;
     width: 100%;
     background-color: var(--darkmode2);
     padding: 40px;
     border-radius: 10px;
+}
+
+@media (max-width: 768px)
+{
+    .login-form-container {
+        max-width: 350px;
+    }
 }
 
 .login-form-header {
