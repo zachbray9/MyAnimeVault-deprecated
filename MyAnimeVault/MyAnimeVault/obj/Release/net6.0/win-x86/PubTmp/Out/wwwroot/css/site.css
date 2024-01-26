@@ -65,7 +65,11 @@ li {
     }
 
     h3 {
-        font-size: 12px;
+        font-size: 14px;
+    }
+
+    h4 {
+        font-size: 13px;
     }
 }
 
@@ -715,6 +719,7 @@ option {
     display: flex;
     justify-content: start;
     align-items: start;
+    width: 100%;
 }
 
 .user-anime-link {
@@ -723,12 +728,18 @@ option {
     justify-content: start;
     align-items: start;
     min-width: 700px;
+    width: 100%;
     padding: 15px;
     transition: all 0.2s;
 }
 
 .user-anime-link:hover {
     background: var(--darkmode1hover)
+}
+
+.vault-anime-poster {
+    width: 160px;
+    height: 200px;
 }
 
 .user-anime-details-container {
@@ -788,6 +799,22 @@ option {
     justify-content: start;
     align-items: start;
     height: stretch;
+}
+
+@media (max-width: 768px)
+{
+    .user-anime-link {
+        min-width: 300px;
+    }
+
+    .user-anime-details-container {
+        height: 150px;
+    }
+
+    .vault-anime-poster {
+        width: 112.5px;
+        height: 150px;
+    }
 }
 
 /*Create Account Page*/
