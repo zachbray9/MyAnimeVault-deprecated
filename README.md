@@ -5,13 +5,26 @@
  [![MyAnimeVault Demo](https://img.youtube.com/vi/h0K6NPegxOg/0.jpg)](https://www.youtube.com/watch?v=h0K6NPegxOg)
 
 ## Tech Stack
-<ul display=flex gap=5px>
+<div display=flex>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" height=40 width=40/>
+  <p>C#</p>
+</div>
+<div display=flex>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg" height=40 width=40/>
+  <p>ASP.Net Core MVC</p>
+</div>
+<div display=flex>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azuresqldatabase/azuresqldatabase-original.svg" height=40 width=40/>
+  <p>Azure SQL Database</p>
+</div>
+<div display=flex>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" height=40 width=40/>
+  <p>Firebase</p>
+</div>
+<div display=flex>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" height=40 width=40/>
-</ul>
+  <p>Microsoft Azure</p>
+</div>
           
 * ASP.Net Core MVC with C# backend for business logic.
 * Azure SQL Database and Entity Framework Core.
