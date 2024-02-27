@@ -6,7 +6,7 @@
 
 ## Tech Stack
 <ul>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" height=10 width=10/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" height=25 width=25/>
 </ul>
 * ASP.Net Core MVC with C# backend for business logic.
 * Azure SQL Database and Entity Framework Core.
