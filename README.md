@@ -5,20 +5,21 @@
  [![MyAnimeVault Demo](https://img.youtube.com/vi/h0K6NPegxOg/0.jpg)](https://www.youtube.com/watch?v=h0K6NPegxOg)
 
 ## Tech Stack
-![CSharp](https://img.shields.io/badge/csharp-512bd4?style=for-the-badge&logo=csharp&logoColor=white)
-![ASP.Net](https://img.shields.io/badge/dotnet-512bd4?style=for-the-badge&logo=dotnet&logoColor=white)
-          
-* ASP.Net Core MVC with C# backend for business logic.
-* Azure SQL Database and Entity Framework Core.
-* RESTful API for database interaction.
-* Firebase for authentication and authorization (account creation and login).
-* Azure Keyvault for secret storage and Azure App Service for deployment.
-* HTML, CSS, and Javascript for frontend.
+* C#
+* ASP.Net Core MVC
+* Azure SQL Database
+* Entity Framework
+* ASP.Net Web Api
+* Firebase
+* Microsoft Azure
+* HTML
+* CSS
+* Javascript
 
  ## Features
  * Access to anime information such as title, description, poster, studio, and opening/ending theme songs.
- * Search functionality to look up any show.
+ * Search functionality to look up any anime.
  * Account creation and deletion.
- * Curate a list of shows that you want to keep track of.
- * Customize your list to keep track of progress in your shows such as watch status, rating, and number of episodes watched.
-   
+ * Curation of lists to keep track of shows.
+ * Customization of shows in list including rating, number of episodes watched, and watch status.
+
