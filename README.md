@@ -5,7 +5,7 @@
  [![MyAnimeVault Demo](https://img.youtube.com/vi/h0K6NPegxOg/0.jpg)](https://www.youtube.com/watch?v=h0K6NPegxOg)
 
 ## Tech Stack
-<div display=flex>
+<div display=flex flex-direction=horizontal>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" height=40 width=40/>
   <p>C#</p>
 </div>
