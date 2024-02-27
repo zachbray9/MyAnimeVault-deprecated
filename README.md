@@ -6,7 +6,7 @@
 
 ## Tech Stack
 ![CSharp](https://img.shields.io/badge/csharp-512bd4?style=for-the-badge&logo=csharp&logoColor=white)
-![ASP.Net](https://img.shields.io/badge/dotnet-512bd4?style=for-the-badge&logo=ASP.Net Core MVC&logoColor=white)
+![ASP.Net](https://img.shields.io/badge/dotnet-512bd4?style=for-the-badge&logo=ASP.Net_Core_MVC&logoColor=white)
           
 * ASP.Net Core MVC with C# backend for business logic.
 * Azure SQL Database and Entity Framework Core.
