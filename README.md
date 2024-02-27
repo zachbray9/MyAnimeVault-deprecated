@@ -5,7 +5,8 @@
  [![MyAnimeVault Demo](https://img.youtube.com/vi/h0K6NPegxOg/0.jpg)](https://www.youtube.com/watch?v=h0K6NPegxOg)
 
 ## Tech Stack
-![CSharp](https://img.shields.io/badge/csharp-512bd4?style=for-the-badge&logo=csharp&logoColor=white)]
+![CSharp](https://img.shields.io/badge/csharp-512bd4?style=for-the-badge&logo=csharp&logoColor=white)
+![ASP.Net](https://img.shields.io/badge/dotnet-512bd4?style=for-the-badge&logo=dotnet&logoColor=white)
           
 * ASP.Net Core MVC with C# backend for business logic.
 * Azure SQL Database and Entity Framework Core.
