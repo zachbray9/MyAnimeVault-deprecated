@@ -9,7 +9,7 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/csharp/csharp-original.svg" height=40 width=40/>
   <p>C#</p>
 </div>
-<div display=flex>
+<div display=flex align-items=center justfify-content=center>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg" height=40 width=40/>
   <p>ASP.Net Core MVC</p>
 </div>
